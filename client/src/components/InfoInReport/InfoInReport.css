@@ -1,0 +1,97 @@
+
+.second-info-in-report-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+.info-in-report-title {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 34px!important;
+    margin-top: 20%!important;
+}
+
+.info-in-report-second-title {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 28px!important;
+}
+
+.info-list-item {
+    color: #498EDF;
+    font-size: 20px!important;
+    margin-left: 15px!important;
+    margin-bottom: 5px!important;
+}
+
+.info-list-item span {
+    color: black;  
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+    font-size: 24px!important;
+    margin-left: -10px!important;
+}
+
+.info-in-report-container {
+    width: 100%;
+    margin-left: 80px!important;
+}
+
+@media (max-width: 1199px) {
+    .info-in-report-title {
+        margin-top: 0!important;
+    }
+    .info-in-report-container {
+        margin-left: 0px!important;
+    }
+    .info-list-item span {
+        font-size: 20px!important;
+    }
+}
+
+@media (max-width: 720px) {
+    .info-in-report-title {
+        font-size: 30px!important;
+    }
+    
+    .info-in-report-second-title {
+        font-size: 22px!important;
+    }
+    .info-in-report-container {
+        margin-left: 0px!important;
+    }
+    .info-list-item span {
+        font-size: 16px!important;
+    }
+}
+
+
+@media (max-width: 560px) {
+    .info-in-report-title {
+        font-size: 28px!important;
+    }
+    
+    .info-in-report-second-title {
+        font-size: 22px!important;
+    }
+    .info-in-report-container {
+        margin-left: 0px!important;
+    }
+    .info-list-item span {
+        font-size: 16px!important;
+    }
+    .second-info-in-report-container {
+        flex-direction: column;
+        align-items: stretch; 
+    }
+}
+
+@media (max-width: 560px) {
+    .info-in-report-title {
+        font-size: 22px!important;
+    }
+    .info-in-report-second-title {
+        font-size: 18px!important;
+    }
+}
