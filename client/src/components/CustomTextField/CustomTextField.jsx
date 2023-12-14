@@ -38,7 +38,7 @@ const CustomTextField = () => {
                     <Typography sx={{ marginRight: '15px' }} className="link-under-field">история запросов</Typography>
                 </Link>
                 <Link>
-                    <Typography  className="link-under-field">пример отчета</Typography>
+                    <Typography onClick={handleClickHelpIcon} className="link-under-field">пример отчета</Typography>
                 </Link>
             </Box>
         </Box>

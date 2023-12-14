@@ -3,15 +3,17 @@ import { Modal, Typography, Box } from '@mui/material';
 import HelpModal1 from '../../media/images/HelpModal1.png'
 import HelpModal2 from '../../media/images/HelpModal2.png'
 import HelpModal3 from '../../media/images/HelpModal3.png'
+import CloseIcon from '@mui/icons-material/Close';
 import './HelpModal.css'
 
 
 const HelpModal = ({ open, onClose }) => {
   return (
     <Modal open={open} onClose={onClose}>
-      <Box className="help-modal-container">
+      <Box className="help-modal-container"  sx={{ maxHeight: '90vh', overflowY: 'auto' }}>
         <Box sx={{ display: 'inline-flex' }}>
             <Typography className="main-title-help-modal">Как узнать VIN, госномер и номер кузова</Typography>
+            <CloseIcon sx={{ fontSize: '26px' }} onClick={onClose} />
         </Box>
         
         <Typography className="title-help-modal">Загляните в документы</Typography>

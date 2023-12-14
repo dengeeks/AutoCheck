@@ -1,0 +1,38 @@
+.review-card-container {
+    height: 350px;
+    width: 230px;
+    background: #eeeeee;
+    border-radius: 7px;
+    padding: 20px;
+    border: solid 2px  black;
+    margin: 0 auto!important;
+}
+
+.review-card-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5px!important;
+}
+
+.review-card-user-name {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 24px;
+}
+
+.review-card-text {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+}
+
+.review-card-avatar {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.star-rating-text {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 16px!important;
+    margin-top: 3px!important;
+}

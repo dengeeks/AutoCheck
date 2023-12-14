@@ -1,0 +1,66 @@
+.auth-form-container {
+    background: #eeeeee;
+    border-radius: 7px;
+}
+
+.form-header-text {
+    color: white;
+    font-size: 24px!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+}
+
+.auth-fields-container {
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    padding: 15px;
+    text-align: center;
+}
+
+.auth-field {
+    margin-top: 10px!important;
+}
+
+.auth-form-header {
+    background: #498EDF;
+    text-align: center;
+    padding: 20px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.auth-form-button {
+    background: #498EDF!important;
+    color: white!important;
+    margin-top: 20px!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    height: 50px;
+    font-size: 16px!important;
+}
+
+.forget-password-container {
+    width: 360px;
+    margin: 15px auto!important;
+}
+
+.forget-password-text {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    text-align: center;
+}
+
+@media (max-width: 430px) {
+    .auth-fields-container {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        padding: 15px;
+        text-align: center;
+    }
+    .forget-password-container {
+        width: 300px;
+        margin: 15px auto!important;
+    }
+}

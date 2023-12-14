@@ -1,0 +1,138 @@
+.feature-info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.info-fearure-title {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 32px!important;
+    margin-bottom: 25px!important;
+}
+
+.feature-box {
+    width: 220px;
+}
+
+.feature-title {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 20px!important;
+    margin-bottom: 10px;
+}
+
+.feature-text {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 40!important;
+    font-size: 18px!important;
+}
+
+.service-social-links-container {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.social-link-qr-code {
+    width: 75px;
+}
+
+.social-link-header {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px!important;
+}
+
+.social-link-logo {
+    width: 30px;
+}
+
+.social-link-name {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 14px!important;
+    margin-top: 5px!important;
+    margin-left: 3px!important;
+}
+
+.our-sources-title {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 32px!important;
+}
+
+.source-icon-container {
+    text-align: right;
+}
+
+.our-source-icon {
+    width: 65px;
+}
+
+.feature-image {
+    width: 200px;
+}
+
+@media (max-width: 1535px) {
+    .our-sources-grid-container {
+        display: none!important;
+    }
+}
+
+@media (max-width: 700px) {
+    .social-link-qr-code {
+        width: 50px;
+    }
+    .feature-box {
+        width: 95%;
+    }
+    .feature-title {
+        font-family: 'Ysabeau Infant', sans-serif!important;
+        font-weight: 700!important;
+        font-size: 18;
+    }
+    .social-link-name {
+        display: none;
+    }
+    .social-link-logo{
+        width: 35px;
+    }
+    .info-fearure-title {
+        font-size: 24px!important;
+    }
+    .feature-text {
+        font-size: 16px!important;
+    }
+    .feature-image {
+        width: 150px;
+    }
+    .social-link-header {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px!important;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .feature-image {
+        width: 120px;
+    }
+    .feature-title {
+        font-family: 'Ysabeau Infant', sans-serif!important;
+        font-weight: 700!important;
+        font-size: 16px!important;
+    }
+    .feature-text{
+        font-size: 14px!important;
+    }
+}
+
+@media (max-width: 380px) {
+    .feature-image {
+        width: 80px;
+    }
+}

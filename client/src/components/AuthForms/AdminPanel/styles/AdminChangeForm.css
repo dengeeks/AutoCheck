@@ -1,0 +1,53 @@
+.admin-change-form-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.admin-change-from-title {
+    font-size: 24px!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+}
+
+.admin-change-from {
+    display: flex;   
+    width: 450px;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto!important;
+}
+
+.admin-change-form-field {
+    margin-top: 5px!important;
+}
+
+
+.admin-change-form-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px!important;
+}
+
+.admin-change-save-btn {
+    background: #498EDF!important;
+    color: #fff!important;
+    width: 60%;
+    height: 45px;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+}
+
+.admin-change-delete-btn {
+    background: #DF4949!important;
+    color: #fff!important;
+    width: 35%;
+    height: 45px;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+}
+
+.admin-change-form-header {
+
+}

@@ -1,0 +1,86 @@
+
+.review-form-container {
+    background: white;
+    width: 400px;
+    margin: auto !important;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    outline: none;
+    border-radius: 10px;
+}
+
+.review-form-header {
+    position: relative;
+    text-align: center;
+    background: #498EDF;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.review-form-header-text {
+    color: white;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 28px!important;
+}
+
+.review-form-header .MuiSvgIcon-root {
+    position: absolute;
+    top: 10px;  /* Выберите подходящее значение отступа сверху */
+    right: 10px;  /* Выберите подходящее значение отступа справа */
+    cursor: pointer;
+}
+.form-star-rating-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.review-form-text {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 16px!important;
+    margin-right: 10px!important;
+}
+
+.review-form-button-container {
+    width: 100%;
+    text-align: center;
+}
+
+
+.review-active-button {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 18px!important;
+    background: #498EDF!important;
+    color: white!important;
+    margin-top: 20px!important;
+    width: 90%;
+    height: 50px;
+}
+
+.review-disable-button {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 18px!important;
+    background: #adadad!important;
+    color: white!important;
+    margin-top: 20px!important;
+    width: 90%;
+    height: 50px;
+}
+
+.review-disable-button:hover {
+    background: #c2c2c2!important;
+}
+
+.review-active-button:hover {
+    background: #0077ff!important;
+}
+

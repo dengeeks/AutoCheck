@@ -17,7 +17,84 @@
 .info-in-report-grid-container {
     background: linear-gradient(180deg, rgba(238, 237, 237, 0.3), rgba(239, 238, 238, 1))!important;
     margin-top: 100px!important;
-    margin-bottom: 150px!important;
+    margin-bottom: 100px!important;
+}
+
+.main-page-reviews {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px!important;
+}
+
+.review-swiper-container {
+    width: 80vw;
+    margin: 0 auto!important;
+}
+
+.review-swiper-slide {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.review-button-container {
+    width: 100%;
+    text-align: center;
+}
+
+.review-button {
+    background: #498EDF!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    width: 150px;
+    height: 45px;
+    color: white!important;
+    margin-bottom: 50px!important;
+}
+
+.faq-grid-container {
+    display: flex;
+    justify-content: center;
+}
+
+.faq-img-grid-container {
+    text-align: center;
+}
+
+.faq-img-main {
+    width: 80%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -265px;
+    margin-top: 100px;
+}
+
+.top-faq-img {
+    display: none!important;
+    width: 500px;
+}
+
+.small-screen-faq-container {
+    width: 100%;
+    text-align: center;
+    display: none;
+    justify-content: center;
+}
+
+.small-screen-faq-img {
+    width: 50%;
+    margin-top: 50px;
+}
+
+.tariff-plan-title-container {
+    margin-top: 25px!important;
+}
+
+.tariff-plan-title {
+    font-size: 32px!important;
+    text-align: center;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
 }
 
 @media (max-width: 1199px) {
@@ -29,33 +106,52 @@
     }
     .info-in-report-image {
         display: none;
+    }  
+    .info-image-container {
+        display: none;
     }
 }
 
 @media (max-width: 675px) {
     .main-page-title {
         font-size: 24px!important;
+    } 
+    .info-about-check-image {
+        width: 350px;
+        margin-top: 30px!important;
+    }
+    .review-swiper-container {
+        width: 100%;
+    }
+    .tariff-plan-title {
+        font-size: 24px!important;
     }
 }
 
-
-@media (max-width: 675px) {
-    .info-about-check-image {
-        width: 350px;
+@media (max-width: 900px) {
+    .top-faq-img {
+        display: block;
     }
-    .main-page-title {
-        font-size: 22px!important;
+    .small-screen-faq-container {
+        display: flex;
+    }
+    .faq-img-main {
+        display: none;
+    }
+    .tariff-plan-title {
+        margin-bottom: -10px!important;
     }
 }
 
 @media (max-width: 440px) {
     .main-page-title {
         font-size: 18px!important;
-    }
-}
-
-@media (max-width: 440px) {        
+    } 
     .info-about-check-image {
         width: 90%;
+    }
+    .tariff-plan-title {
+        font-size: 18px!important;
+        margin-bottom: -10px!important;
     }
 }

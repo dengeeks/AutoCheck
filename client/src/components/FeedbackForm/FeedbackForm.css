@@ -1,0 +1,150 @@
+.form-background-image {
+    height: 100vh;
+    background-image: url('../../media/images/vectorBackground.jpg');
+}
+
+.feedback-form-container {
+    color: white!important;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.feedback-title {
+    color: white!important;
+    font-size: 32px!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    margin-top: 25px!important;
+}
+
+.feedback-second-title {
+    font-size: 28px!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    margin-top: 20px!important;
+    margin-bottom: 10px!important;
+}
+
+.feedback-form-field {
+    margin-bottom: 15px!important;
+    color: white!important;
+}
+
+.feedback-form-field label {
+    color: rgb(196, 196, 196)!important;
+}
+
+/* styles.css */
+
+/* Цвет обводки */
+.feedback-form-field .MuiOutlinedInput-notchedOutline {
+    border-color: white;
+  }
+  
+  /* Цвет обводки при наведении */
+  .feedback-form-field :hover .MuiOutlinedInput-notchedOutline {
+    border-color: white!important;
+  }
+  
+  /* Цвет обводки при фокусе */
+  .feedback-form-field  .Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: white!important;
+  }
+  
+
+  .feedback-form-field .MuiInputBase-input {
+    color: white;
+  }
+
+  .file-upload-text {
+    font-size: 12px!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    padding-left: 30px;
+  }
+
+.feedback-form-filename {
+    margin-left: 10px!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    color: white!important;
+}
+
+.feedback-file-button {
+    height: 35px;
+    width: 200px;
+    background: #e0e0e0!important;
+    color: black!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+    font-size: 12px!important;
+}
+
+.feedback-submit-button {
+    background: #498EDF!important;
+    width: 190px;
+    height: 45px;
+    color: white!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+    margin-top: 15px!important;
+}
+
+.file-size-error {
+    color: #ffffff;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+    margin-left: 10px!important;
+}
+
+@media (max-width: 530px) {
+    .feedback-form-field {
+        margin-bottom: 15px!important;
+        width: 95vw;
+    }
+    .feedback-form-container {
+        width: 100%;
+    }
+    .feedback-title {
+        margin-left: 15px!important;
+        font-size: 28px!important;
+    }
+
+    .feedback-second-title {
+        margin-left: 15px!important;
+        font-size: 24px!important;
+    }
+    
+    .feedback-form-field {
+        margin: 7px auto!important;
+    }
+
+    .feedback-file-button {
+        margin-left: 10px!important;
+        width: 260px!important;
+    }
+
+    .feedback-submit-button {
+        margin-left: 10px!important;
+    }
+    .file-upload-text {
+        font-size: 12px!important;
+        font-family: 'Ysabeau Infant', sans-serif!important;
+        font-weight: 700!important;
+        padding-left: 10px;
+    }
+}
+
+@media (max-width: 380px) {
+    .feedback-title {
+        margin-left: 15px!important;
+        font-size: 24px!important;
+    }
+
+    .feedback-second-title {
+        margin-left: 15px!important;
+        font-size: 20px!important;
+    }
+}

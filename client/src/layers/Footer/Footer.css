@@ -1,0 +1,90 @@
+.footer-root {
+    background-color: #498EDF;
+    color: #fff;
+    padding: 20px;
+}
+
+.footer-title {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 24px!important;
+}
+
+.footer-logo {
+    text-align: center;
+    font-size: 24px!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+}
+
+.footer-contacts {
+    margin-left: 50px!important;
+}
+
+.contact-footer-info {
+    font-size: 18px;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+}
+
+.contact-footer-btn {
+    background: #fff!important;
+    height: 40px;
+    width: 80%;
+    margin-top: 15px!important;
+}
+
+.contact-footer-btn :hover {
+    background: #fff!important;
+}
+
+.footer-column {
+    text-align: center;
+}
+
+.under-footer-info {
+    width: 100%;
+    text-align: center;
+    margin-top: 25px!important;
+}
+
+
+@media (max-width: 1200px) {
+    .footer-contacts {
+        margin-left: 0px!important;
+    }
+}
+
+@media (max-width: 800px) {
+    .footer-title {
+        font-size: 18px!important;
+    }
+    .contact-footer-btn {
+        width: 95%;
+    }
+    .contact-footer-info {
+        font-size: 14px!important;
+        font-family: 'Ysabeau Infant', sans-serif!important;
+        font-weight: 400!important;
+    }
+}
+
+@media (max-width: 510px) {
+    .footer-title {
+        font-size: 14px!important;
+    }
+    .contact-footer-info {
+        font-size: 12px!important;
+        font-family: 'Ysabeau Infant', sans-serif!important;
+        font-weight: 400!important;
+    }
+    .footer-logo {
+        font-size: 18px!important;
+    }
+    .contact-footer-btn {
+        font-size: 14px!important;
+    }
+    .contact-footer-btn text {
+        font-size: 14px!important;
+    }
+}

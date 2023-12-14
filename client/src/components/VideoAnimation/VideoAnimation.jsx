@@ -12,7 +12,7 @@ const VideoAnimation = () => {
     <div className="video-container">
       <video autoPlay loop muted className="text-animation-video" loading="lazy">
         {/* Video with text scrolling */}
-        <source src={textAnimationWebM}  type="video/webm" />
+        <source src={textAnimationWebM} type="video/webm" />
         <source src={textAnimationMP4} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
