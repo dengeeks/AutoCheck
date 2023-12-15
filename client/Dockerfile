@@ -1,6 +1,6 @@
 FROM node:17-alpine as builder
 WORKDIR /react
-COPY package.json yarn.lock ./
-RUN yarn global add yarn@latest
+COPY package.json package-lock.json ./
+RUN npm install -legacy-peer-deps
 COPY . .
-CMD ["yarn", "build"]
+CMD ["npm","run", "build"]
