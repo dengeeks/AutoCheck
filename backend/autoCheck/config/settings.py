@@ -118,13 +118,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'takemycodeservice@gmail.com'
 EMAIL_HOST_PASSWORD = 'lkrf xeug nfuz wggd'
 
-CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:3000",
-    "http://localhost:3000",
-]
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
@@ -147,6 +140,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = '/api/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
