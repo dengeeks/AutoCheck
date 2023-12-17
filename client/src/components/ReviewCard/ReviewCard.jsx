@@ -8,8 +8,8 @@ const ReviewCard = ({ name, avatar, text, convenienceRating, qualityRating, info
 
     const handleRatingChange = (value) => {
         console.log(`Selected rating: ${value}`);
-      };
-      
+    };
+    console.log(avatar)      
     return (
         <Box className="review-card-container">
             <Box className="review-card-header">

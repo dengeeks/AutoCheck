@@ -34,7 +34,7 @@ const MainPage = () => {
     const [reviews, setReviews] = useState([])
     const [tariffPlans, setTariffPlans] = useState([])
 
-    const BASE_URL = process.env.REACT_APP_BASE_URL;
+    const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
 
     useEffect(() => {
         const handleResize = () => {
@@ -142,7 +142,7 @@ const MainPage = () => {
                             <SwiperSlide className="review-swiper-slide" key={index}>
                                 <ReviewCard
                                     name={review.user_name}
-                                    avatar={`${BASE_URL}${review.user_avatar}`}
+                                    avatar={`${BASE_URL_WITHOUT_PREFIX}${review.user_avatar}`}
                                     text={review.text}
                                     convenienceRating={review.convenience_rating}
                                     qualityRating={review.quality_rating}
