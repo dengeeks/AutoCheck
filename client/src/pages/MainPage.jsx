@@ -9,6 +9,7 @@ import FAQ from "../components/FAQ/FAQ"
 import InfoContacts from "../components/InfoContacts/InfoContacts"
 import FormReviewModal from "../components/FormModal/FormReviewModal"
 import { getReviewsRequest } from "../api/getReviewsRequest"
+import { getAllTariffRequest } from "../api/getAllTariffRequest"
 import '../styles/MainPage.css'
 
 import { Autoplay, Scrollbar, Navigation } from 'swiper/modules';
@@ -31,6 +32,7 @@ const MainPage = () => {
     const [isOpenModalForm, setIsOpenModalForm] = useState(false)
     const [slidesPerView, setSlidesPerView] = useState(4)
     const [reviews, setReviews] = useState([])
+    const [tariffPlans, setTariffPlans] = useState([])
 
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -55,7 +57,19 @@ const MainPage = () => {
         return () => {
           window.removeEventListener('resize', handleResize);
         };
-    }, []); 
+    }, []);
+
+    useEffect(() => {
+        getAllTariffRequest({setData: setTariffPlans})
+    }, [])
+
+    const tariffColors = {
+        red: {color: 'd11e22', effectColor: 'rgba(255, 214, 214, 0.3)', image: Speedometr1},
+        orange: {color: 'f46522', effectColor: 'rgba(255, 246, 214, 0.3)', image: Speedometr2},
+        yellow: {color: 'fcbd4b', effectColor: 'rgba(255, 246, 214, 0.3)', image: Speedometr3},
+        blue: {color: '01a8ba', effectColor: 'rgba(214, 235, 255, 0.3)', image: Speedometr4},
+        green: {color: '029547', effectColor: 'rgba(214, 255, 218, 0.3)', image: Speedometr5},
+    };
 
     const handleClickFormModal = () => {
         setIsOpenModalForm(!isOpenModalForm)
@@ -86,21 +100,23 @@ const MainPage = () => {
                 <Typography className='tariff-plan-title'>Тарифные планы</Typography>
             </Box>
             <Grid id='tariff-plans' item container xs={12} md={12} lg={12} xl={12} sx={{ alignItems: 'center' }}>
-                <Grid item xs={6} md={6} lg={2.4} xl={2.4}>
-                    <PlanCard plan='Стандартный' color='d11e22' effectColor='rgba(255, 214, 214, 0.3)' discount='15' quantity='5' price='500' image={Speedometr1} />
-                </Grid>
-                <Grid item xs={6} md={6} lg={2.4} xl={2.4}>
-                    <PlanCard plan='Стандартный' color='f46522' effectColor='rgba(255, 246, 214, 0.3)' discount='15' quantity='5' price='500' image={Speedometr2} />
-                </Grid>
-                <Grid item xs={6} md={6} lg={2.4} xl={2.4}>
-                    <PlanCard plan='Стандартный' color='fcbd4b' effectColor='rgba(244, 255, 214, 0.3)' discount='15' quantity='5' price='500' image={Speedometr3} />
-                </Grid>
-                <Grid item xs={6} md={6} lg={2.4} xl={2.4}>
-                    <PlanCard plan='Стандартный' color='01a8ba' effectColor='rgba(214, 235, 255, 0.3)' discount='15' quantity='5' price='500' image={Speedometr4} />
-                </Grid>
-                <Grid item xs={12} md={6} lg={2.4} xl={2.4}>
-                    <PlanCard plan='Стандартный' color='029547' effectColor='rgba(214, 255, 218, 0.3)' discount='15' quantity='5' price='500' image={Speedometr5}  /> 
-                </Grid>                    
+                {tariffPlans.map((tariff) => {
+                    console.log(tariff)
+                    const tariffColor = tariffColors[String(tariff?.color)];
+                    return(
+                        <Grid item xs={6} md={6} lg={2.4} xl={2.4} key={tariff.id}>
+                            <PlanCard 
+                                plan={tariff.name}
+                                color={tariffColor?.color}
+                                effectColor={tariffColor?.effectColor}
+                                discount={tariff.profit_percentage}
+                                quantity={tariff.request_quantity}
+                                price={tariff.price}
+                                image={tariffColor?.image} 
+                            />
+                        </Grid>
+                    )
+                })}            
             </Grid>
             <Grid item container xs={12} className="info-in-report-grid-container">
                 <Grid item xs={12} md={12} lg={6} lx={8}>

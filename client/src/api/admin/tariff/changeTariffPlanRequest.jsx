@@ -2,13 +2,14 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 
 
-export const changeTariffPlan = ({ id, name, price, request_quantity, token }) => {
+export const changeTariffPlan = ({ id, name, price, request_quantity, color, token }) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
     
     axios.patch(`${BASE_URL}/admin-panel/tariff/${id}/`, {
         name: name,
         price: price,
         request_quantity: request_quantity,
+        color: color,
     },{
         headers: {
             'Content-Type': 'application/json',
@@ -40,4 +41,3 @@ export const getOneTariffPlan = ({ id, token, setData, setLoading }) => {
         toast.error(`Не удалось получить тарифный план номер ${id}`)
     })
 }
-    

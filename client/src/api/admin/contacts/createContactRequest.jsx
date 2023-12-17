@@ -2,13 +2,12 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 
 
-export const createContact = ({ social_network, link, qr_code, token }) => {
+export const createContact = ({ name, info, token }) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
         
-    axios.post(`${BASE_URL}/admin-panel/tariff/`, {
-        social_network: social_network,
-        link: link,
-        qr_code: qr_code,
+    axios.post(`${BASE_URL}/admin-panel/contacts/`, {
+        name: name,
+        info: info,
     },{
         headers: {
             'Content-Type': 'application/json',
@@ -16,9 +15,10 @@ export const createContact = ({ social_network, link, qr_code, token }) => {
         }
     })
     .then((response) => {
-        toast.success('Контакт успешно создан!');
+        toast.success('Соц сеть успешно создана!');
     })
     .catch(error => {
-        toast.error('Ошибка. Не удалось создать контакт');
+        toast.error('Ошибка. Не удалось создать соц сеть');
+        console.log(error)
     })
 }

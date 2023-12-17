@@ -2,7 +2,7 @@ from .models import Review
 from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import CustomUser, TariffPlan, Contact
+from .models import CustomUser, TariffPlan, Contact, SocialNetwork
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -42,17 +42,35 @@ class EmailSerializer(serializers.Serializer):
     files = serializers.ListField(child=serializers.FileField(), max_length=10, required=False)
 
 
-class TariffPlanSerializer(serializers.Serializer):
-    profit_percentage = serializers.ReadOnlyField()
+class TariffPlanSerializer(serializers.ModelSerializer):
+    profit_percentage = serializers.SerializerMethodField()
 
-    class Meta: 
+    class Meta:
         model = TariffPlan
-        fields = '__all__'
+        fields = ('id', 'name', 'price', 'color', 'request_quantity', 'profit_percentage')
 
+    def get_profit_percentage(self, obj):
+        # Получите самый дешевый тариф
+        cheapest_tariff = TariffPlan.objects.order_by('price', 'request_quantity').first()
 
-class ContactSerializer(serializers.Serializer):
+        # Вычислите процент выгоды для текущего тарифа
+        if cheapest_tariff:
+            original_price = cheapest_tariff.price / cheapest_tariff.request_quantity
+            discounted_price = obj.price / obj.request_quantity
+            profit_percentage = ((original_price - discounted_price) / original_price) * 100
+            return round(profit_percentage)
+        else:
+            return 0
+    
+
+class ContactSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Contact
+        fields = '__all__'
+
+class SocialNetworkSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = SocialNetwork
         fields = '__all__'
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

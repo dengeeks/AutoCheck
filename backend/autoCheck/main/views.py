@@ -1,14 +1,12 @@
 from rest_framework import generics
 from rest_framework import permissions, status
-from .serializers import ReviewSerializer, TariffPlanSerializer
-from .models import Review, TariffPlan, Contact
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import EmailSerializer, MyTokenObtainPairSerializer, ContactSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.core.mail import EmailMessage
 from rest_framework.response import Response
-
+from .serializers import EmailSerializer, MyTokenObtainPairSerializer, ContactSerializer, TariffPlanSerializer, SocialNetworkSerializer, ReviewSerializer
+from .models import Review, TariffPlan, Contact, SocialNetwork
 
 class SendEmailView(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -49,13 +47,19 @@ class ReviewListCreateView(generics.ListCreateAPIView):
         # Associate the authenticated user with the review
         serializer.save(user=self.request.user)
 
-class TariffPlanListView(generics.ListAPIView):
-    queryset = TariffPlan.objects.all()
+
+class TariffPlanList(generics.ListAPIView):
+    queryset = TariffPlan.objects.all().order_by('price')
     serializer_class = TariffPlanSerializer
+
 
 class ContactListView(generics.ListAPIView):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+
+class SocialNetworkListView(generics.ListAPIView):
+    queryset = SocialNetwork.objects.all()
+    serializer_class = SocialNetworkSerializer
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer

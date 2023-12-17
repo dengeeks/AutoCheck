@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { toast } from 'react-toastify';
 
-export const getOneContact = ({ id, token, setData }) => {
+
+export const getOneContact = ({ id, token, setData, setLoading }) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
     
     axios.get(`${BASE_URL}/admin-panel/contacts/${id}/`, {
@@ -11,6 +12,7 @@ export const getOneContact = ({ id, token, setData }) => {
     })
     .then((response) => {
         setData(response?.data)
+        setLoading(false)
     })
     .catch(error => {
         toast.error(`Не удалось получить контакт`)

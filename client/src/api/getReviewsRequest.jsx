@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from "react-toastify";
 
 
 export const getReviewsRequest = ({ setData }) => {
@@ -6,10 +7,9 @@ export const getReviewsRequest = ({ setData }) => {
 
     axios.get(`${BASE_URL}/reviews/`)
     .then((response) => {
-        console.log(response)
         setData(response.data)
     })
     .catch(error => {
-        console.log(error)
+        toast.error('Ну удалось получить отзывы')
     })
 }

@@ -9,11 +9,16 @@ import Footer from "./layers/Footer/Footer";
 import { AuthProvider } from "./context/AuthContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AdminPanel from "./components/AuthForms/AdminPanel/AdminPanel";
-import AdminUsers from "./components/AuthForms/AdminPanel/AdminUsers/AdminUsers";
-import AdminStatistic from "./components/AuthForms/AdminPanel/AdminStatistic/AdminStatistic";
-import AdminTariffPlans from "./components/AuthForms/AdminPanel/AdminTariffPlans/AdminTariff";
-import AdminTariffChange from "./components/AuthForms/AdminPanel/AdminTariffPlans/AdminTariffChange";
+import AdminPanel from "./pages/AdminPanel/AdminPanel";
+import AdminUsers from "./components/AdminPanel/AdminUsers/AdminUsers";
+import AdminStatistic from "./components/AdminPanel/AdminStatistic/AdminStatistic";
+import AdminTariffPlans from "./pages/AdminPanel/TariffPlans/AdminTariff";
+import AdminTariffChange from "./pages/AdminPanel/TariffPlans/AdminTariffChange";
+import AdminSocialNetworks from "./pages/AdminPanel/SocialNetworks/AdminSocialNetworks";
+import AdminSocialNetworkChange from "./pages/AdminPanel/SocialNetworks/AdminChangeSocialNetwork";
+import AdminContacts from "./pages/AdminPanel/Contacts/AdminContacts";
+import AdminContactChange from "./pages/AdminPanel/Contacts/AdminContactsChange";
+import ActivateUser from "./pages/Auth/ActivateUser";
 import './styles/App.css'
 import FeedbackPage from "./pages/FeedbackPage";
 
@@ -30,12 +35,17 @@ function App() {
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/forget-password" element={<ForgetPasswordPage />} />
           <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/activate/:uid/:token" element={<ActivateUser />} />
           <Route path="/feedback" element={<FeedbackPage />} />
           <Route path="/admin" element={<AdminPanel />}>
             <Route path="users" element={<AdminUsers />}/>
             <Route path="statistic" element={<AdminStatistic />}/>
             <Route path="tariff-plans" element={<AdminTariffPlans />}/>
             <Route path="tariff-plans/:id" element={<AdminTariffChange />}/>
+            <Route path="social-networks" element={<AdminSocialNetworks />}/>
+            <Route path="social-networks/:id" element={<AdminSocialNetworkChange />}/>
+            <Route path="contacts" element={<AdminContacts />}/>
+            <Route path="contacts/:id" element={<AdminContactChange />}/>
             <Route path="referral-system" element={<AdminStatistic />}/>
             <Route path="violators" element={<AdminStatistic />}/>
             <Route path="newsletter" element={<AdminStatistic />}/>

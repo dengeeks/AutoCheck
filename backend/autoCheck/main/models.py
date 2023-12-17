@@ -24,24 +24,20 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class TariffPlan(models.Model):
+    TARIFF_COLORS_CHOICE = [
+        ("red", "Red"),
+        ("orange", "Orange"),
+        ("yellow", "Yellow"),
+        ("blue", "Blue"),
+        ("green", "Green"),
+    ]
     name = models.CharField(max_length=150)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     request_quantity = models.PositiveIntegerField()
+    color = models.CharField(max_length=20, choices=TARIFF_COLORS_CHOICE)
 
     def __str__(self):
         return f'{self.name} | {self.request_quantity} | {self.price}₽'
-    
-    def save(self, *args, **kwargs):
-        # Рассчитываем price_per_query перед сохранением
-        self.price_per_query = self.price / self.request_query
-        super().save(*args, **kwargs)
-    
-    @property
-    def profit_percentage(self):
-        # Рассчитываем процент выгоды относительно самого дешевого тарифа
-        cheapest_tariff = TariffPlan.objects.order_by('price_per_query').first()
-        return ((cheapest_tariff.price_per_query - self.price_per_query) / cheapest_tariff.price_per_query) * 100
-    
 
 class Review(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
@@ -63,21 +59,21 @@ class Review(models.Model):
     
 
 class Contact(models.Model):
-    phone = models.CharField(max_length=40, verbose_name='Номер телефона')
-    second_phone = models.CharField(max_length=40, verbose_name='Второй номер телефона')
-    email = models.CharField(max_length=40, verbose_name='Электронная почта')
+    name = models.CharField(max_length=100)
+    info = models.CharField(max_length=100) 
 
     def __str__(self):
         return 'Контакты'
 
 class SocialNetwork(models.Model):
     SOCIAL_NETWORKS_CHOICE = [
-        ("Instagram", "instagram"),
-        ("Telegram", "telegram"),
-        ("Facebook", "facebook"),
-        ("WhatsApp", "whatsapp"),
-        ("VK", "vk"),
-        ("Viber", "viber"),
+        ("instagram", "Instagram"),
+        ("youtube", "Youtube"),
+        ("telegram", "Telegram"),
+        ("facebook", "Facebook"),
+        ("whatsapp", "WhatsApp"),
+        ("vk", "VK"),
+        ("viber", "Viber"),
     ]
     social_network = models.CharField(max_length=30, choices=SOCIAL_NETWORKS_CHOICE)
     link = models.URLField(null=True, blank=True)

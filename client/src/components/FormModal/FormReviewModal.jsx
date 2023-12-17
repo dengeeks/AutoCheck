@@ -63,7 +63,7 @@ const FormReviewModal = ({ open, onClose, setData }) => {
                         fullWidth
                         className="review-text-field"
                         onChange={(e) => setText(e.target.value)}
-                        error={error.text}
+                        error={!!error.text}
                         helperText={error.text}
                         label="Ваш отзыв" />
 

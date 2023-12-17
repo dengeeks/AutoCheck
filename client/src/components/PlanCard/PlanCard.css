@@ -83,6 +83,10 @@
     width: 200px;
 }
 
+.header-title-no-discount {
+    padding-top: 23px;
+}
+
 
 @media (max-width: 1536px) {
     .card-container {

@@ -1,8 +1,13 @@
+import { useEffect, useState } from "react"
 import { Grid, Box, Typography, Container } from "@mui/material"
+import { getSocialNetworksRequest } from "../../api/getSocialNetworksRequest"
+import { Link } from "react-router-dom"
+
 import QRcode from '../../media/images/QRcode.png'
 import './InfoContacts.css'
 import ViberLogo from '../../media/images/SocialIcons/viber.svg'
 import TelegramLogo from '../../media/images/SocialIcons/telegram.svg'
+import FacebookLogo from '../../media/images/SocialIcons/facebook.svg'
 import WhatsAppLogo from '../../media/images/SocialIcons/whatsapp.svg'
 import VKLogo from '../../media/images/SocialIcons/vk.svg'
 import InstagramLogo from '../../media/images/SocialIcons/instagram.svg'
@@ -24,6 +29,22 @@ import FeaturesPhone from '../../media/images/features_phone.jpg'
 
 
 const InfoContacts = () => {
+    const [socialNetworks, setSocialNetworks] = useState([])
+
+    useEffect(() => {
+        getSocialNetworksRequest({setData: setSocialNetworks})
+    }, [])
+
+    const socialNetworkLogos = {
+        viber: ViberLogo,
+        telegram: TelegramLogo,
+        whatsapp: WhatsAppLogo,
+        vk: VKLogo,
+        facebook: FacebookLogo,
+        instagram: InstagramLogo,
+        youtube: YouTubeLogo,
+    };
+
     return(
         <Container maxWidth="xl">
             <Grid container>
@@ -51,48 +72,20 @@ const InfoContacts = () => {
                     </Box>
 
                     <Box className='service-social-links-container'>
-                        <Box className='service-social-link'>
-                            <Box className='social-link-header'>
-                                <img className='social-link-logo' src={TelegramLogo} alt="telegram Logo" />
-                                <Typography className='social-link-name'>Telegram</Typography> 
-                            </Box>
-                            <img src={QRcode} className='social-link-qr-code' alt="telegram QR" />
-                        </Box>
-                        <Box className='service-social-link'>
-                            <Box className='social-link-header'>
-                                <img className='social-link-logo' src={ViberLogo} alt="viber Logo" />
-                                <Typography className='social-link-name'>Viber</Typography>
-                            </Box>
-                            <img src={QRcode} className='social-link-qr-code' alt="viber QR" />
-                        </Box>
-                        <Box className='service-social-link'>
-                            <Box className='social-link-header'>
-                                <img className='social-link-logo' src={WhatsAppLogo} alt="whatsapp Logo" />
-                                <Typography className='social-link-name'>WhatsApp</Typography>
-                            </Box>
-                            <img src={QRcode} className='social-link-qr-code' alt="whatsapp QR" />
-                        </Box>
-                        <Box className='service-social-link'>
-                            <Box className='social-link-header'>
-                                <img className='social-link-logo' src={YouTubeLogo} alt="telegram Logo" />
-                                <Typography className='social-link-name'>Telegram</Typography> 
-                            </Box>
-                            <img src={QRcode} className='social-link-qr-code' alt="telegram QR" />
-                        </Box>
-                        <Box className='service-social-link'>
-                            <Box className='social-link-header'>
-                                <img className='social-link-logo' src={VKLogo} alt="viber Logo" />
-                                <Typography className='social-link-name'>Viber</Typography>
-                            </Box>
-                            <img src={QRcode} className='social-link-qr-code' alt="viber QR" />
-                        </Box>
-                        <Box className='service-social-link'>
-                            <Box className='social-link-header'>
-                                <img className='social-link-logo' src={InstagramLogo} alt="whatsapp Logo" />
-                                <Typography className='social-link-name'>WhatsApp</Typography>
-                            </Box>
-                            <img src={QRcode} className='social-link-qr-code' alt="whatsapp QR" />
-                        </Box>
+                        {socialNetworks?.map((network) => {
+                            const logo = socialNetworkLogos[network.social_network];
+                            return(
+                                <Box className='service-social-link' key={network.id}>
+                                    <Link to={`${network.link}`} target="_blank" rel="noopener noreferrer" style={{ color: 'black', textDecoration: 'none' }}>
+                                        <Box className='social-link-header'>
+                                            {logo && <img className='social-link-logo' src={logo} alt={`${network.social_network} Logo`} />}
+                                            <Typography className='social-link-name'>{network?.social_network}</Typography> 
+                                        </Box>
+                                        <img src={network.qr_code} className='social-link-qr-code' alt="telegram QR" />
+                                    </Link>
+                                </Box>
+                            )
+                        })}
                     </Box>
                 </Grid>
                 <Grid item container md={12} xl={6} className='our-sources-grid-container'>
