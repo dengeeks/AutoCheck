@@ -39,7 +39,7 @@ class SendEmailView(APIView):
             return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 class ReviewListCreateView(generics.ListCreateAPIView):
-    queryset = Review.objects.all()
+    queryset = Review.objects.filter(is_allowed=True)
     serializer_class = ReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 

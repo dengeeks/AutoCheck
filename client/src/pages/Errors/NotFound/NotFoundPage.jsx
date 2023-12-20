@@ -1,0 +1,22 @@
+import NotFoundGif from '../../../media/video/404-NotFound.gif'
+import { Box, Typography, Button } from '@mui/material'
+import './NotFound.css'
+import { Link, useNavigate } from 'react-router-dom'
+
+const NotFoundError = () => {
+    const navigate = useNavigate()
+    const NavigateToMainPage = () => {
+        navigate('/')
+    }
+    return(
+        <Box className='not-found-container' sx={{ width: '100%', textAlign: 'center' }}>
+            <Typography className='not-found-title'>Страница не найдена</Typography>
+            <img src={NotFoundGif} alt="Not Found" className='not-found-gif' />
+            <Box className=''>
+                <Button className='not-found-btn' onClick={NavigateToMainPage}>На главную</Button>
+            </Box>
+        </Box>
+    )
+}
+
+export default NotFoundError

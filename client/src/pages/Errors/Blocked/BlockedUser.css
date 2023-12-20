@@ -1,0 +1,48 @@
+.blocked-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 95vh; /* Настраивает высоту контейнера на 100% высоты видимого экрана */
+  }
+  
+  .blocked-page-icon {
+    width: 400px; /* Задайте ширину изображения по вашему усмотрению */
+  }
+
+.blocked-user-title {
+    text-align: center;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 24px!important;
+}
+
+.blocked-user-text {
+    text-align: center;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+    font-size: 18px!important;
+    margin-right: 5px;
+}
+
+.blocked-user-second-title {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 18px!important;
+    margin-right: 5px;
+}
+
+@media (max-width: 565px) {
+    .blocked-page-icon {
+        width: 90%;
+    }
+    .blocked-user-title {
+        font-size: 18px!important;
+    }
+    .blocked-user-second-title {
+        font-size: 16px!important;
+    }
+    .blocked-user-text {
+        font-size: 16px!important;
+    }
+}

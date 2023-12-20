@@ -3,13 +3,21 @@ import StarRating from "../StarRating/StarRating"
 import "./ReviewCard.css"
 
 
-const ReviewCard = ({ name, avatar, text, convenienceRating, qualityRating, informativenessRating }) => {
-    const truncatedText = text.length > 40 ? `${text.slice(0, 100)}...` : text;
+const ReviewCard = ({ name, avatar, text, convenienceRating, qualityRating, informativenessRating }) => {    
+    function truncateText(text, maxLength) {
+        if (text.length <= maxLength) {
+          return text;
+        }      
+        const truncatedText = text.substring(0, maxLength);      
+        const lastSpaceIndex = truncatedText.lastIndexOf(' ');      
 
-    const handleRatingChange = (value) => {
-        console.log(`Selected rating: ${value}`);
-    };
-    console.log(avatar)      
+        if (lastSpaceIndex !== -1) {
+          return truncatedText.substring(0, lastSpaceIndex) + '...';
+        }      
+        return truncatedText + '...';
+    }
+
+    const truncatedText = truncateText(text, 100)
     return (
         <Box className="review-card-container">
             <Box className="review-card-header">
@@ -17,14 +25,14 @@ const ReviewCard = ({ name, avatar, text, convenienceRating, qualityRating, info
                 <Typography className="review-card-user-name">{name}</Typography>
             </Box>
             
-            <Typography className="review-card-text" sx={{ marginBottom: '15px', wordBreak: 'break-all' }}>{truncatedText}</Typography>
+            <Typography className="review-card-text" sx={{ marginBottom: '15px', wordBreak: 'break-word' }}>{truncatedText}</Typography>
 
             <Typography className="star-rating-text" >Удобство</Typography>
-            <StarRating readOnly={true} onChange={handleRatingChange} defaultValue={convenienceRating} />
+            <StarRating readOnly={true} defaultValue={convenienceRating} />
             <Typography className="star-rating-text" >Качество</Typography>
-            <StarRating readOnly={true} onChange={handleRatingChange} defaultValue={qualityRating} />
+            <StarRating readOnly={true} defaultValue={qualityRating} />
             <Typography className="star-rating-text">Информативность</Typography>
-            <StarRating readOnly={true} onChange={handleRatingChange} defaultValue={informativenessRating} />
+            <StarRating readOnly={true} defaultValue={informativenessRating} />
         </Box>
     )
 }

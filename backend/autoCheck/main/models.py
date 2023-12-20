@@ -13,6 +13,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+    is_blocked = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
@@ -21,6 +22,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f'{self.first_name} | {self.email}'
+
+
+class UserBlock(models.Model):
+    user = models.OneToOneField(to=CustomUser, on_delete=models.CASCADE)
+    blocked_until = models.DateTimeField()
+    block_reason = models.TextField()
 
 
 class TariffPlan(models.Model):
@@ -45,6 +52,7 @@ class Review(models.Model):
     convenience_rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)], verbose_name='Удобство рейтинг')
     informativeness_rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)], verbose_name='Информативность рейтинг')
     quality_rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)], verbose_name='Качество рейтинг')
+    is_allowed = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.user} | {self.convenience_rating}, {self.informativeness_rating}, {self.quality_rating}'

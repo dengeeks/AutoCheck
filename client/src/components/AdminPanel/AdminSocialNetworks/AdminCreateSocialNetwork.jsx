@@ -1,4 +1,4 @@
-import { Modal, Box, TextField, Typography, Button} from "@mui/material"
+import { Modal, Box, TextField, Typography, Button, Select, MenuItem} from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import { useState, useRef } from "react";
 import { createSocialNetwork } from "../../../api/admin/socialNetworks/createSocialNetworkRequest";
@@ -44,20 +44,23 @@ const CreateSocialNetworkModal = ({ open, onClose, token }) => {
                 </Box>
 
                 <Box sx={{ padding: '30px' }}>
-                    <select
-                        style={{ height: '50px', width: '100%' }}
+                    <Select
+                        labelId="color-selector-label"
                         value={social_network || ''}
+                        fullWidth
                         onChange={(e) => setSocialNetwork(e.target.value)}
+                        displayEmpty
+                        sx={{ marginTop: '10px' }}
                     >
-                        <option value="">Выберите соц. сеть</option>
-                        <option value="youtube">Youtube</option>
-                        <option value="instagram">Instagram</option>
-                        <option value="telegram">Telegram</option>
-                        <option value="facebook">Facebook</option>
-                        <option value="whatsapp">WhatsApp</option>
-                        <option value="viber">Viber</option>
-                        <option value="vk">VK</option>
-                    </select>
+                        <MenuItem value="" disabled>Выберите соц. сеть</MenuItem>
+                        <MenuItem value="youtube">Youtube</MenuItem>
+                        <MenuItem  value="instagram">Instagram</MenuItem>
+                        <MenuItem value="telegram">Telegram</MenuItem>
+                        <MenuItem value="facebook">Facebook</MenuItem>
+                        <MenuItem value="whatsapp">WhatsApp</MenuItem>
+                        <MenuItem value="viber">Viber</MenuItem>
+                        <MenuItem value="vk">Vk</MenuItem>
+                    </Select>
                     <TextField
                         fullWidth
                         sx={{ marginTop: '10px', marginBottom: '10px' }}

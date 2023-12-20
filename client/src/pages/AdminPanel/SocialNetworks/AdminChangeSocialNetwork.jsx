@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState, useRef } from "react"
 import { useParams } from "react-router-dom"
-import { Box, Typography, TextField, Button } from "@mui/material"
+import { Box, Typography, TextField, Button, Select, MenuItem } from "@mui/material"
 import { getOneSocialNetwork } from "../../../api/admin/socialNetworks/getOneSocialNetworkRequest"
 import { deleteSocialNetwork } from "../../../api/admin/socialNetworks/deleteSocialNetworkRequest"
 import { changeSocialNetwork } from "../../../api/admin/socialNetworks/changeSocialNetworkRequest"
 import UploadFileIcon from '@mui/icons-material/UploadFile';
+import Loader from "../../../components/Loader/Loader"
 import AuthContext from "../../../context/AuthContext"
+import { useNavigate } from "react-router-dom"
 import '../../../styles/AdminChangeForm.css'
 
 
@@ -16,6 +18,7 @@ const AdminSocialNetworkChange = () => {
     const [loading, setLoading] = useState(true);
     const [editedSocialNetwork, setEditedSocialNetwork] = useState({ social_network: '', link: '', qr_code: null });
     const { id } = useParams();
+    const navigate = useNavigate()
   
     useEffect(() => {
       getOneSocialNetwork({ id: id, token: authTokens.access, setData: setSocialNetwork, setLoading: setLoading });
@@ -46,6 +49,7 @@ const AdminSocialNetworkChange = () => {
                 qr_code: isFile ? editedSocialNetwork.qr_code : null,
                 token: authTokens.access
             })
+            navigate('/admin/social-networks')
         }
     };
 
@@ -56,11 +60,12 @@ const AdminSocialNetworkChange = () => {
                 id: id,
                 token: authTokens.access
             })
+            navigate('/admin/social-networks')
         }
     }
   
     if (loading) {
-      return <h1>Loading</h1>;
+      return <Loader />;
     }
   
     return (
@@ -69,29 +74,30 @@ const AdminSocialNetworkChange = () => {
           <Typography className='admin-change-from-title'>Соц. сеть номер {id}</Typography>
         </Box>
         <Box className='admin-change-from'>
-          <select
-            style={{ height: '50px' }}
+          <Select
+            labelId="color-selector-label"
             value={editedSocialNetwork?.social_network || ''}
+            fullWidth
             onChange={(e) => setEditedSocialNetwork((prev) => ({ ...prev, social_network: e.target.value }))}
+            displayEmpty
+            sx={{ marginTop: '10px' }}
           >
-            <option value="">Выберите соц. сеть</option>
-            <option value="youtube">Youtube</option>
-            <option value="instagram">Instagram</option>
-            <option value="telegram">Telegram</option>
-            <option value="facebook">Facebook</option>
-            <option value="whatsapp">WhatsApp</option>
-            <option value="viber">Viber</option>
-            <option value="vk">Vk</option>
-          </select>
-
+            <MenuItem value="" disabled>Выберите соц. сеть</MenuItem>
+            <MenuItem value="youtube">Youtube</MenuItem>
+            <MenuItem  value="instagram">Instagram</MenuItem>
+            <MenuItem value="telegram">Telegram</MenuItem>
+            <MenuItem value="facebook">Facebook</MenuItem>
+            <MenuItem value="whatsapp">WhatsApp</MenuItem>
+            <MenuItem value="viber">Viber</MenuItem>
+            <MenuItem value="vk">Vk</MenuItem>
+          </Select>
           <TextField
             className='admin-change-form-field'
-            placeholder="Link"
+            label="Ссылка"
             value={editedSocialNetwork?.link || ''}
             type='text'
             onChange={(e) => setEditedSocialNetwork((prev) => ({ ...prev, link: e.target.value }))}
           />
-
           <input
             type="file"
             ref={fileInputRef}
@@ -100,7 +106,6 @@ const AdminSocialNetworkChange = () => {
             accept=".jpg, .jpeg, .png"
             multiple
           />
-
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Button className='feedback-file-button' sx={{ marginTop: '5px' }} onClick={handleAttachFileClick} startIcon={<UploadFileIcon />} >Добавить</Button>
           </Box>

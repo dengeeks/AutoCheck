@@ -1,18 +1,33 @@
 import Box from '@mui/material/Box';
 import {useNavigate} from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid';
+import EditIcon from '@mui/icons-material/Edit';
+
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'id', headerName: 'ID', align: 'center', width: 90 },
     {
       field: 'name',
       headerName: 'Название',
+      align: 'center',
       width: 150,
     },
     {
       field: 'info',
       headerName: 'Информация',
-      width: 150,
+      align: 'center',
+      width: 180,
+    },
+    {
+      field: 'change',
+      headerName: 'Редактировать',
+      width: 170,
+      align: 'center',
+      renderCell: (params) => (
+        <div>
+          <EditIcon />
+        </div>
+      ),
     },
 ];
 

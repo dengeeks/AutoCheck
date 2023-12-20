@@ -24,7 +24,7 @@ const AdminTariffPlans = () => {
         <Box>
             <CreateTariffPlanModal open={isModalOpen} onClose={onClose} token={authTokens.access} />
             <Box sx={{ width: '100%', textAlign: 'center' }}>
-                <Typography className='admin-data-title'>Тарфиные планы</Typography>
+                <Typography className='admin-data-title'>Управление тарфиными планами</Typography>
             </Box>
             <Button className='add-admin-data-btn' onClick={() => setIsModalOpen(true)}>Добавить тариф</Button>
             <AdminTariffPlansDataGrid rows={tariffPlans}/>   

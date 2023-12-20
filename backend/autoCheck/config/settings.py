@@ -9,7 +9,7 @@ SECRET_KEY = 'django-insecure-7-ao56s^oco()i1d8l6r339(tq9eenyo@j*+-m0d9e(7heoz4o
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.72.76.90']
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
@@ -118,6 +118,13 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'takemycodeservice@gmail.com'
 EMAIL_HOST_PASSWORD = 'lkrf xeug nfuz wggd'
 
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+]
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
@@ -129,9 +136,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'main.CustomUser'
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 

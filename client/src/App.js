@@ -10,7 +10,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminPanel from "./pages/AdminPanel/AdminPanel";
-import AdminUsers from "./components/AdminPanel/AdminUsers/AdminUsers";
+import AdminUsers from "./pages/AdminPanel/Users/AdminUsers";
 import AdminStatistic from "./components/AdminPanel/AdminStatistic/AdminStatistic";
 import AdminTariffPlans from "./pages/AdminPanel/TariffPlans/AdminTariff";
 import AdminTariffChange from "./pages/AdminPanel/TariffPlans/AdminTariffChange";
@@ -18,9 +18,14 @@ import AdminSocialNetworks from "./pages/AdminPanel/SocialNetworks/AdminSocialNe
 import AdminSocialNetworkChange from "./pages/AdminPanel/SocialNetworks/AdminChangeSocialNetwork";
 import AdminContacts from "./pages/AdminPanel/Contacts/AdminContacts";
 import AdminContactChange from "./pages/AdminPanel/Contacts/AdminContactsChange";
+import AdminReviews from "./pages/AdminPanel/Reviews/AdminReviews";
+import AdminReviewChange from "./pages/AdminPanel/Reviews/AdminReviewChange";
 import ActivateUser from "./pages/Auth/ActivateUser";
 import './styles/App.css'
 import FeedbackPage from "./pages/FeedbackPage";
+import NotFoundError from "./pages/Errors/NotFound/NotFoundPage";
+import AdminUsersChange from "./pages/AdminPanel/Users/AdminUsersChange";
+import BlockedUserPage from "./pages/Errors/Blocked/BlockedUserPage";
 
 
 function App() {
@@ -37,8 +42,10 @@ function App() {
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/activate/:uid/:token" element={<ActivateUser />} />
           <Route path="/feedback" element={<FeedbackPage />} />
+          <Route path="/you-blocked" element={<BlockedUserPage />} />
           <Route path="/admin" element={<AdminPanel />}>
             <Route path="users" element={<AdminUsers />}/>
+            <Route path="users/:id" element={<AdminUsersChange />}/>
             <Route path="statistic" element={<AdminStatistic />}/>
             <Route path="tariff-plans" element={<AdminTariffPlans />}/>
             <Route path="tariff-plans/:id" element={<AdminTariffChange />}/>
@@ -46,6 +53,8 @@ function App() {
             <Route path="social-networks/:id" element={<AdminSocialNetworkChange />}/>
             <Route path="contacts" element={<AdminContacts />}/>
             <Route path="contacts/:id" element={<AdminContactChange />}/>
+            <Route path="reviews" element={<AdminReviews />}/>
+            <Route path="reviews/:id" element={<AdminReviewChange />}/>
             <Route path="referral-system" element={<AdminStatistic />}/>
             <Route path="violators" element={<AdminStatistic />}/>
             <Route path="newsletter" element={<AdminStatistic />}/>
@@ -53,6 +62,7 @@ function App() {
             <Route path="report-history" element={<AdminStatistic />}/>
             <Route path="design" element={<AdminStatistic />}/>
           </Route>
+          <Route path='*' element={<NotFoundError />} />
         </Routes>
         <Footer />
       </AuthProvider>

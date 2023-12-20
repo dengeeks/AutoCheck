@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TariffPlan, Review, Contact, SocialNetwork, CustomUser
+from .models import TariffPlan, Review, Contact, SocialNetwork, CustomUser, UserBlock
 
 
 class CustomUserAdmin(admin.ModelAdmin):
@@ -11,3 +11,4 @@ admin.site.register(Review)
 admin.site.register(Contact)
 admin.site.register(SocialNetwork)
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(UserBlock)

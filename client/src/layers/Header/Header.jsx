@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Box, AppBar, Toolbar, Typography, IconButton, Popover, List, ListItem, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -18,6 +18,12 @@ const Header = () => {
   const closeMenu = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    if (user?.is_blocked) {
+      navigate('/you-blocked/')
+    }
+  }, [user, navigate])
 
   const scrollToSection = (id) => {
     const section = document.getElementById(id);

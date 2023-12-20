@@ -14,6 +14,7 @@ export default AuthContext
 export const AuthProvider = ({children}) => {
     const [authTokens, setAuthTokens] = useState(localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     const [user, setUser] = useState(localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')) : null)
+    // eslint-disable-next-line
     const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
@@ -63,7 +64,6 @@ export const AuthProvider = ({children}) => {
         })
         .then((response) => {
             const data = response.data
-            console.log('Update token', data)
             setAuthTokens(data)
             setUser(jwtDecode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
@@ -88,7 +88,7 @@ export const AuthProvider = ({children}) => {
             }
         }, (1000 * 60) * 14)
         return ()=> clearInterval(interval)
-        
+    // eslint-disable-next-line
     }, [authTokens, loading])
 
     return(

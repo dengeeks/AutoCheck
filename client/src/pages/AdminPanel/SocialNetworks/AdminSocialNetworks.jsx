@@ -24,7 +24,7 @@ const AdminSocialNetworks = () => {
         <Box>
             <CreateSocialNetworkModal open={isModalOpen} onClose={onClose} token={authTokens.access} />
             <Box sx={{ width: '100%', textAlign: 'center' }}>
-                <Typography className='admin-data-title'>Социальные сети</Typography>
+                <Typography className='admin-data-title'>Управление социальными сетями</Typography>
             </Box>
             <Button className='add-admin-data-btn' onClick={() => setIsModalOpen(true)}>Добавить соц. сеть</Button>
             <AdminSocialNetworksDataGrid rows={socialNetworks}/>   

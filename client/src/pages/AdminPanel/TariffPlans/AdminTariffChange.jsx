@@ -4,6 +4,8 @@ import { getOneTariffPlan, changeTariffPlan } from "../../../api/admin/tariff/ch
 import { deleteTariffPlan } from "../../../api/admin/tariff/deleteTariffPlanRequest"
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../../../context/AuthContext"
+import { useNavigate } from "react-router-dom"
+import Loader from "../../../components/Loader/Loader"
 import '../../../styles/AdminChangeForm.css'
 
 
@@ -13,6 +15,7 @@ const AdminTariffChange = () => {
     const [loading, setLoading] = useState(true);
     const [editedTariff, setEditedTariff] = useState({ name: '', price: 0, request_quantity: 0, color: '' });
     const { id } = useParams();
+    const navigate = useNavigate()
   
     useEffect(() => {
       getOneTariffPlan({ id: id, token: authTokens.access, setData: setTariff, setLoading: setLoading });
@@ -37,6 +40,7 @@ const AdminTariffChange = () => {
                 color: editedTariff.color,
                 token: authTokens.access
             })
+            navigate('/admin/tariff-plans')
         }
     };
 
@@ -47,11 +51,12 @@ const AdminTariffChange = () => {
                 id: id,
                 token: authTokens.access
             })
+            navigate('/admin/tariff-plans')
         }
     }
   
     if (loading) {
-      return <h1>Loading</h1>;
+      return <Loader />;
     }
   
     return (
@@ -62,21 +67,21 @@ const AdminTariffChange = () => {
         <Box className='admin-change-from'>
           <TextField
             className='admin-change-form-field'
-            placeholder="Название"
+            label="Название"
             value={editedTariff?.name || ''}
             type='text'
             onChange={(e) => handleInputChange('name', e.target.value)}
           />
           <TextField
             className='admin-change-form-field'
-            placeholder="Цена"
+            label="Цена"
             value={editedTariff?.price || 0}
             type='number'
             onChange={(e) => handleInputChange('price', e.target.value)}
           />
           <TextField
             className='admin-change-form-field'
-            placeholder="Количество запросов"
+            label="Количество запросов"
             value={editedTariff?.request_quantity || 0}
             type='number'
             onChange={(e) => handleInputChange('request_quantity', e.target.value)}

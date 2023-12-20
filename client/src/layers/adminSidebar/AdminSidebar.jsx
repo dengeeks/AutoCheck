@@ -16,6 +16,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import ForumIcon from '@mui/icons-material/Forum';
 
 
 const Sidebar = () => {
@@ -47,6 +48,12 @@ const Sidebar = () => {
                 <ListItem button>
                     {isOpen ? <ListItemText className='sidebar-list-item' primary="Пользователи" /> : ''}
                     <PeopleAltIcon />
+                </ListItem>
+            </Link>
+            <Link to='reviews' style={{ color: 'black', textDecoration: 'none' }}>
+                <ListItem button>
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Отзывы" /> : ''}
+                    <ForumIcon />
                 </ListItem>
             </Link>
             <Link to='social-networks' style={{ color: 'black', textDecoration: 'none' }}>

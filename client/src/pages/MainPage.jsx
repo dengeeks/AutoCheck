@@ -101,10 +101,9 @@ const MainPage = () => {
             </Box>
             <Grid id='tariff-plans' item container xs={12} md={12} lg={12} xl={12} sx={{ alignItems: 'center' }}>
                 {tariffPlans.map((tariff) => {
-                    console.log(tariff)
                     const tariffColor = tariffColors[String(tariff?.color)];
                     return(
-                        <Grid item xs={6} md={6} lg={2.4} xl={2.4} key={tariff.id}>
+                        <Grid item xs={6} md={6} lg={2.4} xl={2.4} sx={{ margin: '0 auto' }} key={tariff.id}>
                             <PlanCard 
                                 plan={tariff.name}
                                 color={tariffColor?.color}

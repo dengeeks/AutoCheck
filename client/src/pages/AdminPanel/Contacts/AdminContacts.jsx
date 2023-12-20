@@ -24,7 +24,7 @@ const AdminContacts = () => {
         <Box>
             <CreateContactModal open={isModalOpen} onClose={onClose} token={authTokens.access} />
             <Box sx={{ width: '100%', textAlign: 'center' }}>
-                <Typography className='admin-data-title'>Контакты</Typography>
+                <Typography className='admin-data-title'>Управление контактами</Typography>
             </Box>
             <Button className='add-admin-data-btn' onClick={() => setIsModalOpen(true)}>Добавить контакт</Button>
             <AdminContactsDataGrid rows={contacts}/>   

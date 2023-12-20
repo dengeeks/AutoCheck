@@ -1,0 +1,43 @@
+.not-found-container {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.not-found-title {
+    font-size: 34px!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+}
+
+.not-found-btn {
+    background: #498EDF!important;
+    color: white!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    width: 250px;
+    height: 50px;
+}
+
+
+@media (max-width: 800px) {
+    .not-found-gif {
+        width: 550px;
+    }
+}
+
+@media (max-width: 550px) {
+    .not-found-gif {
+        width: 95%;
+    }
+    .not-found-btn {
+        width: 180px;
+    }
+    .not-found-title {
+        font-size: 28px!important;
+        font-family: 'Ysabeau Infant', sans-serif!important;
+        font-weight: 700!important;
+    }
+}

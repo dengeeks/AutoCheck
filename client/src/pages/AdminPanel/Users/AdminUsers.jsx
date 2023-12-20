@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material"
-import AdminUsersDataGrid from "./AdminUserDataGrid"
-import getUsersRequest from "../../../api/admin/getUsersRequest"
+import AdminUsersDataGrid from "../../../components/AdminPanel/AdminUsers/AdminUserDataGrid"
+import getUsersRequest from "../../../api/admin/users/getUsersRequest"
 import '../../../styles/AdminData.css'
 import AuthContext from "../../../context/AuthContext"
 import { useContext, useState, useEffect } from "react"
@@ -12,7 +12,10 @@ const AdminUsers = () => {
 
     useEffect(() => {
         getUsersRequest({setData: setUsers, token: authTokens.access})
-    }, [authTokens])
+    }, [authTokens])       
+    
+    console.log(users, 'usre')
+
     return(
         <Box>
             <Box sx={{ width: '100%', textAlign: 'center' }}>
