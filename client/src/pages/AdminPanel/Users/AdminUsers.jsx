@@ -3,6 +3,7 @@ import AdminUsersDataGrid from "../../../components/AdminPanel/AdminUsers/AdminU
 import getUsersRequest from "../../../api/admin/users/getUsersRequest"
 import '../../../styles/AdminData.css'
 import AuthContext from "../../../context/AuthContext"
+import { resetDepartment } from "../../../api/resetDepartmentRequest"
 import { useContext, useState, useEffect } from "react"
 
 
@@ -12,6 +13,7 @@ const AdminUsers = () => {
 
     useEffect(() => {
         getUsersRequest({setData: setUsers, token: authTokens.access})
+        resetDepartment({department: 'users', token: authTokens.access})
     }, [authTokens])       
     
     console.log(users, 'usre')

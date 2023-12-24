@@ -35,6 +35,10 @@
     width: 50px;
 }
 
+.admin-sidebar-badge {
+    margin-right:15px!important;
+}
+
 @media (max-width: 1000px) {
     .sidebar-container {
         width: 200px;

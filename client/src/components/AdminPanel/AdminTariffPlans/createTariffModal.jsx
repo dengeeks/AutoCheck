@@ -70,7 +70,7 @@ const CreateTariffPlanModal = ({ open, onClose, token }) => {
                         <MenuItem value="green">Зелёный</MenuItem>
                     </Select>
 
-                    {price && request_quantity ? <Typography sx={{ textAlign: 'center', marginTop: '5px' }}>Цена одного тарифа {price / request_quantity}</Typography> : ''}
+                    {price && request_quantity ? <Typography sx={{ textAlign: 'center', marginTop: '5px' }}>Цена одного отчёта {price / request_quantity}</Typography> : ''}
                     <Box className="review-form-button-container">
                         <Button 
                             sx={{    

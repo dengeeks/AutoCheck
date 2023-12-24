@@ -1,5 +1,18 @@
 from django.urls import path, include
-from .views import AdminUsersViewSet, AdminTariffPlansViewSet, AdminSocialNetworksViewSet, AdminContactsViewSet, AdminReviewViewSet, AdminBlockUserGet, AdminBlockUserPost, AdminUnblockUserPost
+from .views import (
+    AdminUsersViewSet,
+    AdminTariffPlansViewSet,
+    AdminSocialNetworksViewSet,
+    AdminContactsViewSet,
+    AdminReviewViewSet,
+    AdminBlockUserGet,
+    AdminBlockUserPost,
+    AdminUnblockUserPost,
+    AdminChangeCustomUser,
+    MailingView,
+    DepartmentListView,
+    ResetDepartmentView
+)
 from rest_framework.routers import DefaultRouter
 
 
@@ -27,4 +40,8 @@ urlpatterns = [
     path('block-user/', AdminBlockUserPost.as_view(), name='admin_block_user_post'),
     path('block-user/<int:id>/', AdminBlockUserGet.as_view(), name='admin_block_user_get'),
     path('unblock-user/', AdminUnblockUserPost.as_view(), name='admin_unblock_user_post'),
+    path('change-custom-user/<int:id>/', AdminChangeCustomUser.as_view(), name='admin-change-custom-user'),
+    path('mailing/', MailingView.as_view(), name='admin-mailing'),
+    path('department/', DepartmentListView.as_view(), name='admin-department'),
+    path('reset-department/', ResetDepartmentView.as_view(), name='admin-reset-department')
 ]

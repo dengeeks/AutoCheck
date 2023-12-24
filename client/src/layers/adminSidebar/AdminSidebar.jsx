@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import { Box, List, ListItem, ListItemText, Typography } from '@mui/material'
-;import { Link } from 'react-router-dom';
-import './AdminSidebar.css'
+import React, {useState, useEffect, useContext} from 'react';
+import { Box, List, ListItem, ListItemText, Typography, Badge } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { getDepartment } from '../../api/getDepartmentRequest';
+import './AdminSidebar.css';
 
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
@@ -17,10 +18,36 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import ForumIcon from '@mui/icons-material/Forum';
+import AuthContext from '../../context/AuthContext';
 
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [department, setDepartment] = useState([])
+  const {authTokens} = useContext(AuthContext)
+
+  const reviewsQuantity = department && department.find(result => result.name === 'reviews')?.quantity;
+  const usersQuantity = department && department.find(result => result.name === 'users')?.quantity;
+
+  const saveSidebarState = (state) => {
+    localStorage.setItem('sidebarState', JSON.stringify(state));
+  };
+
+  const loadSidebarState = () => {
+    const storedState = localStorage.getItem('sidebarState');
+    if (storedState) {
+      setIsOpen(JSON.parse(storedState));
+    }
+  };
+
+  useEffect(() => {
+    loadSidebarState();
+    getDepartment({setData: setDepartment, token: authTokens.access})
+  }, []);
+
+  useEffect(() => {
+    saveSidebarState(isOpen);
+  }, [isOpen]);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -40,74 +67,77 @@ const Sidebar = () => {
         <List>
             <Link to='tariff-plans' style={{ color: 'black', textDecoration: 'none' }}>
                 <ListItem button>
-                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Тарифные планы" /> : ''}
                     <PaymentsIcon />
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Тарифные планы" /> : ''}
                 </ListItem>
             </Link>
             <Link to='users' style={{ color: 'black', textDecoration: 'none' }}>
                 <ListItem button>
-                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Пользователи" /> : ''}
                     <PeopleAltIcon />
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Пользователи" /> : ''}
+                    {usersQuantity ? <Badge className='admin-sidebar-badge' color='error' badgeContent={`+${usersQuantity}`} /> : ''}
                 </ListItem>
             </Link>
             <Link to='reviews' style={{ color: 'black', textDecoration: 'none' }}>
                 <ListItem button>
-                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Отзывы" /> : ''}
                     <ForumIcon />
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Отзывы" /> : ''}
+                    {reviewsQuantity ? <Badge className='admin-sidebar-badge' color='error' badgeContent={`+${reviewsQuantity}`} /> : ''}
+                    
                 </ListItem>
             </Link>
             <Link to='social-networks' style={{ color: 'black', textDecoration: 'none' }}>
                 <ListItem button>
-                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Социальные сети" /> : ''}
                     <InstagramIcon />
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Социальные сети" /> : ''}
                 </ListItem>
             </Link>
             <Link to='contacts' style={{ color: 'black', textDecoration: 'none' }}>
                 <ListItem button>
-                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Контакты" /> : ''}
                     <ContactsIcon />
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Контакты" /> : ''}
                 </ListItem>
             </Link>
             <Link to='statistic' style={{ color: 'black', textDecoration: 'none' }}>
                 <ListItem button>
-                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Статистика" /> : ''}
                     <AssessmentIcon />
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Статистика" /> : ''} 
                 </ListItem>
             </Link>
             <Link to='referral-system' style={{ color: 'black', textDecoration: 'none' }}>
                 <ListItem button>
-                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Реферальная система" /> : ''}
                     <GroupAddIcon />
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Реферальная система" /> : ''}
                 </ListItem>
             </Link>
-            <Link to='violators' style={{ color: 'black', textDecoration: 'none' }}>
+            <Link to='blocked' style={{ color: 'black', textDecoration: 'none' }}>
                 <ListItem button>
-                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Нарушители" /> : ''}
                     <FmdBadIcon />
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Нарушители" /> : ''}
                 </ListItem>
             </Link>
-            <Link to='newsletter' style={{ color: 'black', textDecoration: 'none' }}>
+            <Link to='mailing' style={{ color: 'black', textDecoration: 'none' }}>
                 <ListItem button>
-                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Рассылка" /> : ''}
                     <MarkAsUnreadIcon />
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Рассылка" /> : ''}
                 </ListItem>
             </Link>
             <Link to='ticket-system' style={{ color: 'black', textDecoration: 'none' }}>
                 <ListItem button>
-                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Тикетная система" /> : ''}
                     <ConfirmationNumberIcon />
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Тикетная система" /> : ''}
                 </ListItem>
             </Link>
             <Link to='report-history' style={{ color: 'black', textDecoration: 'none' }}>
                 <ListItem button>
-                    {isOpen ? <ListItemText className='sidebar-list-item' primary="История отчетов" /> : ''}
                     <HistoryIcon />
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="История отчетов" /> : ''}
                 </ListItem>
             </Link>
             <Link to='design' style={{ color: 'black', textDecoration: 'none' }}>
                 <ListItem button>
-                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Дизайн" /> : ''}
                     <BrushIcon />
+                    {isOpen ? <ListItemText className='sidebar-list-item' primary="Дизайн" /> : ''}
                 </ListItem>
             </Link>
 

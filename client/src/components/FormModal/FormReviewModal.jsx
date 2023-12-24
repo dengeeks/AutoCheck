@@ -10,7 +10,7 @@ import { validateReviewForm } from "./validateReviewForm";
 
 
 const FormReviewModal = ({ open, onClose, setData }) => {
-    const {user, logoutUser, authTokens} = useContext(AuthContext)
+    const {user, authTokens} = useContext(AuthContext)
     const [text, setText] = useState('')
     const [convenienceRating, setConvenienceRating] = useState(0)
     const [informativenessRating, setInformativenessRating] = useState(0)
@@ -32,7 +32,6 @@ const FormReviewModal = ({ open, onClose, setData }) => {
                     quality:qualityRating, 
                     tokens: authTokens.access
                 })
-
                 onClose()
             }
         }
@@ -84,10 +83,9 @@ const FormReviewModal = ({ open, onClose, setData }) => {
                         
                         <Button 
                             className={
-                                convenienceRating === 0 || informativenessRating === 0 || qualityRating === 0 ||
-                                convenienceRating === null || informativenessRating === null || qualityRating === null
-                                ? 'review-disable-button'
-                                : 'review-active-button'
+                                (convenienceRating === 0 || informativenessRating === 0 || qualityRating === 0 ||
+                                convenienceRating === null || informativenessRating === null || qualityRating === null ||
+                                text.trim() === '') ? 'review-disable-button' : 'review-active-button'
                             }
                             onClick={handleReviewSubmit}
                             disabled={
@@ -96,7 +94,8 @@ const FormReviewModal = ({ open, onClose, setData }) => {
                                 qualityRating === 0 ||
                                 convenienceRating === null ||
                                 informativenessRating === null ||
-                                qualityRating === null
+                                qualityRating === null ||
+                                text.trim() === ''
                             }
                         >
                             Отправить отзыв

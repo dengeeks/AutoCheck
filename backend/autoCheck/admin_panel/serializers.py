@@ -16,3 +16,12 @@ class UserBlockSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserBlock
         fields = '__all__'
+
+class AdminCustomUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = '__all__'
+
+class MailingSerializer(serializers.Serializer):
+    subject = serializers.CharField()
+    message = serializers.CharField()

@@ -1,7 +1,8 @@
 import {useContext, useState, useEffect} from "react"
-import { Box, Typography, Button } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import AdminReportDataGrid from "../../../components/AdminPanel/AdminReviews/AdminReviewDataGrid"
 import { getAdminReviews } from "../../../api/admin/reviews/getAdminReviews"
+import { resetDepartment } from "../../../api/resetDepartmentRequest"
 import AuthContext from "../../../context/AuthContext"
 
 
@@ -10,9 +11,9 @@ const AdminReviews = () => {
     const [reviews, setReviews] = useState([])
 
     useEffect(() => {
-        console.log('call')
         getAdminReviews({setData: setReviews, token: authTokens.access})
-    }, [])
+        resetDepartment({department: 'reviews', token: authTokens.access})
+    }, [authTokens])
 
     return(
         <Box>

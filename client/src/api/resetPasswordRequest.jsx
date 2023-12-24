@@ -12,7 +12,6 @@ export const resetPasswordRequest = (email) => {
         },
     })
     .then((response) => {
-        console.log(response)
         toast.success('Ссылка для смены пароля отправлена на ваш Email');
     })
     .catch((error) => {

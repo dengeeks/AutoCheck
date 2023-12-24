@@ -8,6 +8,7 @@ import Loader from "../../../components/Loader/Loader"
 import AdminUserBlockModal from "../../../components/AdminPanel/AdminUsers/AdminUserBlockModal"
 import { unblockUser } from "../../../api/admin/users/unblockUserRequest"
 import '../../../styles/AdminChangeForm.css'
+import GenerateUserPassword from "./GenerateUserPassword"
 
 
 const AdminUsersChange = () => {
@@ -36,6 +37,13 @@ const AdminUsersChange = () => {
         navigate('/admin/users/')
     }
 
+    const handleUserChange = () => {
+        const confirmed = window.confirm("Установить пользователю новый пароль ?");
+        if (confirmed) {
+            console.log(editedUser)
+        }
+    }
+
     const onClose = () => {
         setOpenModal(false)
     }
@@ -54,40 +62,45 @@ const AdminUsersChange = () => {
                 className='admin-change-form-field'
                 label="Имя"
                 value={editedUser?.first_name || ''}
+                onChange={(e) => handleInputChange('first_name', e.target.value)}
                 type='text'
             />
             <TextField
                 className='admin-change-form-field'
                 label="Фамилия"
                 value={editedUser?.last_name || ''}
+                onChange={(e) => handleInputChange('last_name', e.target.value)}
                 type='text'
             />
             <TextField
                 className='admin-change-form-field'
                 label="Почта"
                 value={editedUser?.email || ''}
+                onChange={(e) => handleInputChange('email', e.target.value)}
                 type='text'
             />
+            <GenerateUserPassword id={id} token={authTokens.access} />
             <TextField
                 className='admin-change-form-field'
                 label="Тарифный план"
                 value={editedUser?.current_tariff || ''}
-                onChange={(e) => handleInputChange('tariff', e.target.value)}
+                disabled
             />
             <TextField
                 className='admin-change-form-field'
                 label="Количество запросов"
-                value={editedUser?.request_quantity || 0}
+                value={editedUser?.request_quantity || ''}
                 type='number'
                 onChange={(e) => handleInputChange('request_quantity', e.target.value)}
             />       
 
             <Box className='admin-change-form-footer'>
                 {editedUser.is_blocked ? 
-                    <Button className='admin-change-save-btn' sx={{ width: '100%' }} onClick={() => handleUnblockUser()}>Разблокировать</Button> 
+                    <Button className='admin-change-save-btn' sx={{ width: '50%' }} onClick={() => handleUnblockUser()}>Разблокировать</Button> 
                 :
-                    <Button className='admin-change-delete-btn' onClick={() => setOpenModal(true)} sx={{ width: '100%' }}>Заблокировать</Button>
+                    <Button className='admin-change-delete-btn' onClick={() => setOpenModal(true)} sx={{ width: '50%' }}>Заблокировать</Button>
                 }
+                <Button className='admin-change-save-btn' sx={{ width: '45%' }} onClick={() => handleUserChange()}>Сохранить изменения</Button>
             </Box>
         </Box>
       </Box>

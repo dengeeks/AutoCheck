@@ -3,7 +3,6 @@ import { Grid, Box, Typography, Container } from "@mui/material"
 import { getSocialNetworksRequest } from "../../api/getSocialNetworksRequest"
 import { Link } from "react-router-dom"
 
-import QRcode from '../../media/images/QRcode.png'
 import './InfoContacts.css'
 import ViberLogo from '../../media/images/SocialIcons/viber.svg'
 import TelegramLogo from '../../media/images/SocialIcons/telegram.svg'

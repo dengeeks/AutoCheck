@@ -1,7 +1,7 @@
 import NotFoundGif from '../../../media/video/404-NotFound.gif'
 import { Box, Typography, Button } from '@mui/material'
 import './NotFound.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const NotFoundError = () => {
     const navigate = useNavigate()

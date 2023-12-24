@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../../../context/AuthContext"
 import Loader from "../../../components/Loader/Loader"
-import StarRating from "../../../components/StarRating/StarRating"
 import '../../../styles/AdminChangeForm.css'
 
 
@@ -27,10 +26,6 @@ const AdminReviewChange = () => {
     useEffect(() => {
         setEditedReview({ ...reviews });
     }, [reviews]);
-  
-    const handleInputChange = (fieldName, value) => {
-        setEditedReview((prev) => ({ ...prev, [fieldName]: value }));
-    };
   
     const handleSaveReview = () => {
         const confirmed = window.confirm("Вы уверены что хотите сохранить изменения ?");

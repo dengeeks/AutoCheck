@@ -22,7 +22,7 @@ const AdminSocialNetworkChange = () => {
   
     useEffect(() => {
       getOneSocialNetwork({ id: id, token: authTokens.access, setData: setSocialNetwork, setLoading: setLoading });
-    }, [id]);
+    }, [id, authTokens]);
   
     useEffect(() => {
       setEditedSocialNetwork({ ...socialNetwork });

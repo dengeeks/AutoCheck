@@ -1,13 +1,17 @@
-from rest_framework import viewsets, views
-from main.models import CustomUser, TariffPlan, Contact, SocialNetwork, Review, UserBlock
-from main.serializers import ContactSerializer, SocialNetworkSerializer, ReviewSerializer
-from .serializers import AdminUserSerializer, AdminTariffPlansSerializer, UserBlockSerializer
+from rest_framework import viewsets, views, generics
+from main.models import CustomUser, TariffPlan, Contact, SocialNetwork, Review, UserBlock, Department
+from main.serializers import ContactSerializer, SocialNetworkSerializer, ReviewSerializer, DepartmentSerializer
+from .serializers import AdminUserSerializer, AdminTariffPlansSerializer, UserBlockSerializer, AdminCustomUserSerializer, MailingSerializer
 from rest_framework.permissions import IsAdminUser
 from rest_framework import status
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from datetime import datetime, timezone, timedelta
+from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
 from django.http import Http404
+from django.conf import settings
+from django.db.models import Q
 
 
 class AdminUsersViewSet(viewsets.ModelViewSet):
@@ -94,15 +98,84 @@ class AdminUnblockUserPost(views.APIView):
         try:
             # Get user by id
             id = request.data.get('user')
+
+            user = get_object_or_404(CustomUser, id=id)
+            user.is_blocked = False
+            user.save()
+
             try:
                 user_block = UserBlock.objects.get(user=id)
                 user_block.delete()
             except:
                 return Response({"error": "Указаный вами пользователь не заблокирован"}, status=status.HTTP_404_NOT_FOUND)
             
-            user = get_object_or_404(CustomUser, id=id)
-            user.is_blocked = False
-            user.save()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Http404:
             return Response({"error": "Пользователь не найден"}, status=status.HTTP_404_NOT_FOUND)
+        
+
+class AdminChangeCustomUser(views.APIView):
+    permission_classes = [IsAdminUser]
+    def patch(self, request, id):
+        try:
+            user = CustomUser.objects.get(id=id)
+        except CustomUser.DoesNotExist:
+            return Response({"error": "Пользователь не найден"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = AdminCustomUserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            new_password = serializer.validated_data.get('password')
+            if new_password:
+                serializer.validated_data['password'] = make_password(new_password)
+            serializer.save(user=user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class MailingView(views.APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = MailingSerializer(data=request.data)
+        if serializer.is_valid():
+            subject = serializer.validated_data['subject']
+            message = serializer.validated_data['message']
+
+            # Отправка письма всем пользователям
+            if request.data.get('send_to') == 'all':
+                users = CustomUser.objects.all()
+            # Отправка письма только активным пользователям
+            elif request.data.get('send_to') == 'active':
+                users = CustomUser.objects.filter(Q(request_quantity__gt=0))
+            # Отправка письма только неактивным пользователям
+            elif request.data.get('send_to') == 'inactive':
+                users = CustomUser.objects.filter(request_quantity=0)
+            # Отправка письма конкретному пользователю
+            elif request.data.get('user_id'):
+                users = CustomUser.objects.filter(id=request.data['user_id'])
+            else:
+                return Response({'error': 'Invalid send_to parameter'}, status=status.HTTP_400_BAD_REQUEST)
+
+            for user in users:
+                send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email])
+
+            return Response({'success': 'Email sent successfully'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class DepartmentListView(generics.ListAPIView):
+    queryset = Department.objects.all()
+    serializer_class = DepartmentSerializer
+    permission_classes = [IsAdminUser]
+
+class ResetDepartmentView(views.APIView):
+    def post(self, request):
+        department_name = request.data.get('department')
+        
+        if not department_name:
+            return Response({'error': 'Отсутствует поле department'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            department = Department.objects.get(name=department_name)
+            department.quantity = 0
+            department.save()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Department.DoesNotExist:
+            return Response({'error': f'Отдел с именем {department_name} не найден'}, status=status.HTTP_404_NOT_FOUND)

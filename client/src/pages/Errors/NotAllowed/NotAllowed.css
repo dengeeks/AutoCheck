@@ -6,7 +6,7 @@
 }
 
 .not-allowed-img {
-    width: 700px;
+    width: 450px;
 }
 
 .not-allowed-title {
@@ -36,17 +36,23 @@
 
 @media (max-width: 1000px) {
     .not-allowed-container {
-        width: 90vw;
         margin: 10vh auto!important;
     }
     .not-allowed-img {
-        width: 550px;
+        width: 450px;
     }
     .not-allowed-title {
         font-size: 28px!important;
     }
     .not-allowed-text {
         font-size: 20px!important;
+    }
+    .not-allowed-btn {
+        background: #498EDF!important;
+        margin: 10px!important;
+        margin-top: 20px!important;
+        width: 150px;
+        height: 50px;
     }
 }
 

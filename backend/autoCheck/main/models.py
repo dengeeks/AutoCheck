@@ -89,3 +89,15 @@ class SocialNetwork(models.Model):
 
     def __str__(self):
         return self.social_network
+
+class Department(models.Model):
+    DEPARTMENT_CHOICE = [
+        ("users", "Users"),
+        ("reviews", "Reviews"),
+        ("referral", "Referral"),
+        ("violators", "Violators"),
+        ("ticket", "Ticket"),
+        ("history", "History"),
+    ]
+    name = models.CharField(max_length=9, choices=DEPARTMENT_CHOICE)
+    quantity = models.PositiveIntegerField(default=0)

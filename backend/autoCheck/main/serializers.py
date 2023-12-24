@@ -2,7 +2,7 @@ from .models import Review
 from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import CustomUser, TariffPlan, Contact, SocialNetwork
+from .models import CustomUser, TariffPlan, Contact, SocialNetwork, Department
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -33,7 +33,6 @@ class CustomUserCreateSerializer(UserCreateSerializer):
             is_staff=validated_data.get('is_staff', False),
         )
         return user
-    
 
 class EmailSerializer(serializers.Serializer):
     email_from = serializers.EmailField()
@@ -84,3 +83,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['is_staff'] = user.is_staff
         token['is_blocked'] = user.is_blocked
         return token
+
+class DepartmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Department
+        fields = ('id', 'name', 'quantity')

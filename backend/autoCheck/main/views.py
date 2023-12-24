@@ -8,9 +8,9 @@ from rest_framework.response import Response
 from .serializers import EmailSerializer, MyTokenObtainPairSerializer, ContactSerializer, TariffPlanSerializer, SocialNetworkSerializer, ReviewSerializer
 from .models import Review, TariffPlan, Contact, SocialNetwork
 
+
 class SendEmailView(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
     def post(self, request, *args, **kwargs):
         serializer = EmailSerializer(data=request.data)
         if serializer.is_valid():
@@ -38,6 +38,7 @@ class SendEmailView(APIView):
         else:
             return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
+
 class ReviewListCreateView(generics.ListCreateAPIView):
     queryset = Review.objects.filter(is_allowed=True)
     serializer_class = ReviewSerializer
@@ -46,7 +47,7 @@ class ReviewListCreateView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         # Associate the authenticated user with the review
         serializer.save(user=self.request.user)
-
+    
 
 class TariffPlanList(generics.ListAPIView):
     queryset = TariffPlan.objects.all().order_by('price')

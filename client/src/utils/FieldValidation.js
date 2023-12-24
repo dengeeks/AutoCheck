@@ -26,7 +26,7 @@ export const validatePassword = (password) => {
     // Check for at least one digit
     const digitRegex = /\d/;
     if (!digitRegex.test(password)) {
-        return 'Пароль 0олжен содержать хотя бы одну цифру';
+        return 'Пароль должен содержать хотя бы одну цифру';
     }
 
     // Check for minimum length

@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from "react"
-import { Box, Typography } from "@mui/material"
-import { useNavigate, Outlet } from "react-router-dom"
+import React, { useContext } from "react"
+import { Box } from "@mui/material"
+import { Outlet } from "react-router-dom"
 import AuthContext from "../../context/AuthContext"
 import Sidebar from "../../layers/adminSidebar/AdminSidebar"
 import NotAllowedPage from "../Errors/NotAllowed/NotAllowedPage"
@@ -8,7 +8,6 @@ import NotAllowedPage from "../Errors/NotAllowed/NotAllowedPage"
 
 const AdminPanel = () => {
     const { user } = useContext(AuthContext);
-    const navigate = useNavigate();
 
     if (!user || !user.is_staff) {
         return <NotAllowedPage />

@@ -21,11 +21,13 @@ import AdminContactChange from "./pages/AdminPanel/Contacts/AdminContactsChange"
 import AdminReviews from "./pages/AdminPanel/Reviews/AdminReviews";
 import AdminReviewChange from "./pages/AdminPanel/Reviews/AdminReviewChange";
 import ActivateUser from "./pages/Auth/ActivateUser";
-import './styles/App.css'
 import FeedbackPage from "./pages/FeedbackPage";
 import NotFoundError from "./pages/Errors/NotFound/NotFoundPage";
 import AdminUsersChange from "./pages/AdminPanel/Users/AdminUsersChange";
 import BlockedUserPage from "./pages/Errors/Blocked/BlockedUserPage";
+import AdminMailingPage from "./pages/AdminPanel/Mailing/AdminMailing";
+import BlockedUsers from "./pages/AdminPanel/BlockedUsers/BlockedUsers";
+import './styles/App.css'
 
 
 function App() {
@@ -39,7 +41,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/forget-password" element={<ForgetPasswordPage />} />
-          <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/reset-password/:uid/:token" element={<ChangePassword />} />
           <Route path="/activate/:uid/:token" element={<ActivateUser />} />
           <Route path="/feedback" element={<FeedbackPage />} />
           <Route path="/you-blocked" element={<BlockedUserPage />} />
@@ -55,9 +57,9 @@ function App() {
             <Route path="contacts/:id" element={<AdminContactChange />}/>
             <Route path="reviews" element={<AdminReviews />}/>
             <Route path="reviews/:id" element={<AdminReviewChange />}/>
+            <Route path="mailing/" element={<AdminMailingPage />}/>
             <Route path="referral-system" element={<AdminStatistic />}/>
-            <Route path="violators" element={<AdminStatistic />}/>
-            <Route path="newsletter" element={<AdminStatistic />}/>
+            <Route path="blocked" element={<AdminStatistic />}/>
             <Route path="ticket-system" element={<AdminStatistic />}/>
             <Route path="report-history" element={<AdminStatistic />}/>
             <Route path="design" element={<AdminStatistic />}/>

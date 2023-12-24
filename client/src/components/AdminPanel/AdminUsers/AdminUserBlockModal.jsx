@@ -5,6 +5,7 @@ import { blockUser } from "../../../api/admin/users/blockUserRequest";
 import AuthContext from "../../../context/AuthContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { validateText } from "../../../utils/FieldValidation";
 
 
 const AdminUserBlockModal = ({ open, onClose, id}) => {
@@ -14,6 +15,11 @@ const AdminUserBlockModal = ({ open, onClose, id}) => {
     const navigate = useNavigate()
 
     const handleBlockSubmit = () => {
+        if (!block_reason || !block_duration.days) {
+            alert("Пожалуйста, заполните все обязательные поля");
+            return;
+        }
+        
         const confirmed = window.confirm("Вы уверены что хотите сохранить изменения ?");
         if (confirmed) {
             blockUser({
