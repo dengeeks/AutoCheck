@@ -24,7 +24,7 @@ const ForgetPasswordForm = () => {
             </Box>
             <Box className='forget-password-container'>
                 <Typography className="forget-password-text" sx={{ color: 'black', marginBottom: '-10px' }}>
-                    Введите свой E-mail которого указывали при регистрации, на него будет выслан новый пароль:
+                    Введите свой E-mail которого указывали при регистрации, мы отправим вам ссылку для смены пароля:
                 </Typography>
             </Box>
             

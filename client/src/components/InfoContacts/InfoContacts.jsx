@@ -76,9 +76,14 @@ const InfoContacts = () => {
                             return(
                                 <Box className='service-social-link' key={network.id}>
                                     <Link to={`${network.link}`} target="_blank" rel="noopener noreferrer" style={{ color: 'black', textDecoration: 'none' }}>
-                                        <Box className='social-link-header'>
-                                            {logo && <img className='social-link-logo' src={logo} alt={`${network.social_network} Logo`} />}
-                                            <Typography className='social-link-name'>{network?.social_network}</Typography> 
+                                        <Box className='social-link-header' sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                            <Box>
+                                                {logo && <img className='social-link-logo' src={logo} alt={`${network.social_network} Logo`} />}
+                                            </Box>
+                                            <Box>
+                                                <Typography className='social-link-name'>{network?.social_network}</Typography>
+                                            </Box>
+                                             
                                         </Box>
                                         <img src={network.qr_code} className='social-link-qr-code' alt="telegram QR" />
                                     </Link>

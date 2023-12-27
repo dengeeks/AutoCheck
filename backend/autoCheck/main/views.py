@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from rest_framework import permissions, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -39,10 +39,35 @@ class SendEmailView(APIView):
             return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ReviewListCreateView(generics.ListCreateAPIView):
+class ReviewAPIViewset(viewsets.ModelViewSet):
     queryset = Review.objects.filter(is_allowed=True)
     serializer_class = ReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+
+        # Получение следующего и предыдущего объекта
+        next_review = self.get_next_object(instance)
+        prev_review = self.get_previous_object(instance)
+
+        # Получение идентификаторов следующего и предыдущего объекта
+        next_review_id = next_review.id if next_review else None
+        prev_review_id = prev_review.id if prev_review else None
+
+        # Добавление информации о следующем и предыдущем объекте (идентификаторы) к ответу
+        serializer_data = serializer.data
+        serializer_data['next_review'] = next_review_id
+        serializer_data['prev_review'] = prev_review_id
+
+        return Response(serializer_data)
+
+    def get_next_object(self, instance):
+        return self.queryset.filter(id__gt=instance.id).order_by('id').first()
+
+    def get_previous_object(self, instance):
+        return self.queryset.filter(id__lt=instance.id).order_by('-id').first()
 
     def perform_create(self, serializer):
         # Associate the authenticated user with the review

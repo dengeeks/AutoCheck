@@ -1,8 +1,27 @@
-
+import { useContext, useEffect, useState } from "react"
+import BlockedUsersDataGrid from "../../../components/AdminPanel/AdminBlockedUsers/AdminBlockedUsersDataGrid"
+import AdminUserBlockModal from "../../../components/AdminPanel/AdminUsers/AdminUserBlockModal"
+import { Box } from "@mui/material"
+import AuthContext from "../../../context/AuthContext"
+import { getAllBlockedUsers } from "../../../api/admin/users/getAllBlockedUsers"
 
 const BlockedUsers = () => {
+    const [open, setOpen] = useState(false)
+    const [blockedUsers, setBlockedUsers] = useState([])
+    const {authTokens} = useContext(AuthContext)
+
+    useEffect(() => {
+        getAllBlockedUsers({setData: setBlockedUsers, token: authTokens.access})
+    }, [authTokens.access])
+
+    const onClose = () => {
+        setOpen(!open)
+    }
+
     return(
-        <h1>blocked USERS</h1>
+        <Box>
+            <BlockedUsersDataGrid rows={blockedUsers}/>   
+        </Box>
     )
 }
 

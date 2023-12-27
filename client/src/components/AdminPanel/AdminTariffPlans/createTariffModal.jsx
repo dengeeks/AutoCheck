@@ -21,6 +21,7 @@ const CreateTariffPlanModal = ({ open, onClose, token }) => {
                 token: token,
             })
             onClose()
+            window.location.reload();
         }
     }
 

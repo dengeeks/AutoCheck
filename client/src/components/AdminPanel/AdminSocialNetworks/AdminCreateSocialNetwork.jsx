@@ -26,6 +26,7 @@ const CreateSocialNetworkModal = ({ open, onClose, token }) => {
                 token: token,
             })
             onClose()
+            window.location.reload();
         }
     }
 

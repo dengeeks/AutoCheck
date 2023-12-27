@@ -11,7 +11,8 @@ from .views import (
     AdminChangeCustomUser,
     MailingView,
     DepartmentListView,
-    ResetDepartmentView
+    ResetDepartmentView,
+    AdminGetBlockedUsers
 )
 from rest_framework.routers import DefaultRouter
 
@@ -39,6 +40,7 @@ urlpatterns = [
     path('', include(review_router.urls)),
     path('block-user/', AdminBlockUserPost.as_view(), name='admin_block_user_post'),
     path('block-user/<int:id>/', AdminBlockUserGet.as_view(), name='admin_block_user_get'),
+    path('get-blocked-users/', AdminGetBlockedUsers.as_view(), name='admin_get_blocked_users'),
     path('unblock-user/', AdminUnblockUserPost.as_view(), name='admin_unblock_user_post'),
     path('change-custom-user/<int:id>/', AdminChangeCustomUser.as_view(), name='admin-change-custom-user'),
     path('mailing/', MailingView.as_view(), name='admin-mailing'),

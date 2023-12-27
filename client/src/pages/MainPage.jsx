@@ -140,6 +140,7 @@ const MainPage = () => {
                         {reviews?.results?.map((review, index) => (
                             <SwiperSlide className="review-swiper-slide" key={index}>
                                 <ReviewCard
+                                    id={review.id}
                                     name={review.user_name}
                                     avatar={`${BASE_URL_WITHOUT_PREFIX}${review.user_avatar}`}
                                     text={review.text}

@@ -3,7 +3,7 @@ import { Rating } from '@mui/material';
 
 const StarRating = ({ readOnly = true, onChange, defaultValue }) => {
   const [rating, setRating] = useState(defaultValue || 0);
-
+  
   const handleRatingChange = (event, newValue) => {
     setRating(newValue);
     if (onChange) {

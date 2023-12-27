@@ -37,10 +37,10 @@ const columns = [
         width: 210,
     },
     {
-        field: 'block_time',
+        field: 'blocked_until',
         headerName: 'Длительность блокировки',
         align: 'center',
-        width: 210,
+        width: 240,
     },
     {
       field: 'change',

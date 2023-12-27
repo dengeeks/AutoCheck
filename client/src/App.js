@@ -27,7 +27,13 @@ import AdminUsersChange from "./pages/AdminPanel/Users/AdminUsersChange";
 import BlockedUserPage from "./pages/Errors/Blocked/BlockedUserPage";
 import AdminMailingPage from "./pages/AdminPanel/Mailing/AdminMailing";
 import BlockedUsers from "./pages/AdminPanel/BlockedUsers/BlockedUsers";
+import ReviewPage from "./pages/Review/ReviewPage";
 import './styles/App.css'
+import ProfileSidebar from "./layers/profileSidebar/ProfileSidebar";
+
+import Profile from "./pages/UserProfile/Profile/Profile";
+import ReferralSystem from "./pages/UserProfile/ReferralSystem/ReferralSystem";
+import PaymentHistory from "./pages/UserProfile/PaymentHistory/PaymentHistory";
 
 
 function App() {
@@ -44,7 +50,12 @@ function App() {
           <Route path="/reset-password/:uid/:token" element={<ChangePassword />} />
           <Route path="/activate/:uid/:token" element={<ActivateUser />} />
           <Route path="/feedback" element={<FeedbackPage />} />
+          <Route path="/review/:id" element={<ReviewPage />} />
           <Route path="/you-blocked" element={<BlockedUserPage />} />
+          <Route path="/user-profile" element={<ProfileSidebar />}>
+            <Route path="payment-history" element={<PaymentHistory />}/>
+            <Route path="referral-system" element={<ReferralSystem />}/>
+          </Route> 
           <Route path="/admin" element={<AdminPanel />}>
             <Route path="users" element={<AdminUsers />}/>
             <Route path="users/:id" element={<AdminUsersChange />}/>
@@ -59,7 +70,7 @@ function App() {
             <Route path="reviews/:id" element={<AdminReviewChange />}/>
             <Route path="mailing/" element={<AdminMailingPage />}/>
             <Route path="referral-system" element={<AdminStatistic />}/>
-            <Route path="blocked" element={<AdminStatistic />}/>
+            <Route path="blocked" element={<BlockedUsers />}/>
             <Route path="ticket-system" element={<AdminStatistic />}/>
             <Route path="report-history" element={<AdminStatistic />}/>
             <Route path="design" element={<AdminStatistic />}/>

@@ -1,11 +1,15 @@
-from django.urls import path
-from .views import ReviewListCreateView, SendEmailView, MyTokenObtainPairView, TariffPlanList, ContactListView, SocialNetworkListView
+from django.urls import path, include
+from .views import ReviewAPIViewset, SendEmailView, MyTokenObtainPairView, TariffPlanList, ContactListView, SocialNetworkListView
 from django.contrib.auth import views as auth_views
 from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework.routers import DefaultRouter
+
+reviews_router = DefaultRouter()
+reviews_router.register(r'reviews', ReviewAPIViewset, basename='review')
 
 
 urlpatterns = [
-    path('reviews/', ReviewListCreateView.as_view()),
+    path('', include(reviews_router.urls)),
     path('tariff-plans/', TariffPlanList.as_view()),
     path('contacts/', ContactListView.as_view()),
     path('social-networks/', SocialNetworkListView.as_view()),

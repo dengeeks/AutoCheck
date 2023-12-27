@@ -17,6 +17,7 @@ const CreateContactModal = ({ open, onClose, token }) => {
                 token: token,
             })
             onClose()
+            window.location.reload();
         }
     }
 

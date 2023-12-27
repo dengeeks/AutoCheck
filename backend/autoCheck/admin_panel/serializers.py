@@ -17,6 +17,30 @@ class UserBlockSerializer(serializers.ModelSerializer):
         model = UserBlock
         fields = '__all__'
 
+class CustomBlockedUserSerializer(serializers.ModelSerializer):
+    is_blocked = serializers.SerializerMethodField()
+    blocked_until = serializers.SerializerMethodField()
+    block_reason = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'first_name', 'is_blocked', 'last_name', 'request_quantity', 'email', 'blocked_until', 'block_reason']
+
+    def get_is_blocked(self, obj):
+        return obj.is_blocked
+
+    def get_blocked_until(self, obj):
+        if obj.is_blocked:
+            blocked_until = obj.userblock.blocked_until if obj.userblock else None
+            if blocked_until:
+                return blocked_until.strftime('%Y-%m-%d %H:%M')
+        return None
+
+    def get_block_reason(self, obj):
+        if obj.is_blocked:
+            return obj.userblock.block_reason if obj.userblock else None
+        return None
+
 class AdminCustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser

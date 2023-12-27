@@ -1,7 +1,7 @@
 from rest_framework import viewsets, views, generics
 from main.models import CustomUser, TariffPlan, Contact, SocialNetwork, Review, UserBlock, Department
 from main.serializers import ContactSerializer, SocialNetworkSerializer, ReviewSerializer, DepartmentSerializer
-from .serializers import AdminUserSerializer, AdminTariffPlansSerializer, UserBlockSerializer, AdminCustomUserSerializer, MailingSerializer
+from .serializers import AdminUserSerializer, AdminTariffPlansSerializer, UserBlockSerializer, AdminCustomUserSerializer, MailingSerializer, CustomBlockedUserSerializer
 from rest_framework.permissions import IsAdminUser
 from rest_framework import status
 from rest_framework.response import Response
@@ -63,6 +63,12 @@ class AdminBlockUserGet(views.APIView):
                 return Response({'detail': 'Пользователь больше не заблокирован'}, status=status.HTTP_404_NOT_FOUND)
             except CustomUser.DoesNotExist:
                 return Response({'detail': 'Пользователь не найден'}, status=status.HTTP_400_BAD_REQUEST)
+
+    
+class AdminGetBlockedUsers(generics.ListAPIView):
+    queryset = CustomUser.objects.filter(is_blocked=True)
+    serializer_class = CustomBlockedUserSerializer
+    permission_classes = [IsAdminUser]
 
 class AdminBlockUserPost(views.APIView):
     permission_classes = [IsAdminUser]

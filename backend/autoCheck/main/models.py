@@ -29,7 +29,6 @@ class UserBlock(models.Model):
     blocked_until = models.DateTimeField()
     block_reason = models.TextField()
 
-
 class TariffPlan(models.Model):
     TARIFF_COLORS_CHOICE = [
         ("red", "Red"),
@@ -47,7 +46,7 @@ class TariffPlan(models.Model):
         return f'{self.name} | {self.request_quantity} | {self.price}₽'
 
 class Review(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     text = models.TextField()
     convenience_rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)], verbose_name='Удобство рейтинг')
     informativeness_rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)], verbose_name='Информативность рейтинг')

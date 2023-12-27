@@ -105,9 +105,12 @@ const Header = () => {
           {/* Ссылки для десктопной версии */}
           {user ?
             <>
-              <Typography className="header-link">
-                {user.first_name} {user.last_name}
-              </Typography>
+              <Link to='/user-profile' style={{textDecoration: 'none'}}>
+                <Typography className="header-link">
+                  {user.first_name} {user.last_name}
+                </Typography>
+              </Link>
+              
               
               <LogoutIcon onClick={logoutUser} />
 
