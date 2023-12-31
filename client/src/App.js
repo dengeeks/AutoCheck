@@ -30,6 +30,7 @@ import BlockedUsers from "./pages/AdminPanel/BlockedUsers/BlockedUsers";
 import ReviewPage from "./pages/Review/ReviewPage";
 import './styles/App.css'
 import ProfileSidebar from "./layers/profileSidebar/ProfileSidebar";
+import AccountSettings from "./pages/UserProfile/AccountSettings/AccountSettings";
 
 import Profile from "./pages/UserProfile/Profile/Profile";
 import ReferralSystem from "./pages/UserProfile/ReferralSystem/ReferralSystem";
@@ -45,7 +46,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/registration" element={<RegistrationPage />} />
+          <Route path="/registration/:referral_code?" element={<RegistrationPage />} />
           <Route path="/forget-password" element={<ForgetPasswordPage />} />
           <Route path="/reset-password/:uid/:token" element={<ChangePassword />} />
           <Route path="/activate/:uid/:token" element={<ActivateUser />} />
@@ -55,6 +56,7 @@ function App() {
           <Route path="/user-profile" element={<ProfileSidebar />}>
             <Route path="payment-history" element={<PaymentHistory />}/>
             <Route path="referral-system" element={<ReferralSystem />}/>
+            <Route path="settings" element={<AccountSettings />}/>
           </Route> 
           <Route path="/admin" element={<AdminPanel />}>
             <Route path="users" element={<AdminUsers />}/>

@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom"
 import { Box, Typography, TextField, Button } from "@mui/material"
-import { getOneContact } from "../../../api/admin/contacts/getOneContactRequest"
-import { deleteContact } from "../../../api/admin/contacts/deleteContactRequest"
-import { changeContactsRequest } from "../../../api/admin/contacts/changeContactsRequest"
 import { useNavigate } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../../../context/AuthContext"
 import Loader from "../../../components/Loader/Loader"
 import '../../../styles/AdminChangeForm.css'
+
+import { getOneContact } from "../../../api/Admin/contacts/getOneContactRequest"
+import { deleteContact } from "../../../api/Admin/contacts/deleteContactRequest"
+import { changeContactsRequest } from "../../../api/Admin/contacts/changeContactsRequest"
 
 
 const AdminContactChange = () => {

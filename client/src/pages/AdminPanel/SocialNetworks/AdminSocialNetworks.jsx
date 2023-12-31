@@ -1,10 +1,11 @@
 import { useContext, useState, useEffect } from "react"
 import { Box, Typography, Button } from "@mui/material"
 import AuthContext from "../../../context/AuthContext"
-import { getAdminSocialNetworks } from "../../../api/admin/socialNetworks/getSocialNetworkRequest"
 import AdminSocialNetworksDataGrid from "../../../components/AdminPanel/AdminSocialNetworks/AdminSocialNetworksDataGrid"
 import CreateSocialNetworkModal from "../../../components/AdminPanel/AdminSocialNetworks/AdminCreateSocialNetwork"
 import '../../../styles/AdminData.css'
+
+import { getAdminSocialNetworks } from "../../../api/Admin/socialNetworks/getSocialNetworkRequest"
 
 
 const AdminSocialNetworks = () => {

@@ -1,5 +1,5 @@
 .form-background-image {
-    height: 100vh;
+    min-height: 100vh;
     background-image: url('../../media/images/vectorBackground.jpg');
 }
 
@@ -36,34 +36,29 @@
     color: rgb(196, 196, 196)!important;
 }
 
-/* styles.css */
-
-/* Цвет обводки */
 .feedback-form-field .MuiOutlinedInput-notchedOutline {
     border-color: white;
-  }
-  
-  /* Цвет обводки при наведении */
-  .feedback-form-field :hover .MuiOutlinedInput-notchedOutline {
+}
+
+.feedback-form-field :hover .MuiOutlinedInput-notchedOutline {
     border-color: white!important;
-  }
+}
   
-  /* Цвет обводки при фокусе */
-  .feedback-form-field  .Mui-focused .MuiOutlinedInput-notchedOutline {
+.feedback-form-field  .Mui-focused .MuiOutlinedInput-notchedOutline {
     border-color: white!important;
-  }
+}
   
 
-  .feedback-form-field .MuiInputBase-input {
+.feedback-form-field .MuiInputBase-input {
     color: white;
-  }
+}
 
-  .file-upload-text {
+.file-upload-text {
     font-size: 12px!important;
     font-family: 'Ysabeau Infant', sans-serif!important;
     font-weight: 700!important;
     padding-left: 30px;
-  }
+}
 
 .feedback-form-filename {
     margin-left: 10px!important;

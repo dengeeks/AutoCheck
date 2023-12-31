@@ -105,11 +105,13 @@ const FeedbackForm = () => {
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <Button className='feedback-file-button' onClick={handleAttachFileClick} startIcon={<UploadFileIcon />} >
                         {selectedFiles.length > 0 ? 'прикреплен ' : 'Прикрепить файл'} {selectedFiles.length > 0 && <CheckIcon sx={{ marginLeft: '5px', fontSize: '24px' }} />}
-                    </Button>
+                    </Button>   
+
                     <Typography className='file-upload-text'>JPG, PNG, GIF или PDF — до 10 файлов общим размером до 20 МБ</Typography>
                 </Box>
-
-                <Button className='feedback-submit-button' onClick={handleSubmitFeedback}>Отправить</Button>
+                <Box sx={{ display: 'block', marginBottom: '20px' }}>
+                    <Button className='feedback-submit-button' onClick={handleSubmitFeedback}>Отправить</Button>
+                </Box>
             </Box>
         </Box>
     )

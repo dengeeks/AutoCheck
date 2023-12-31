@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import ReviewAPIViewset, SendEmailView, MyTokenObtainPairView, TariffPlanList, ContactListView, SocialNetworkListView
+from .views import ReviewAPIViewset, SendEmailView, MyTokenObtainPairView, TariffPlanList, ContactListView, SocialNetworkListView, ReferralsGetView
 from django.contrib.auth import views as auth_views
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.routers import DefaultRouter
@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include(reviews_router.urls)),
     path('tariff-plans/', TariffPlanList.as_view()),
     path('contacts/', ContactListView.as_view()),
+    path('referrals/', ReferralsGetView.as_view()),
     path('social-networks/', SocialNetworkListView.as_view()),
     path('send-email/', SendEmailView.as_view()),
     path('auth/logout/', auth_views.LogoutView.as_view(), name='logout'),

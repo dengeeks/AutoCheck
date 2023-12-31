@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom"
 import { Box, Typography, TextField, Button, MenuItem, Select } from "@mui/material"
-import { getOneTariffPlan, changeTariffPlan } from "../../../api/admin/tariff/changeTariffPlanRequest"
-import { deleteTariffPlan } from "../../../api/admin/tariff/deleteTariffPlanRequest"
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../../../context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import Loader from "../../../components/Loader/Loader"
 import '../../../styles/AdminChangeForm.css'
+
+import { deleteTariffPlan } from "../../../api/Admin/tariff/deleteTariffPlanRequest"
+import { getOneTariffPlan, changeTariffPlan } from "../../../api/Admin/tariff/changeTariffPlanRequest"
 
 
 const AdminTariffChange = () => {

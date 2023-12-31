@@ -2,14 +2,15 @@ import axios from "axios"
 import { toast } from "react-toastify";
 
 
-export const registrationRequest = (firstName, lastName, email, password, setIsSuccess) => {
+export const registrationRequest = ({ first_name, last_name, email, password, referral, setIsSuccess }) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     axios.post(`${BASE_URL}/auth/users/`, {
-        first_name: firstName,
-        last_name: lastName,
+        first_name: first_name,
+        last_name: last_name,
         email: email,
         password: password,
+        referral_code: referral || '',
     }, {
         headers: {
             'Content-Type': 'application/json',

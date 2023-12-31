@@ -20,11 +20,66 @@
     margin-left: 10px!important;
 }
 
+.payment-history-selected {
+    text-align: center;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+}
+
+.payment-collapse-item-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.collapse-select-item {
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px!important;
+    padding-bottom: 5px!important;
+    justify-content: center;
+    margin: 5px auto!important;
+    background: #e4e4e4;
+    width: 100%;
+    border-radius: 7px;
+}
+
+.collapse-select-item-text {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+    text-align: center;
+    margin-left: 5px!important;
+}
+
+.payment-history-collapse {
+    margin-top: 5px!important;
+}
+
 @media (max-width: 1200px) {
     .payment-history-title {
         font-size: 28px!important;
     }
     .profile-payment-history-title {
         font-size: 16px!important;
+    }
+}
+
+@media (max-width: 800px) {
+    .payment-history-title {
+        font-size: 24px!important;
+    }
+    .profile-payment-history-title {
+        font-size: 14px!important;
+    }
+}
+
+@media (max-width: 850px) {
+    .profile-payment-history-header {
+        display: none;
+    }
+    .profile-payment-history-title {
+        font-size: 14px!important;
+        margin-left: 5px!important;
     }
 }

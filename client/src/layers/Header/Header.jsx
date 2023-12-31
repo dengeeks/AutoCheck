@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Box, AppBar, Toolbar, Typography, IconButton, Popover, List, ListItem, ListItemText } from '@mui/material';
+import Logo from '../../media/images/logo.png'
 import MenuIcon from '@mui/icons-material/Menu';
 import './Header.css'
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -43,7 +44,7 @@ const Header = () => {
       <AppBar position="static" sx={{ background: '#498EDF' }}>
         <Toolbar>
           <Typography component="div" sx={{ flexGrow: 1 }}>
-            LOGO
+            <img src={Logo} alt="" style={{ width: '170px' }} />
           </Typography>
           {/* IconButton для открытия меню на мобильных устройствах */}
           <IconButton

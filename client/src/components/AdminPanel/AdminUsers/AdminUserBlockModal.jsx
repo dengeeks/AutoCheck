@@ -1,11 +1,11 @@
 import { Modal, Box, TextField, Typography, Button, Select, MenuItem } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
-import { blockUser } from "../../../api/admin/users/blockUserRequest";
 import AuthContext from "../../../context/AuthContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { validateText } from "../../../utils/FieldValidation";
+
+import { blockUser } from "../../../api/Admin/users/blockUserRequest";
 
 
 const AdminUserBlockModal = ({ open, onClose, id}) => {

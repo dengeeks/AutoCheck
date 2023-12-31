@@ -14,9 +14,9 @@ export const changeReview = ({ id, is_allowed, token }) => {
         }
     })
     .then((response) => {
-        toast.success('Соц сеть успешно изменена!');
+        toast.success('Отзыв успешно изменен!');
     })
     .catch(error => {
-        toast.error('Ошибка. Не удалось изменить соц сеть');
+        toast.error('Ошибка. Не удалось изменить отзыв');
     })
 }

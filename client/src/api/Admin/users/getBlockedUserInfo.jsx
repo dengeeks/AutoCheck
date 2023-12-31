@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { toast } from 'react-toastify';
 
-export const getBlockedUserInfo = ({ id, setData }) => {
+export const getBlockedUserInfo = ({ id, setData, logout }) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
     console.log(id, 'ID')
     return(
@@ -11,6 +11,7 @@ export const getBlockedUserInfo = ({ id, setData }) => {
         })
         .catch(error => {
             toast.error(`Не удалось получить информацию о блокировке`)
+            logout()
         })
     )
 }

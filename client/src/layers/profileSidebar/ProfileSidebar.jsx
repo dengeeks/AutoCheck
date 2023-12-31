@@ -12,10 +12,13 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import RestorePageIcon from '@mui/icons-material/RestorePage';
 import SettingsIcon from '@mui/icons-material/Settings';
-import './ProfileSidebar.css'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import './ProfileSidebar.css';
+
 
 const ProfileSidebar = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const {user, logoutUser} = useContext(AuthContext)
     const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
     const navigate = useNavigate()
@@ -24,83 +27,107 @@ const ProfileSidebar = () => {
         if (!user) {
             navigate('/login')
         }
-    }, [user])        
+    }, [user])
+
+    const handleNavbarOpen = () => {
+        setIsSidebarOpen(true)
+    }
+
+    const handleNavbarClose = () => {
+        setIsSidebarOpen(false)
+    }
 
     return(
     <Box sx={{ display: 'flex' }}>
-        <Box className='profile-sidebar-container'>
+        <Box className={`profile-sidebar-container ${isSidebarOpen ? 'profile-sidebar-open' : 'profile-sidebar-closed'}`}>
             <List>
                 <ListItem className='profile-sidebar-user-item'>
-                    <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                        <img src={`${BASE_URL_WITHOUT_PREFIX}/${user?.avatar}`} alt="Аватарка" className='profile-user-avatar' />
-                        <Box>
-                            <Typography className='profile-user-account'>Баланс: <span className='profile-user-account-price'>0.00₽</span></Typography>
-                            <Typography className='profile-user-account'>{user?.first_name} {user?.last_name}</Typography>
-                        </Box> 
+                    <Box className={`${isSidebarOpen ? 'profile-sidebar-header': 'profile-sidebar-header-closed'}`} sx={{ display: 'flex', flexDirection: 'row' }}>
+                        <img src={`${BASE_URL_WITHOUT_PREFIX}${user?.avatar}`} alt="Аватарка" className={`user-avatar-border ${isSidebarOpen ? 'profile-user-avatar' : 'profile-user-avatar-closed'}`} />
+                        {isSidebarOpen && (
+                            <Box>
+                                <Typography className='profile-user-account'>Баланс: <span className='profile-user-account-price'>0.00₽</span></Typography>
+                                <Typography className='profile-user-account'>{user?.first_name} {user?.last_name}</Typography>
+                            </Box>
+                        )}
+
+                        {isSidebarOpen ? 
+                            <ArrowBackIcon 
+                                className={`${isSidebarOpen ? 'profile-sidebar-icons-open' : 'profile-sidebar-icons-close'}`}
+                                onClick={handleNavbarClose} 
+                            /> 
+                        : 
+                            <ArrowForwardIcon 
+                                className={`${isSidebarOpen ? 'profile-sidebar-icons-open' : 'profile-sidebar-icons-close'}`}
+                                onClick={handleNavbarOpen} 
+                            />}
                     </Box>
-                    <Box sx={{ marginTop: '10px', width: '100%', textAlign: 'left' }}>
-                        <Typography className='profile-user-account'>Количество отчетов: {user?.request_quantity}</Typography>
-                        <Typography className='profile-user-account'>
-                            Тарифный план: <Link to='/'><span className='profile-user-request-quantity'>Выбрать</span></Link>
-                        </Typography>  
-                    </Box>   
+                    {isSidebarOpen && ( 
+                        <Box sx={{ marginTop: '10px', width: '100%', textAlign: 'left' }}>
+                            <Typography className='profile-user-account'>Количество отчетов: {user?.request_quantity}</Typography>
+                            <Typography className='profile-user-account'>
+                                Тарифный план: <Link to='/'><span className='profile-user-request-quantity'>Выбрать</span></Link>
+                            </Typography>  
+                        </Box>  
+                    )}
+ 
                 </ListItem> 
                 <NavLink to='payment-history' style={{ color: '#000', textDecoration: 'none' }}>
                     <ListItem className='profile-sidebar-item'>
                         <RestoreIcon />
-                        <Typography className='profile-item-text'>История платежей</Typography>
+                        <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>История платежей</Typography>
                     </ListItem>
                 </NavLink>
                 <NavLink to='referral-system' style={{ color: '#000', textDecoration: 'none' }}>
                     <ListItem className='profile-sidebar-item'>
                         <Diversity3Icon />
-                        <Typography className='profile-item-text'>Реферальная система</Typography>
+                        <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Реферальная система</Typography>
                     </ListItem>
                 </NavLink>
                 <NavLink to='inspection-history' style={{ color: '#000', textDecoration: 'none' }}>
                     <ListItem className='profile-sidebar-item'>
                         <RestorePageIcon />
-                        <Typography className='profile-item-text'>История проверок</Typography>
+                        <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>История проверок</Typography>
                     </ListItem>
                 </NavLink>
                 <NavLink to='favorites' style={{ color: '#000', textDecoration: 'none' }}>
                     <ListItem className='profile-sidebar-item'>
                         <FavoriteIcon />
-                        <Typography className='profile-item-text'>Избранное</Typography>
+                        <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Избранное</Typography>
                     </ListItem>
                 </NavLink>
                 <NavLink to='ticket-system' style={{ color: '#000', textDecoration: 'none' }}>
                     <ListItem className='profile-sidebar-item'>
                         <ConfirmationNumberIcon />
-                        <Typography className='profile-item-text'>Тикетная система</Typography>
+                        <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Тикетная система</Typography>
                     </ListItem>
                 </NavLink>
-                <NavLink to='/settings' style={{ color: '#000', textDecoration: 'none' }}>
+                <NavLink to='settings' style={{ color: '#000', textDecoration: 'none' }}>
                     <ListItem className='profile-sidebar-item'>
                         <SettingsIcon />
-                        <Typography className='profile-item-text'>Настройки аккаунта</Typography>
+                        <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Настройки аккаунта</Typography>
                     </ListItem>
                 </NavLink>
                 <NavLink to='/' style={{ color: '#000', textDecoration: 'none' }}> 
                 {/*TODO add scroll to #faq */}
                     <ListItem className='profile-sidebar-item'>
                         <QuestionMarkIcon />
-                        <Typography className='profile-item-text'>Вопросы и ответы</Typography>
+                        <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Вопросы и ответы</Typography>
                     </ListItem>
                 </NavLink>
                 <NavLink to='/forget-password' style={{ color: '#000', textDecoration: 'none' }}>
                     <ListItem className='profile-sidebar-item'>
                         <PasswordIcon />
-                        <Typography className='profile-item-text'>Сменить пароль</Typography>
+                        <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Сменить пароль</Typography>
                     </ListItem>
                 </NavLink>
                 <ListItem className='profile-sidebar-item' onClick={logoutUser}>
                     <LogoutIcon />
-                    <Typography className='profile-item-text'>Выйти</Typography>
+                    <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Выйти</Typography>
                 </ListItem>
             </List>
         </Box>
-        <Box sx={{ flex: 1 }}>
+        <Box className='outlet-profile-container'>
             <Outlet></Outlet>
         </Box>
     </Box>

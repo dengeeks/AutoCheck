@@ -1,7 +1,7 @@
 import { Box, Typography, Button } from "@mui/material"
 import PasswordField from "../PasswordField/PasswordField"
 import { useParams, useNavigate } from "react-router-dom"
-import { confirmPasswordReset } from "../../../api/confirmPasswordReset"
+import { confirmPasswordReset } from "../../../api/Auth/confirmPasswordReset"
 import '../AuthFormStyle.css'
 import { validatePassword } from "../../../utils/FieldValidation"
 import { useState } from "react"

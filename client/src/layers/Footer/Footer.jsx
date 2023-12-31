@@ -1,8 +1,9 @@
 import {useState, useEffect} from 'react';
 import { Box, Typography, Container, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { getAdminContacts } from '../../api/admin/contacts/getContactsRequest';
 import './Footer.css';
+
+import { getAdminContacts } from '../../api/Admin/contacts/getContactsRequest';
 
 
 const Footer = () => {
@@ -47,7 +48,7 @@ const Footer = () => {
     </Container>     
     <Box className="under-footer-info">
         © 2023 Your Company. All rights reserved.
-      </Box>
+    </Box>
     </Box>
   );
 };

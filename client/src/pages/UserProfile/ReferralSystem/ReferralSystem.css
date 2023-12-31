@@ -1,21 +1,55 @@
 .referral-system-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 90vh;
-    width: 500px;
-    margin: 0 auto!important;
+    text-align: center;
+    height: 90vh;   
+    margin: 10vh auto!important;
 }
 
 .referral-system-form-btn {
     background: #498EDF!important;
-    color: black!important;
+    color: rgb(255, 255, 255)!important;
 }
+
+.referral-system-form-btn:hover {
+    background: #277fe4!important;
+    color: rgb(255, 255, 255)!important;
+}
+
 
 .referral-system-titile {
     font-size: 22px!important;
     font-family: 'Ysabeau Infant', sans-serif!important;
     font-weight: 700!important;
     margin-bottom: 50px!important;
+}
+
+.referral-form-container {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    margin: 0 auto!important;
+}
+
+.referral-page-info-header {
+    margin-top: 50px!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+    font-size: 18px!important;
+}
+
+.referral-page-text {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 18px!important;
+    color: #6DDE45;
+}
+
+@media (max-width: 1000px) {
+    .referral-form-container {
+        display: flex;
+        flex-direction: row;
+        width: 500px!important;
+        margin: 0 auto!important;
+    }
 }

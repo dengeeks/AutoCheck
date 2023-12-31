@@ -3,7 +3,10 @@ from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import CustomUser, TariffPlan, Contact, SocialNetwork, Department
+import uuid
+import logging
 
+logger = logging.getLogger(__name__)
 
 class ReviewSerializer(serializers.ModelSerializer):
     user_name = serializers.ReadOnlyField(source='name')
@@ -16,14 +19,27 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     
 class CustomUserCreateSerializer(UserCreateSerializer):
+    created_at = serializers.DateTimeField(format="%d.%m.%Y %H:%M")
+
     class Meta(UserCreateSerializer.Meta):
         model = CustomUser
-        fields = ('id', 'email', 'first_name', 'last_name', 'password', 'current_tariff', 'request_quantity', 'is_active', 'is_staff')
+        fields = ('id', 'avatar', 'email', 'first_name', 'last_name', 'password', 'current_tariff', 'request_quantity', 'is_active', 'is_staff', 'created_at')
 
     def create(self, validated_data):
+        referral_code = self.initial_data.get('referral_code')
+        referred_by = None
+
+        if referral_code:
+            try:
+                referred_by = CustomUser.objects.get(referral_code=referral_code)
+            except CustomUser.DoesNotExist:
+                pass
+
+        validated_data['referral_code'] = str(uuid.uuid4())
+
         user = CustomUser.objects.create_user(
             email=validated_data['email'],
-            avatar = validated_data.get('avatar', 'users/avatar/default-avatar.png'),
+            avatar=validated_data.get('avatar', 'users/avatar/default-avatar.png'),
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             password=validated_data['password'],
@@ -31,7 +47,9 @@ class CustomUserCreateSerializer(UserCreateSerializer):
             request_quantity=validated_data.get('request_quantity', 0),
             is_active=validated_data.get('is_active', False),
             is_staff=validated_data.get('is_staff', False),
+            referred_by=referred_by,
         )
+
         return user
 
 class EmailSerializer(serializers.Serializer):
@@ -49,10 +67,10 @@ class TariffPlanSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'price', 'color', 'request_quantity', 'profit_percentage')
 
     def get_profit_percentage(self, obj):
-        # Получите самый дешевый тариф
+        # Get the most expensive rate
         cheapest_tariff = TariffPlan.objects.order_by('price', 'request_quantity').first()
 
-        # Вычислите процент выгоды для текущего тарифа
+        # Calculate interest benefits at the current tariff
         if cheapest_tariff:
             original_price = cheapest_tariff.price / cheapest_tariff.request_quantity
             discounted_price = obj.price / obj.request_quantity
@@ -67,7 +85,7 @@ class ContactSerializer(serializers.ModelSerializer):
         model = Contact
         fields = '__all__'
 
-class SocialNetworkSerializer(serializers.ModelSerializer):
+class SocialNetworkSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = SocialNetwork
         fields = '__all__'
@@ -90,3 +108,8 @@ class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
         fields = ('id', 'name', 'quantity')
+
+class ReferralSerializer(serializers.Serializer):
+    referral_code = serializers.CharField()
+    invited_referrals = CustomUserCreateSerializer(many=True)
+    all_invited = serializers.IntegerField()

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .managers import CustomUserManager
+import uuid
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -10,6 +11,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=30)
     current_tariff = models.ForeignKey('TariffPlan', on_delete=models.SET_NULL, null=True, blank=True)
     request_quantity = models.PositiveIntegerField(default=0)
+    referral_code = models.UUIDField(default=uuid.uuid4, unique=True)
+    referred_by = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='referrals')
+    created_at = models.DateTimeField(auto_now_add=True)
 
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)

@@ -1,7 +1,8 @@
 import { Modal, Box, TextField, Typography, Button, Select, MenuItem } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
-import { createTariffPlan } from "../../../api/admin/tariff/createTariffPlanRequest";
+
+import { createTariffPlan } from "../../../api/Admin/tariff/createTariffPlanRequest";
 
 
 const CreateTariffPlanModal = ({ open, onClose, token }) => {

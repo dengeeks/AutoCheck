@@ -12,4 +12,6 @@ export const resetDepartment = ({ department, token }) => {
             'Authorization': `Bearer ${token}`
         }
     })
+    .catch(() => {
+    })
 }

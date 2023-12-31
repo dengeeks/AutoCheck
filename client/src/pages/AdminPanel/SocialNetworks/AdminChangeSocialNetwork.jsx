@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState, useRef } from "react"
 import { useParams } from "react-router-dom"
 import { Box, Typography, TextField, Button, Select, MenuItem } from "@mui/material"
-import { getOneSocialNetwork } from "../../../api/admin/socialNetworks/getOneSocialNetworkRequest"
-import { deleteSocialNetwork } from "../../../api/admin/socialNetworks/deleteSocialNetworkRequest"
-import { changeSocialNetwork } from "../../../api/admin/socialNetworks/changeSocialNetworkRequest"
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import Loader from "../../../components/Loader/Loader"
 import AuthContext from "../../../context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import '../../../styles/AdminChangeForm.css'
+
+import { getOneSocialNetwork } from "../../../api/Admin/socialNetworks/getOneSocialNetworkRequest"
+import { deleteSocialNetwork } from "../../../api/Admin/socialNetworks/deleteSocialNetworkRequest"
+import { changeSocialNetwork } from "../../../api/Admin/socialNetworks/changeSocialNetworkRequest"
 
 
 const AdminSocialNetworkChange = () => {

@@ -1,8 +1,9 @@
 import { Modal, Box, TextField, Typography, Button, Select, MenuItem} from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import { useState, useRef } from "react";
-import { createSocialNetwork } from "../../../api/admin/socialNetworks/createSocialNetworkRequest";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
+
+import { createSocialNetwork } from "../../../api/Admin/socialNetworks/createSocialNetworkRequest";
 
 
 const CreateSocialNetworkModal = ({ open, onClose, token }) => {

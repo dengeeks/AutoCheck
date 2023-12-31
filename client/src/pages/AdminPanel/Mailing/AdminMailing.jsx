@@ -1,8 +1,9 @@
 import { Box, TextField, Button, Select, MenuItem, Typography } from "@mui/material"
 import { useState, useContext } from "react"
-import { sendMailing } from "../../../api/admin/mailing/sendMailingRequest"
 import './AdminMailing.css'
 import AuthContext from "../../../context/AuthContext"
+
+import { sendMailing } from "../../../api/Admin/mailing/sendMailingRequest"
 
 
 const AdminMailingPage = () => {

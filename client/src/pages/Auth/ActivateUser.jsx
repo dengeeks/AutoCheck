@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useParams, useNavigate } from 'react-router-dom';
-import { activateUserRequest } from "../../api/activateUserRequest";
+import { activateUserRequest } from '../../api/Auth/activateUserRequest'
 
 
 const ActivateUser = () => {

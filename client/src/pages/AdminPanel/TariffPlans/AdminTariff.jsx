@@ -2,9 +2,10 @@ import { useContext, useState, useEffect } from "react"
 import { Box, Typography, Button } from "@mui/material"
 import AuthContext from "../../../context/AuthContext"
 import AdminTariffPlansDataGrid from "../../../components/AdminPanel/AdminTariffPlans/AdminTariffDataGrid"
-import getTariffPlans from "../../../api/admin/tariff/getTariffPlansRequest"
 import CreateTariffPlanModal from "../../../components/AdminPanel/AdminTariffPlans/createTariffModal"
 import '../../../styles/AdminData.css'
+
+import getTariffPlans from "../../../api/Admin/tariff/getTariffPlansRequest"
 
 
 const AdminTariffPlans = () => {

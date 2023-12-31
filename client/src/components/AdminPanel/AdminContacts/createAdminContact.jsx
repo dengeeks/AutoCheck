@@ -1,7 +1,8 @@
 import { Modal, Box, TextField, Typography, Button} from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from "react";
-import { createContact } from "../../../api/admin/contacts/createContactRequest";
+
+import { createContact } from "../../../api/Admin/contacts/createContactRequest";
 
 
 const CreateContactModal = ({ open, onClose, token }) => {

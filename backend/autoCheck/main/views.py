@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.core.mail import EmailMessage
 from rest_framework.response import Response
-from .serializers import EmailSerializer, MyTokenObtainPairSerializer, ContactSerializer, TariffPlanSerializer, SocialNetworkSerializer, ReviewSerializer
-from .models import Review, TariffPlan, Contact, SocialNetwork
+from .serializers import EmailSerializer, MyTokenObtainPairSerializer, ContactSerializer, TariffPlanSerializer, SocialNetworkSerializer, ReviewSerializer, ReferralSerializer
+from .models import Review, TariffPlan, Contact, SocialNetwork, CustomUser
 
 
 class SendEmailView(APIView):
@@ -89,3 +89,16 @@ class SocialNetworkListView(generics.ListAPIView):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+class ReferralsGetView(APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    def get(self, request):
+        try:
+            user = request.user
+            referral_code = user.referral_code
+        except:
+            return Response({'error': 'Пользователь не найден'}, status=status.HTTP_400_BAD_REQUEST)
+        invited_referrals = CustomUser.objects.filter(referred_by=user)
+        all_invited = invited_referrals.count()
+        serializer = ReferralSerializer({'referral_code': referral_code, 'invited_referrals': invited_referrals, 'all_invited': all_invited})
+        return Response({'data': serializer.data}, status=status.HTTP_200_OK)

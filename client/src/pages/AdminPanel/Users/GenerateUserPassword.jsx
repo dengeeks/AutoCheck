@@ -1,7 +1,8 @@
 import { TextField, Box, Button } from "@mui/material"
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useState } from "react";
-import { adminChangeUserPassword } from "../../../api/admin/users/changePassword";
+
+import { adminChangeUserPassword } from "../../../api/Admin/users/changePassword";
 
 
 const GenerateUserPassword = ({ id, token }) => {

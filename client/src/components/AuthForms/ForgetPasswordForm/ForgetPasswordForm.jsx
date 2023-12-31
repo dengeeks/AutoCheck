@@ -1,6 +1,6 @@
 import { Box, Typography, TextField, Button } from "@mui/material"
 import { Link } from "react-router-dom"
-import { resetPasswordRequest } from "../../../api/resetPasswordRequest"
+import { resetPasswordRequest } from "../../../api/Auth/resetPasswordRequest"
 import '../AuthFormStyle.css'
 import { useState } from "react"
 import { validateResetPasswordForm } from "./ValidateResetForm"

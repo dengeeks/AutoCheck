@@ -59,10 +59,10 @@ const Sidebar = () => {
             {isOpen ? 
                 <>
                     <Typography className='sidebar-header-title'>Админ панель</Typography>
-                    <ArrowForwardIcon onClick={toggleSidebar}/> 
+                    <ArrowBackIcon onClick={toggleSidebar}/>
                 </>
             :
-                <ArrowBackIcon onClick={toggleSidebar}/>}
+                <ArrowForwardIcon onClick={toggleSidebar}/> }
         </Box>
         <List>
             <Link to='tariff-plans' style={{ color: 'black', textDecoration: 'none' }}>

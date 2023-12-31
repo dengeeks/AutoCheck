@@ -2,9 +2,10 @@ import { useContext, useState, useEffect } from "react"
 import { Box, Typography, Button } from "@mui/material"
 import AuthContext from "../../../context/AuthContext"
 import AdminContactsDataGrid from "../../../components/AdminPanel/AdminContacts/AdminContactsDataGrid"
-import { getAdminContacts } from "../../../api/admin/contacts/getContactsRequest"
 import CreateContactModal from "../../../components/AdminPanel/AdminContacts/createAdminContact"
 import '../../../styles/AdminData.css'
+
+import { getAdminContacts } from "../../../api/Admin/contacts/getContactsRequest"
 
 
 const AdminContacts = () => {

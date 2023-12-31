@@ -80,3 +80,19 @@
         font-size: 18px!important;
     }
 }
+
+
+@media (max-width: 430px) {
+    .payment-card-title {
+        font-size: 14px!important;
+    }
+    .payment-card-time {
+        font-family: 'Ysabeau Infant', sans-serif!important;
+        font-weight: 400!important;
+        font-size: 12px!important;
+
+    }
+    .payment-card-price {
+        font-size: 16px!important;
+    }
+}

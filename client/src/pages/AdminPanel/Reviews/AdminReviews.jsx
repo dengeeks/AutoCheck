@@ -1,9 +1,10 @@
 import {useContext, useState, useEffect} from "react"
 import { Box, Typography } from "@mui/material"
 import AdminReportDataGrid from "../../../components/AdminPanel/AdminReviews/AdminReviewDataGrid"
-import { getAdminReviews } from "../../../api/admin/reviews/getAdminReviews"
-import { resetDepartment } from "../../../api/resetDepartmentRequest"
 import AuthContext from "../../../context/AuthContext"
+
+import { getAdminReviews } from "../../../api/Admin/reviews/getAdminReviews"
+import { resetDepartment } from "../../../api/resetDepartmentRequest"
 
 
 const AdminReviews = () => {

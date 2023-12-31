@@ -1,10 +1,10 @@
 import { Box, TextField, Typography, Button } from "@mui/material"
 import { useState } from "react"
 import PasswordField from "../PasswordField/PasswordField"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import '../AuthFormStyle.css'
 import { validateRegistrationForm } from "./RegistrationFormValidate"
-import { registrationRequest } from "../../../api/registrationRequest"
+import { registrationRequest } from "../../../api/Auth/registrationRequest"
 import { useNavigate } from 'react-router-dom'
 
 
@@ -16,6 +16,7 @@ const RegistrationForm = () => {
     const [password1, setPassword1] = useState('')
     const [isSuccess, setIsSuccess] = useState(false)
 
+    const {referral_code} = useParams()
     const navigate = useNavigate()
 
     const [error, setError] = useState({
@@ -28,7 +29,14 @@ const RegistrationForm = () => {
     const handleSubmitForm = () => {
         if (password === password1) {
           if (validateRegistrationForm(firstName, lastName, email, password, setError)) {
-            registrationRequest(firstName, lastName, email, password, setIsSuccess)
+            registrationRequest({
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: password,
+                referral: referral_code,
+                setIsSuccess: setIsSuccess,
+            })
           }
         } else {
             setError({ ...error, password: 'Пароли не совпадают' });

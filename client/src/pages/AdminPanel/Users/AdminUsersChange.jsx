@@ -1,14 +1,16 @@
 import { useParams } from "react-router-dom"
 import { Box, Typography, TextField, Button } from "@mui/material"
-import { getOneUser } from "../../../api/admin/users/getOneUserRequest"
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../../../context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import Loader from "../../../components/Loader/Loader"
 import AdminUserBlockModal from "../../../components/AdminPanel/AdminUsers/AdminUserBlockModal"
-import { unblockUser } from "../../../api/admin/users/unblockUserRequest"
 import '../../../styles/AdminChangeForm.css'
 import GenerateUserPassword from "./GenerateUserPassword"
+
+import { unblockUser } from "../../../api/Admin/users/unblockUserRequest"
+import { adminChangeUserInfo } from "../../../api/Admin/users/changeUserInfo"
+import { getOneUser } from "../../../api/Admin/users/getOneUserRequest"
 
 
 const AdminUsersChange = () => {
@@ -38,9 +40,16 @@ const AdminUsersChange = () => {
     }
 
     const handleUserChange = () => {
-        const confirmed = window.confirm("Установить пользователю новый пароль ?");
+        const confirmed = window.confirm("Вы уверены что хотите применить изменения?");
         if (confirmed) {
-            console.log(editedUser)
+            adminChangeUserInfo({
+                id: id,
+                first_name: editedUser.first_name, 
+                last_name: editedUser.last_name, 
+                email: editedUser.email, 
+                request_quantity: editedUser.request_quantity,
+                token: authTokens.access,
+            })
         }
     }
 

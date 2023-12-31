@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react"
 import BlockedUsersDataGrid from "../../../components/AdminPanel/AdminBlockedUsers/AdminBlockedUsersDataGrid"
-import AdminUserBlockModal from "../../../components/AdminPanel/AdminUsers/AdminUserBlockModal"
 import { Box } from "@mui/material"
 import AuthContext from "../../../context/AuthContext"
-import { getAllBlockedUsers } from "../../../api/admin/users/getAllBlockedUsers"
+
+import { getAllBlockedUsers } from '../../../api/Admin/users/getAllBlockedUsers'
+
 
 const BlockedUsers = () => {
     const [open, setOpen] = useState(false)

@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom"
 import { Box, Typography, TextField, Button } from "@mui/material"
-import { getOneReview } from "../../../api/admin/reviews/getOneAdminReview"
-import { deleteReview } from "../../../api/admin/reviews/deleteAdminReview"
-import { changeReview } from "../../../api/admin/reviews/changeAdminReview"
 import { useNavigate } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../../../context/AuthContext"
 import Loader from "../../../components/Loader/Loader"
 import '../../../styles/AdminChangeForm.css'
+
+import { getOneReview } from "../../../api/Admin/reviews/getOneAdminReview"
+import { deleteReview } from "../../../api/Admin/reviews/deleteAdminReview"
+import { changeReview } from "../../../api/Admin/reviews/changeAdminReview"
 
 
 const AdminReviewChange = () => {

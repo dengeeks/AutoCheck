@@ -5,12 +5,37 @@
     box-shadow: 0px 0px 6px 2px rgb(161, 161, 161);
     margin: 10px!important;
     border-radius: 15px!important;
-    z-index: 89!important;
+    z-index: 999!important;
+    user-select: none;
 }
 
-.profile-sidebar-close {
-    width: 60px!important;
+.profile-sidebar-header {
+    display: flex;
+    flex-direction: row;
 }
+
+
+.profile-sidebar-header-closed {
+    display: flex;
+    flex-direction: column!important;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-sidebar-closed {
+    width: 60px;
+    position: relative;
+    transition: height 0.5s ease;
+}
+
+.profile-sidebar-open {
+    position: relative;
+    padding: 1px;
+    border-radius: 50%;
+    margin-top: 15px!important;
+    
+}
+
 
 .profile-sidebar-user-item {
     display: flex;
@@ -22,13 +47,26 @@
 .profile-user-avatar {
     width: 50px;
     border-radius: 50%;
+
 }
 
+.user-avatar-border {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(to right, red, orange);
+    padding: 2px;
+}
+
+.profile-user-avatar-closed {
+    width: 50px;
+    border-radius: 50%;
+    margin-bottom: 15px!important;
+}
 
 .profile-user-avatar:hover {
     cursor: pointer;  
 }
-
 
 .profile-user-account {
     font-family: 'Ysabeau Infant', sans-serif!important;
@@ -46,7 +84,6 @@
     font-family: 'Ysabeau Infant', sans-serif!important;
     font-weight: 400!important;
     text-decoration: underline;
-    
     color: #498EDF;
 }
 
@@ -54,7 +91,6 @@
     margin-bottom: 3px!important;
     height: 45px;
 }
-
 
 .profile-sidebar-item:hover {
     background: #f0f0f0!important;
@@ -68,8 +104,35 @@
     margin-left: 15px!important;
 }
 
+.profile-sidebar-icons-open {
+    position: relative;
+    left: 15px;
+    background: #ffffff;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+.profile-item-text-close {
+    display: none;
+}
+
 .profile-item-text .active {
     font-family: 'Ysabeau Infant', sans-serif!important;
     font-weight: 700!important;
     margin-left: 15px!important;
+}
+
+.outlet-profile-container {
+    flex: 1;
+    height: 95vh;
+}
+
+@media (max-width: 950px) {
+    .profile-sidebar-open {
+        position: absolute;
+        left: 0;
+        z-index: 999!important;
+        transition: height 0.5s ease;
+    }
+
 }

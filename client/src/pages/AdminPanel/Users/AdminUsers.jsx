@@ -1,10 +1,11 @@
 import { Box, Typography } from "@mui/material"
 import AdminUsersDataGrid from "../../../components/AdminPanel/AdminUsers/AdminUserDataGrid"
-import getUsersRequest from "../../../api/admin/users/getUsersRequest"
 import '../../../styles/AdminData.css'
 import AuthContext from "../../../context/AuthContext"
-import { resetDepartment } from "../../../api/resetDepartmentRequest"
 import { useContext, useState, useEffect } from "react"
+
+import { resetDepartment } from "../../../api/resetDepartmentRequest"
+import getUsersRequest from "../../../api/Admin/users/getUsersRequest"
 
 
 const AdminUsers = () => {
