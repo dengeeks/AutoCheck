@@ -14,6 +14,7 @@ import RestorePageIcon from '@mui/icons-material/RestorePage';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import './ProfileSidebar.css';
 
 
@@ -26,8 +27,10 @@ const ProfileSidebar = () => {
     useEffect(() => {
         if (!user) {
             navigate('/login')
+           
         }
-    }, [user])
+        handleNavbarClose()
+    }, [user, navigate])
 
     const handleNavbarOpen = () => {
         setIsSidebarOpen(true)
@@ -38,7 +41,13 @@ const ProfileSidebar = () => {
     }
 
     return(
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', marginTop: '20px' }}>
+                    {isSidebarOpen && (
+                <div
+                    className="background-overlay"
+                    onClick={handleNavbarClose}
+                />
+            )}
         <Box className={`profile-sidebar-container ${isSidebarOpen ? 'profile-sidebar-open' : 'profile-sidebar-closed'}`}>
             <List>
                 <ListItem className='profile-sidebar-user-item'>
@@ -72,6 +81,12 @@ const ProfileSidebar = () => {
                     )}
  
                 </ListItem> 
+                <NavLink to='balance' style={{ color: '#000', textDecoration: 'none' }}>
+                    <ListItem className='profile-sidebar-item'>
+                        <AccountBalanceWalletIcon />
+                        <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Пополнить баланс</Typography>
+                    </ListItem>
+                </NavLink>
                 <NavLink to='payment-history' style={{ color: '#000', textDecoration: 'none' }}>
                     <ListItem className='profile-sidebar-item'>
                         <RestoreIcon />
@@ -128,7 +143,8 @@ const ProfileSidebar = () => {
             </List>
         </Box>
         <Box className='outlet-profile-container'>
-            <Outlet></Outlet>
+            <Outlet>
+            </Outlet>
         </Box>
     </Box>
   )

@@ -1,8 +1,9 @@
 .sidebar-container {
-    height: 90vh;
+    min-height: 90vh;
     width: 250px;
     background: #D9D9D9!important;
     user-select: none;
+    padding-top: 20px;
 }
 
 .sidebar-header {
@@ -33,7 +34,11 @@
 }
 
 .closed-sidebar {
+    min-height: 90vh;
     width: 50px;
+    background: #D9D9D9!important;
+    user-select: none;
+    padding-top: 20px;
 }
 
 .admin-sidebar-badge {

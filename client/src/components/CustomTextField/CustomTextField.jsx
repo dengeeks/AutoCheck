@@ -35,7 +35,7 @@ const CustomTextField = () => {
             <Button className="submit-field-button" endIcon={<SearchIcon />}>Проверить</Button>
             <Box sx={{ display: 'flex', justifyContent: 'inline' }}>
                 <Link>
-                    <Typography sx={{ marginRight: '15px' }} className="link-under-field">история запросов</Typography>
+                    <Typography sx={{ marginRight: '15px' }} className="link-under-field">история проверок</Typography>
                 </Link>
                 <Link>
                     <Typography onClick={handleClickHelpIcon} className="link-under-field">пример отчета</Typography>

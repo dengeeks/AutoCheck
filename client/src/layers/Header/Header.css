@@ -9,6 +9,40 @@
     text-decoration: none;
 }
 
+.header-text-field label {
+    color: #fff!important;
+    border-bottom-right-radius: 0!important;
+}
+.header-text-field .MuiOutlinedInput-notchedOutline {
+    border-color: white;
+}
+.header-text-field :hover .MuiOutlinedInput-notchedOutline {
+    border-color: white!important;
+}
+.header-text-field  .Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: white!important;
+}
+.header-text-field .MuiInputBase-input {
+    color: white;
+}
+
+.header-form-button {
+    background: white!important;
+    height: 55px;
+    border-top-left-radius: 0!important;
+    border-bottom-left-radius: 0!important;
+}
+
+.report-form-header {
+    flex-grow: 5;
+}
+
+@media (max-width: 900px) {
+    .report-form-header {
+        display: none!important;
+    }
+}
+
 @media (max-width: 675px) {
     .header-link {
         font-size: 12px!important;

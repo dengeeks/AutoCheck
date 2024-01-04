@@ -14,7 +14,7 @@ const AdminPanel = () => {
     }
 
     return (
-        <Box sx={{ display: 'flex' }}>      
+        <Box sx={{ display: 'flex', overflowX: 'hidden'}}>      
             <Sidebar />
             <Box sx={{ flex: 1 }}>
                 <Outlet></Outlet>

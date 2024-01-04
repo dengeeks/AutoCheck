@@ -1,11 +1,8 @@
 import { Box, Typography, ListItem } from "@mui/material"
-import { useContext } from "react"
 import './ReferralInfoCard.css'
-import AuthContext from "../../context/AuthContext"
 
 
 const ReferralInfoCard = ({ avatar, first_name, last_name, date  }) => {
-    const {user} = useContext(AuthContext)
     const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
 
 

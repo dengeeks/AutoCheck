@@ -15,7 +15,7 @@ const Footer = () => {
   
   return (
     <Box className="footer-root">
-    <Container sx={{ display: 'flex', justifyContent: 'space-between', }}>
+    <Container sx={{ display: 'flex', justifyContent: 'space-between' }}>
       <Box className="footer-column">
         <Box className="footer-logo">Your Logo</Box>
         <Box className="footer-contacts">

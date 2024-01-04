@@ -15,11 +15,10 @@ const ReferralSystem = () => {
     const [data, setData] = useState([])
     const [isIconChanged, setIsIconChanged] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
-    const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     const handleCopyClick = () => {
         if (data.referral_code) {
-            navigator.clipboard.writeText(`${BASE_URL}${data.referral_code}`)
+            navigator.clipboard.writeText(`http://127.0.0.1:3000/registration/${data.referral_code}`) // hardcode value domain
             toast.success('Ваша реферальная ссылка успешно скопирована')
             setIsIconChanged(true)
         } else {
@@ -30,7 +29,7 @@ const ReferralSystem = () => {
     useEffect(() => {
         getReferralRequest({setData: setData, token: authTokens.access, isLoading: setIsLoading})
     }, [authTokens])
-    console.log(data)
+
     if (isLoading) {
         return(
             <Loader />

@@ -18,7 +18,7 @@ const ReviewPage = () => {
 
     useEffect(() => {
         getOneReviewRequest({id: id, setData: setReview, setIsLoading: setIsLoading})
-    }, [])
+    }, [id])
 
     const navigateToNextReview = () => {
         navigate(`/review/${review?.next_review}`)

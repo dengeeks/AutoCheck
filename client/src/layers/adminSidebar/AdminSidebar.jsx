@@ -43,7 +43,7 @@ const Sidebar = () => {
   useEffect(() => {
     loadSidebarState();
     getDepartment({setData: setDepartment, token: authTokens.access})
-  }, []);
+  }, [authTokens]);
 
   useEffect(() => {
     saveSidebarState(isOpen);
@@ -54,7 +54,7 @@ const Sidebar = () => {
   };
     
   return (
-    <Box className={`sidebar-container ${isOpen ? 'open' : 'closed-sidebar'}`}>
+    <Box className={` ${isOpen ? 'sidebar-container' : 'closed-sidebar'}`}>
         <Box className='sidebar-header'>
             {isOpen ? 
                 <>
@@ -140,7 +140,6 @@ const Sidebar = () => {
                     {isOpen ? <ListItemText className='sidebar-list-item' primary="Дизайн" /> : ''}
                 </ListItem>
             </Link>
-
         </List>
     </Box>
   );

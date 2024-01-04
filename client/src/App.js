@@ -28,13 +28,17 @@ import BlockedUserPage from "./pages/Errors/Blocked/BlockedUserPage";
 import AdminMailingPage from "./pages/AdminPanel/Mailing/AdminMailing";
 import BlockedUsers from "./pages/AdminPanel/BlockedUsers/BlockedUsers";
 import ReviewPage from "./pages/Review/ReviewPage";
-import './styles/App.css'
+
 import ProfileSidebar from "./layers/profileSidebar/ProfileSidebar";
 import AccountSettings from "./pages/UserProfile/AccountSettings/AccountSettings";
-
-import Profile from "./pages/UserProfile/Profile/Profile";
+import TicketSystem from "./pages/UserProfile/TicketSystem/TicketCatalog/TicketCatalog";
+import TicketPage from "./pages/UserProfile/TicketSystem/TicketPage/TicketPage";
 import ReferralSystem from "./pages/UserProfile/ReferralSystem/ReferralSystem";
 import PaymentHistory from "./pages/UserProfile/PaymentHistory/PaymentHistory";
+import UserBalance from "./pages/UserProfile/Balance/UserBalance";
+import Profile from "./pages/UserProfile/Profile/ProfileIndex";
+
+import './styles/App.css'
 
 
 function App() {
@@ -54,9 +58,13 @@ function App() {
           <Route path="/review/:id" element={<ReviewPage />} />
           <Route path="/you-blocked" element={<BlockedUserPage />} />
           <Route path="/user-profile" element={<ProfileSidebar />}>
+            <Route index element={<Profile />} />
             <Route path="payment-history" element={<PaymentHistory />}/>
             <Route path="referral-system" element={<ReferralSystem />}/>
             <Route path="settings" element={<AccountSettings />}/>
+            <Route path="ticket/:id" element={<TicketPage />} />
+            <Route path="ticket-system" element={<TicketSystem />}/>
+            <Route path="balance" element={<UserBalance />} />
           </Route> 
           <Route path="/admin" element={<AdminPanel />}>
             <Route path="users" element={<AdminUsers />}/>

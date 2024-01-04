@@ -19,7 +19,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     
 class CustomUserCreateSerializer(UserCreateSerializer):
-    created_at = serializers.DateTimeField(format="%d.%m.%Y %H:%M")
+    created_at = serializers.DateTimeField(format="%d.%m.%Y %H:%M", required=False)
 
     class Meta(UserCreateSerializer.Meta):
         model = CustomUser
@@ -113,3 +113,27 @@ class ReferralSerializer(serializers.Serializer):
     referral_code = serializers.CharField()
     invited_referrals = CustomUserCreateSerializer(many=True)
     all_invited = serializers.IntegerField()
+
+class CustomUserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['email', 'first_name', 'last_name', 'password', 'avatar']
+
+    def update(self, instance, validated_data):
+        # Make sure the user has updated their account
+        if self.context['request'].user != instance:
+            raise serializers.ValidationError("Вы можете обновлять только свой аккаунт")
+
+        # Update user info
+        instance.email = validated_data.get('email', instance.email)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.avatar = validated_data.get('avatar', instance.avatar)
+
+        # Update password
+        password = validated_data.get('password')
+        if password:
+            instance.set_password(password)
+
+        instance.save()
+        return instance

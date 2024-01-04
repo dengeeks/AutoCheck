@@ -10,15 +10,20 @@ const AuthContext = createContext()
 
 export default AuthContext
 
-
 export const AuthProvider = ({children}) => {
     const [authTokens, setAuthTokens] = useState(localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     const [user, setUser] = useState(localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')) : null)
-    // eslint-disable-next-line
     const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
     const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          setUser(JSON.parse(storedUser));
+        }
+      }, []);
 
     const loginUser = ({ email, password }) => {
         axios.post(`${BASE_URL}/token/`, {
@@ -50,13 +55,14 @@ export const AuthProvider = ({children}) => {
     const logoutUser = () => {
         setAuthTokens(null)
         setUser(null)
+        localStorage.removeItem('user')
         localStorage.removeItem('authTokens')
         navigate('/login')
     }
       
     const updateToken = () => {
         axios.post(`${BASE_URL}/token/refresh/`, {
-            refresh: authTokens.refresh
+            refresh: authTokens?.refresh
         },{
             headers: {
                 'Content-Type': 'application/json',
@@ -71,16 +77,33 @@ export const AuthProvider = ({children}) => {
         .catch(() => {
             logoutUser()
         })
+        if (loading) {
+            setLoading(false)
+        }
     }
+
+    const updateUser = (updatedData) => {
+        console.log('update user updatedData: ', updatedData)
+        setUser((prevUser) => {
+          const newUser = { ...prevUser, ...updatedData };
+          localStorage.setItem('user', JSON.stringify(newUser));
+          return newUser;
+        });
+    };
 
     const contextData = {
         user: user,
         authTokens: authTokens,
         loginUser: loginUser,
         logoutUser: logoutUser,
+        updateUser, updateUser,
     }
+    console.log(user)
 
     useEffect(() => {
+        if (loading) {
+            updateToken()
+        }
 
         const interval = setInterval(() => {
             if (authTokens) {

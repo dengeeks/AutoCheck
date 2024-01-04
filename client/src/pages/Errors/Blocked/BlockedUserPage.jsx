@@ -16,7 +16,7 @@ const BlockedUserPage = () => {
             console.log(user.user_id)
             getBlockedUserInfo({id: user.user_id, setData: setBlockInfo, logout: logoutUser})
         }
-    }, [user])
+    }, [user, logoutUser])
 
     console.log(blockInfo)
 

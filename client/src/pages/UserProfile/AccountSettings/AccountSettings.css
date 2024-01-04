@@ -1,48 +1,68 @@
 .profile-settings-container {
     margin-top: 40px!important;
+    margin-bottom: 25px!important;
 }
 
-.profile-settings-field {
-    width: 80%;
-    margin-left: 25px!important;
+.profile-settings-main-title {
+    font-size: 32px!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    margin-bottom: 25px!important;
+    text-align: center;
+}
+
+.profile-settings-avatar-img {
+    width: 200px;
+    cursor: pointer;
+}
+
+.profile-settings-avatar-title {
+    font-size: 28px!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+}
+
+.profile-settings-avatar-btn {
+    background: #E4E4E4!important;
+    color: black!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    height: 45px;
+    width: 200px;
+    margin-bottom: 25px!important;
+    margin-top: 10px!important;
+}
+
+.profile-settings-avatar-btn:hover {
+    background: #c4c4c4!important;
 }
 
 .profile-settings-title {
     font-size: 28px!important;
     font-family: 'Ysabeau Infant', sans-serif!important;
     font-weight: 700!important;
-    margin-left: 25px!important;
     margin-bottom: 20px!important;
 }
 
-.profile-settings-second-title {
-    font-size: 22px!important;
-    font-family: 'Ysabeau Infant', sans-serif!important;
-    font-weight: 700!important;
-    margin-left: 25px!important;
-    margin-bottom: 25px!important;
+.profile-settings-field {
+    width: 30%;
+    margin-right: 15px!important;
 }
 
 .profile-settings-footer {
     margin-top: 50px!important;
 }
-
+ 
 .profile-settings-change-title {
     font-size: 28px!important;
     font-family: 'Ysabeau Infant', sans-serif!important;
     font-weight: 700!important;
     margin-top: 35px!important;
     margin-bottom: 15px!important;
-    margin-left: 25px!important;
 }
 
 .profile-settings-field {
     margin-bottom: 15px!important;
-}
-
-.profile-settings-field-email {
-    width: 550px;
-    margin-left: 25px!important;
 }
 
 .profile-settings-save-changes {
@@ -54,7 +74,6 @@
     width: 300px;
     margin-top: 25px!important;
 }
-
 .profile-settings-save-changes:hover {
     background: #277fe4!important;
 }
@@ -77,35 +96,40 @@
 .profile-settings-btns {
     display: flex;
     flex-direction: row;
-    margin-left: 25px!important;
 }
 
-.profile-settings-avatar {
-    background: #E4E4E4!important;
-    color: black!important;
-    margin-left: 25px!important;
-    font-family: 'Ysabeau Infant', sans-serif!important;
-    font-weight: 700!important;
-    height: 45px;
-    width: 200px;
-    margin-bottom: 25px!important;
-    margin-top: 10px!important;
+@media (max-width: 760px) {
+    .profile-settings-fields-container {
+        display: flex;
+        flex-direction: column!important;
+    }
+    .profile-settings-save-changes {
+        width: 45%;
+    }
+    .profile-settings-exit {
+        width: 45%;
+        margin-left: 0px!important;
+    }
+    .profile-settings-btns {
+        justify-content: space-between;
+    }
+    .profile-settings-field {
+        width: 100%;
+        margin-left: 0px!important;
+    }
+    .profile-settings-avatar-container {
+        text-align: center;
+    }
 }
 
-
-.profile-settings-avatar:hover {
-    background: #c4c4c4!important;
-}
-
-.profile-settings-avatar-img {
-    width: 200px;
-    margin-left: 25px!important;
-}
-
-.profile-settings-avatar-title {
-    font-size: 20px!important;
-    font-family: 'Ysabeau Infant', sans-serif!important;
-    font-weight: 700!important;
-    margin-left: 40px!important;
-    margin-bottom: 15px!important;
+@media (max-width: 585px) {
+    .profile-settings-save-changes {
+        width:60%;
+        font-size: 12px!important;
+    }
+    
+    .profile-settings-exit {
+        width: 30%;
+        font-size: 12px!important;
+    }
 }

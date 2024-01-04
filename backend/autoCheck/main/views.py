@@ -5,7 +5,16 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.core.mail import EmailMessage
 from rest_framework.response import Response
-from .serializers import EmailSerializer, MyTokenObtainPairSerializer, ContactSerializer, TariffPlanSerializer, SocialNetworkSerializer, ReviewSerializer, ReferralSerializer
+from .serializers import (
+    EmailSerializer,
+    MyTokenObtainPairSerializer,
+    ContactSerializer,
+    TariffPlanSerializer,
+    SocialNetworkSerializer,
+    ReviewSerializer,
+    ReferralSerializer,
+    CustomUserUpdateSerializer
+    )
 from .models import Review, TariffPlan, Contact, SocialNetwork, CustomUser
 
 
@@ -102,3 +111,11 @@ class ReferralsGetView(APIView):
         all_invited = invited_referrals.count()
         serializer = ReferralSerializer({'referral_code': referral_code, 'invited_referrals': invited_referrals, 'all_invited': all_invited})
         return Response({'data': serializer.data}, status=status.HTTP_200_OK)
+
+class CustomUserUpdateView(generics.UpdateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserUpdateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user

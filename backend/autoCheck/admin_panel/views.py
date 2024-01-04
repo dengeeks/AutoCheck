@@ -118,7 +118,6 @@ class AdminUnblockUserPost(views.APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Http404:
             return Response({"error": "Пользователь не найден"}, status=status.HTTP_404_NOT_FOUND)
-        
 
 class AdminChangeCustomUser(views.APIView):
     permission_classes = [IsAdminUser]

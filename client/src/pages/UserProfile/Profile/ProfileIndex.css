@@ -1,0 +1,23 @@
+.profile-report-input-container {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-btns-container {
+    display: flex;
+    justify-content: space-between;
+    width: 650px;
+    margin: 0 auto!important;
+    margin-top: 45px!important;
+}
+
+.profile-navigate-btn {
+    background: #498EDF!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    color: white!important;
+    height: 45px;
+}
+.profile-navigate-btn:hover {
+    background: #277FE4!important;
+}

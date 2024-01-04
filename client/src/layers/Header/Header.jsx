@@ -1,11 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Box, AppBar, Toolbar, Typography, IconButton, Popover, List, ListItem, ListItemText } from '@mui/material';
+import { 
+  Box,
+  AppBar, 
+  Toolbar, 
+  Typography, 
+  IconButton, 
+  Popover, 
+  List, 
+  ListItem,
+  ListItemText,
+  } from '@mui/material';
 import Logo from '../../media/images/logo.png'
 import MenuIcon from '@mui/icons-material/Menu';
-import './Header.css'
 import LogoutIcon from '@mui/icons-material/Logout';
 import AuthContext from '../../context/AuthContext';
+import HeaderReportForm from '../../components/HeaderReportForm/HeaderReportForm';
+import './Header.css'
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -41,10 +53,12 @@ const Header = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ background: '#498EDF' }}>
+      <AppBar position="fixed" sx={{ background: '#498EDF', marginBottom: '25px !important'}}>
         <Toolbar>
           <Typography component="div" sx={{ flexGrow: 1 }}>
-            <img src={Logo} alt="" style={{ width: '170px' }} />
+            <Link to='/'> 
+              <img src={Logo} alt="" style={{ width: '170px' }} />
+            </Link>
           </Typography>
           {/* IconButton для открытия меню на мобильных устройствах */}
           <IconButton
@@ -57,7 +71,9 @@ const Header = () => {
           >
             <MenuIcon />
           </IconButton>
-
+          <Box className='report-form-header'>
+            <HeaderReportForm />
+          </Box>
           {/* Ссылки для десктопной версии */}
           <Typography onClick={() => scrollToSection('tariff-plans')} className="header-link" sx={{ display: { xs: 'none', md: 'block' } }}>
             Тарифные планы
@@ -99,7 +115,6 @@ const Header = () => {
                   <ListItemText sx={{ color: 'black', }} primary="Авторизация" />
                 </Link> 
               </ListItem>
-
             </List>
           </Popover>
 
@@ -111,10 +126,8 @@ const Header = () => {
                   {user.first_name} {user.last_name}
                 </Typography>
               </Link>
-              
-              
-              <LogoutIcon onClick={logoutUser} />
 
+              <LogoutIcon onClick={logoutUser} />
             </>
           :
             <>

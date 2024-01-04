@@ -1,0 +1,60 @@
+.ticket-modal-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ticket-form-container {
+    background: #E4E4E4;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 7px;
+    padding-bottom: 15px;
+}
+
+.ticket-form-header {
+    background: #498EDF!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+}
+
+.ticket-form-header-title {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    color: white!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 28px!important;
+}
+
+.ticket-form-fields {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px!important;
+}
+
+.ticket-form-field {
+    width: 90%;
+    margin: 5px auto!important;
+}
+
+.ticket-form-btns {
+    margin-top: 10px!important;
+    text-align: center;
+}
+
+.submit-ticket-btn {
+    background: #498EDF!important;
+    width: 90%;
+    height: 45px;
+    color: white!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+}

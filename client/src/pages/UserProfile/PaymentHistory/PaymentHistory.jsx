@@ -1,4 +1,4 @@
-import { Typography, Box, Grid, Collapse, ListItem } from "@mui/material"
+import { Typography, Box, Grid, Collapse } from "@mui/material"
 import { useState, useEffect } from "react";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -10,28 +10,25 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import './PaymentHistory.css'
 
+
 const PaymentHistory = () => {
     const isMobile = useMediaQuery('(max-width: 850px)');
     const [activeGridIndex, setActiveGridIndex] = useState(1);
     const [isCollapse, setIsCollapse] = useState(false)
+    // eslint-disable-next-line
     const [selectedType, setSelectedType] = useState({ debit: 'Списание средств', credit: 'Начисление средств', bonus: 'Бонусы за рефералов' })
     const [selectedItem, setSelectedItem] = useState('debit')
-
-    const navigatePaymentCard = () => {
-    }
 
     const handleSelectItem = (item) => {
         setSelectedItem(item)
         setIsCollapse(false)
-        
-        
     }
+
     useEffect(() => {
         const activeGridSelected = {'debit': 0, 'credit': 1, 'bonus': 2}
         setActiveGridIndex(activeGridSelected[selectedItem])  
     }, [selectedItem])
     
-
     return(
         <Box>
             <Typography className='payment-history-title'>История платежей</Typography>

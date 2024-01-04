@@ -24,7 +24,7 @@ const columns = [
       field: 'email',
       headerName: 'Электронная почта',
       align: 'center',
-      width: 250,
+      width: 220,
     },
     {
       field: 'full_name',
@@ -75,7 +75,7 @@ export default function AdminUsersDataGrid({rows}) {
       navigate(`/admin/users/${params.id}`);
     };
     return (
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: '90vw', overflowX: 'auto', margin: '0 auto'}}>
         <DataGrid
           rows={rows}
           columns={columns}

@@ -7,17 +7,12 @@ import { getAllBlockedUsers } from '../../../api/Admin/users/getAllBlockedUsers'
 
 
 const BlockedUsers = () => {
-    const [open, setOpen] = useState(false)
     const [blockedUsers, setBlockedUsers] = useState([])
     const {authTokens} = useContext(AuthContext)
 
     useEffect(() => {
         getAllBlockedUsers({setData: setBlockedUsers, token: authTokens.access})
     }, [authTokens.access])
-
-    const onClose = () => {
-        setOpen(!open)
-    }
 
     return(
         <Box>

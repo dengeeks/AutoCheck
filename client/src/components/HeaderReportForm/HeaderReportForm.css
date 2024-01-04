@@ -1,0 +1,41 @@
+.header-report-field {
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    width: 200px;
+    height: 50px;
+}
+.header-report-field label {
+    color: #fff!important;
+    border-bottom-right-radius: 0!important;
+}
+.header-report-field .MuiOutlinedInput-notchedOutline {
+    border-color: #fff;
+    border-bottom-right-radius: 0!important;
+    border-top-right-radius: 0!important;
+    height: 55px;
+}
+.header-report-field :hover .MuiOutlinedInput-notchedOutline {
+    border-color: #fff!important;
+}
+.header-report-field  .Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: solid 1px #fff!important;
+}
+.header-report-field .MuiInputBase-input {
+    color: #fff;
+}
+
+.header-report-btn {
+    background: #fff!important;
+    color: black!important;
+    height: 52px;
+    border: solid 1px #fff;
+    border-bottom-left-radius: 0!important;
+    border-top-left-radius: 0!important;
+}
+
+
+@media (max-width: 900px) {
+    .header-report-form-container {
+        display: none;
+    }
+}
