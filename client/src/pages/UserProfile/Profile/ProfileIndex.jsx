@@ -1,12 +1,17 @@
 import CustomTextField from "../../../components/CustomTextField/CustomTextField"
-import { Container, Box, Button } from "@mui/material"
+import { Container, Box, Button, Typography } from "@mui/material"
 import { Link } from "react-router-dom"
 import './ProfileIndex.css'
 
 
 const Profile = () => {
     return (
-        <Container sx={{ marginTop: '105px' }}>
+        <Container>
+            <Box className='profile-title-container'>
+                <Typography className='profile-title'>
+                    Ваш личный кабинет
+                </Typography>
+            </Box>
             <Box className='profile-report-input-container'>
                 <CustomTextField />
             </Box>

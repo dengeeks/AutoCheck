@@ -1,45 +1,58 @@
+import Box from '@mui/material/Box';
+import {useNavigate} from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 import './TicketsDataGrid.css'
 
-export default function TicketsDataGrid({ rows }) {
-    const navigate = useNavigate()
-    
-    const handleCellClick = (params) => {
-        navigate(`/user-profile/ticket/${params.id}`);
-    };
 
-    const columns = [
-      { field: 'theme', headerName: 'Тема', width: 200 },
-      { field: 'text', headerName: 'Сообщение', width: 180},
-      {
-        field: 'response',
+const columns = [
+    { field: 'id', headerName: 'ID', align: 'center', width: 90 },
+    {
+      field: 'subject',
+      headerName: 'Тема',
+      align: 'center',
+      width: 230,
+    },
+    {
+      field: 'text',
+      headerName: 'Вопрос',
+      align: 'center',
+      width: 200,
+    },
+    {
+        field: 'is_answered',
         headerName: 'Ответ',
-        width: 100,
+        align: 'center',
+        width: 110,
         renderCell: (params) => (
           params.value ? <CheckCircleIcon color="primary" /> : <DoNotDisturbOnIcon color="error" />
         ),
-      },
-    ];
-  
+    },
+];
+
+export default function UserTicketsDataGrid({rows}) {
+    const navigate = useNavigate()
+    const handleCellClick = (params) => {
+        navigate(`/user-profile/ticket/${params.id}`);
+    };
     return (
-        <Box
-            sx={{
-                width: { xs: '75vw', sm: '85vw' },
-                overflowX: 'auto',
-                margin: '0 auto',
-            }}>
-        <DataGrid 
-            rows={rows} 
-            columns={columns} 
-            onCellClick={handleCellClick}
-            disableColumnMenu
-            hideFooterPagination={true}
-            className="ticket-data-grid"
+      <Box sx={{ width: '80vw', overflowX: 'auto', margin: '0 auto'}}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          onCellClick={handleCellClick}
+          className='ticket-data-grid'
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 15,
+              },
+            },
+          }}
+          pageSizeOptions={[15]}
         />
       </Box>
     );
-  }
+}

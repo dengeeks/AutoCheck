@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.core.mail import EmailMessage
 from rest_framework.response import Response
+from billing.permissions import IsAdminOrReadOnly
 from .serializers import (
     EmailSerializer,
     MyTokenObtainPairSerializer,
@@ -13,10 +14,25 @@ from .serializers import (
     SocialNetworkSerializer,
     ReviewSerializer,
     ReferralSerializer,
-    CustomUserUpdateSerializer
-    )
-from .models import Review, TariffPlan, Contact, SocialNetwork, CustomUser
+    CustomUserUpdateSerializer,
+    TicketSerializer,
+    TicketAnswerSerializer,
+    GetUserInfoSerializer
+)
+from .models import (
+    Review, 
+    TariffPlan, 
+    Contact, 
+    SocialNetwork, 
+    CustomUser, 
+    Ticket,
+    TicketAnswer
+)
+from django.core.exceptions import ValidationError
+import logging
 
+
+logger = logging.getLogger(__name__)
 
 class SendEmailView(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -115,7 +131,58 @@ class ReferralsGetView(APIView):
 class CustomUserUpdateView(generics.UpdateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserUpdateSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAdminOrReadOnly]
 
     def get_object(self):
         return self.request.user
+
+class UserTickets(viewsets.ModelViewSet):
+    serializer_class = TicketSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Ticket.objects.filter(user=user)
+        return queryset
+    
+class TicketAnswerView(viewsets.ModelViewSet):
+    queryset = TicketAnswer.objects.all()
+    serializer_class = TicketAnswerSerializer
+    permission_classes = [IsAdminOrReadOnly]
+
+    def perform_create(self, serializer):
+        ticket_answer = serializer.save()
+        # Установите статус is_answered в True для связанного объекта Ticket
+        ticket_answer.ticket.is_answered = True
+        ticket_answer.ticket.save()
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class TicketAndAnswerView(APIView):
+    def get(self, request, id):
+        try:
+            ticket = Ticket.objects.get(id=id)
+        except Ticket.DoesNotExist:
+            return Response({"error": "Ticket not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        ticket_serializer = TicketSerializer(ticket)
+        ticket_answer_serializer = TicketAnswerSerializer(ticket.answers.all(), many=True)
+
+        data = {
+            "ticket": ticket_serializer.data,
+            "answers": ticket_answer_serializer.data
+        }
+
+        return Response(data, status=status.HTTP_200_OK)
+    
+class GetAllTickets(generics.ListAPIView):
+    queryset = Ticket.objects.all()
+    serializer_class = TicketSerializer
+
+class GetUserInfoView(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = GetUserInfoSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return CustomUser.objects.filter(id=user.id)

@@ -9,7 +9,7 @@ import Footer from "./layers/Footer/Footer";
 import { AuthProvider } from "./context/AuthContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AdminPanel from "./pages/AdminPanel/AdminPanel";
+import AdminSidebar from './layers/adminSidebar/AdminSidebar'
 import AdminUsers from "./pages/AdminPanel/Users/AdminUsers";
 import AdminStatistic from "./components/AdminPanel/AdminStatistic/AdminStatistic";
 import AdminTariffPlans from "./pages/AdminPanel/TariffPlans/AdminTariff";
@@ -34,11 +34,14 @@ import AccountSettings from "./pages/UserProfile/AccountSettings/AccountSettings
 import TicketSystem from "./pages/UserProfile/TicketSystem/TicketCatalog/TicketCatalog";
 import TicketPage from "./pages/UserProfile/TicketSystem/TicketPage/TicketPage";
 import ReferralSystem from "./pages/UserProfile/ReferralSystem/ReferralSystem";
-import PaymentHistory from "./pages/UserProfile/PaymentHistory/PaymentHistory";
 import UserBalance from "./pages/UserProfile/Balance/UserBalance";
 import Profile from "./pages/UserProfile/Profile/ProfileIndex";
+import AdminReferralSystem from "./pages/AdminPanel/ReferralSystem/ReferralSystem";
+import AdminTicketSystem from "./pages/AdminPanel/TicketSystem/TicketSystem";
+import AdminTicketAnswerPage from "./pages/AdminPanel/TicketSystem/TicketAnswerPage";
 
 import './styles/App.css'
+import PaymentSettings from "./pages/AdminPanel/PaymentSettings/PaymentSettings";
 
 
 function App() {
@@ -59,14 +62,13 @@ function App() {
           <Route path="/you-blocked" element={<BlockedUserPage />} />
           <Route path="/user-profile" element={<ProfileSidebar />}>
             <Route index element={<Profile />} />
-            <Route path="payment-history" element={<PaymentHistory />}/>
             <Route path="referral-system" element={<ReferralSystem />}/>
             <Route path="settings" element={<AccountSettings />}/>
             <Route path="ticket/:id" element={<TicketPage />} />
             <Route path="ticket-system" element={<TicketSystem />}/>
             <Route path="balance" element={<UserBalance />} />
           </Route> 
-          <Route path="/admin" element={<AdminPanel />}>
+          <Route path="/admin" element={<AdminSidebar />}>
             <Route path="users" element={<AdminUsers />}/>
             <Route path="users/:id" element={<AdminUsersChange />}/>
             <Route path="statistic" element={<AdminStatistic />}/>
@@ -79,9 +81,11 @@ function App() {
             <Route path="reviews" element={<AdminReviews />}/>
             <Route path="reviews/:id" element={<AdminReviewChange />}/>
             <Route path="mailing/" element={<AdminMailingPage />}/>
-            <Route path="referral-system" element={<AdminStatistic />}/>
             <Route path="blocked" element={<BlockedUsers />}/>
-            <Route path="ticket-system" element={<AdminStatistic />}/>
+            <Route path="ticket-system" element={<AdminTicketSystem />}/>
+            <Route path="ticket/:id" element={<AdminTicketAnswerPage />}/>
+            <Route path="payment-settings" element={<PaymentSettings />}/>
+            <Route path="referral-system" element={<AdminReferralSystem />}/>
             <Route path="report-history" element={<AdminStatistic />}/>
             <Route path="design" element={<AdminStatistic />}/>
           </Route>

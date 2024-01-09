@@ -1,0 +1,35 @@
+.payment-settings-container {
+    width: 500px;
+    margin: 0 auto!important;
+    margin-top: 55px!important;
+}
+
+.payment-settngs-btn {
+    background: #498EDF!important;
+    height: 45px;
+    width: 250px;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    color: white!important;
+    margin-top: 15px!important;
+}
+
+.payment-settings-title {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important; 
+    font-size: 24px!important;
+}
+
+@media (max-width: 600px) {
+    .payment-settings-container {
+        width: 80%;
+        margin: 0 auto!important;
+        margin-top: 55px!important;
+    }
+}
+
+@media (max-width: 370px) {
+    .payment-settngs-btn {
+        width: 100%;
+    }
+}

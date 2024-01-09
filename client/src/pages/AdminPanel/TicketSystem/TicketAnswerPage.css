@@ -1,0 +1,12 @@
+.ticket-response-form {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    margin: 0 auto!important;
+    margin-top: 50px!important;
+}
+
+.admin-ticket-answer-btn {
+    background: #498EDF!important;
+    color: white!important;
+}

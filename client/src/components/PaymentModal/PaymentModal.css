@@ -1,0 +1,100 @@
+.payment-modal-container {
+    width: 450px;
+    background: #E4E4E4!important;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    padding: 15px;
+}
+
+.payment-modal-close-icon {
+    position: relative;
+    left: 110px;
+    bottom: 20px;
+    color: white!important;
+}
+
+.payment-header-form {
+    background: #498EDF!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.payment-modal-title {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    font-size: 24px!important;
+    color: white!important;
+}
+
+.payment-modal-helper-text {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+    margin-bottom: 10px!important;
+    text-align: center;
+}
+
+.payment-modal-custom-amount {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid black;
+    padding-bottom: 25px;
+}
+
+.payment-custom-amount-btn {
+    background: #498EDF!important;
+    color: white!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    width: 100%;
+    height: 45px;
+    margin-top: 10px!important;
+}
+.payment-custom-amount-btn:hover {
+    background: #277FE4!important;
+}
+
+.payment-modal-amount-btn {
+    background: #498EDF!important;
+    color: white!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    width: 95%;
+}
+
+.payment-modal-amount-btn:hover {
+    background: #277FE4!important;
+}
+
+.payment-modal-btns-container {
+    display: flex;
+    text-align: center;
+    margin-top: 15px!important;
+}
+
+@media (max-width: 480px) {
+    .payment-modal-container {
+        width: 350px;
+        background: #E4E4E4!important;
+        padding: 15px;
+        border-radius: 7px;
+    }    
+    .payment-modal-close-icon {
+        left: 330px;
+    }
+}
+
+@media (max-width: 370px) {
+    .payment-modal-container {
+        width: 300px;
+        background: #E4E4E4!important;
+        padding: 15px;
+        border-radius: 7px;
+    }    
+    .payment-modal-close-icon {
+        left: 280px;
+    }
+}

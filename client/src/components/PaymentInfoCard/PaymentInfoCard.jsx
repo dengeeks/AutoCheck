@@ -4,7 +4,7 @@ import './PaymentInfoCard.css'
 
 const PaymentInfoCard = ({ uid, title, date, price, type }) => {
     const navigate = useNavigate()
-    const cardColorClass = type === 'debit' ? 'debit-color' : 'credit-color';
+    const cardColorClass = type === 'withdraw' ? 'withdraw-color' : 'payment-color';
     
     const navigatePaymentCard = () => {
         navigate(`/payment-info/${uid}`)

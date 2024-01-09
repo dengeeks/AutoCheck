@@ -65,7 +65,7 @@ export default function AdminReviewDataGrid({rows}) {
         navigate(`/admin/reviews/${params.id}`);
     };
     return (
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: '90vw', overflowX: 'auto', margin: '0 auto'}}>
         <DataGrid
           rows={rows}
           columns={columns}

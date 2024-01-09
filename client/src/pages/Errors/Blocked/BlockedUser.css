@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 95vh; /* Настраивает высоту контейнера на 100% высоты видимого экрана */
+    min-height: 95vh; /* Настраивает высоту контейнера на 100% высоты видимого экрана */
   }
   
   .blocked-page-icon {

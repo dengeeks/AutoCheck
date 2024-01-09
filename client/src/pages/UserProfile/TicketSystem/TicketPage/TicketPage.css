@@ -1,6 +1,7 @@
 .ticket-message-box {
     text-align: left;
-    min-width: 40%;
+    min-width: 150px;
+    max-width: 60%;
     min-height: 60px;
     padding: 5px;
     border-radius: 7px;
@@ -10,13 +11,11 @@
 .support-ticket {
     background: #E4E4E4!important;
     margin-right: 15px;
-    max-width: 60%;
 }
 
 .user-ticket {
     background: #E4E4F5!important;
     margin-left: 15px;
-    max-width: 60%;
 }
 
 .ticket-page-title {

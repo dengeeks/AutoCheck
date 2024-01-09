@@ -1,9 +1,11 @@
 .not-found-container {
-    height: 90vh;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 25px!important;
+    margin-bottom: 25px!important;
 }
 
 .not-found-title {

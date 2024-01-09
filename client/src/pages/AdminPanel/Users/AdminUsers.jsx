@@ -21,7 +21,7 @@ const AdminUsers = () => {
 
     return(
         <Box>
-            <Box sx={{ width: '100%', textAlign: 'center', marginTop: '35px' }}>
+            <Box sx={{ width: '100%', textAlign: 'center', marginTop: '15px' }}>
                 <Typography className='admin-data-title'>Пользователи</Typography>
             </Box>
             <AdminUsersDataGrid rows={users} />

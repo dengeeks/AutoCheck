@@ -49,3 +49,13 @@ class AdminCustomUserSerializer(serializers.ModelSerializer):
 class MailingSerializer(serializers.Serializer):
     subject = serializers.CharField()
     message = serializers.CharField()
+
+class ReferralUserSerializer(serializers.ModelSerializer):
+    referred_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'first_name', 'last_name', 'email', 'referred_count']
+
+    def get_referred_count(self, obj):
+        return obj.referrals.count()

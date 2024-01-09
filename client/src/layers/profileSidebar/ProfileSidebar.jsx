@@ -10,7 +10,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PasswordIcon from '@mui/icons-material/Password';
 import LogoutIcon from '@mui/icons-material/Logout';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-import RestorePageIcon from '@mui/icons-material/RestorePage';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -42,17 +41,24 @@ const ProfileSidebar = () => {
 
     return(
     <Box sx={{ display: 'flex', marginTop: '20px' }}>
-                    {isSidebarOpen && (
-                <div
-                    className="background-overlay"
-                    onClick={handleNavbarClose}
-                />
-            )}
+        {isSidebarOpen && (
+             <div
+                className="background-overlay"
+                onClick={handleNavbarClose}
+            />
+         )}
         <Box className={`profile-sidebar-container ${isSidebarOpen ? 'profile-sidebar-open' : 'profile-sidebar-closed'}`}>
             <List>
                 <ListItem className='profile-sidebar-user-item'>
-                    <Box className={`${isSidebarOpen ? 'profile-sidebar-header': 'profile-sidebar-header-closed'}`} sx={{ display: 'flex', flexDirection: 'row' }}>
-                        <img src={`${BASE_URL_WITHOUT_PREFIX}${user?.avatar}`} alt="Аватарка" className={`user-avatar-border ${isSidebarOpen ? 'profile-user-avatar' : 'profile-user-avatar-closed'}`} />
+                    <Box 
+                        className={`${isSidebarOpen ? 'profile-sidebar-header': 'profile-sidebar-header-closed'}`} 
+                        sx={{ display: 'flex', flexDirection: 'row' }}
+                    >
+                        <img 
+                            src={`${BASE_URL_WITHOUT_PREFIX}${user?.avatar}`} 
+                            alt="Аватарка" 
+                            className={`user-avatar-border ${isSidebarOpen ? 'profile-user-avatar' : 'profile-user-avatar-closed'}`} 
+                        />
                         {isSidebarOpen && (
                             <Box>
                                 <Typography className='profile-user-account'>Баланс: <span className='profile-user-account-price'>0.00₽</span></Typography>
@@ -87,12 +93,6 @@ const ProfileSidebar = () => {
                         <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Пополнить баланс</Typography>
                     </ListItem>
                 </NavLink>
-                <NavLink to='payment-history' style={{ color: '#000', textDecoration: 'none' }}>
-                    <ListItem className='profile-sidebar-item'>
-                        <RestoreIcon />
-                        <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>История платежей</Typography>
-                    </ListItem>
-                </NavLink>
                 <NavLink to='referral-system' style={{ color: '#000', textDecoration: 'none' }}>
                     <ListItem className='profile-sidebar-item'>
                         <Diversity3Icon />
@@ -101,7 +101,7 @@ const ProfileSidebar = () => {
                 </NavLink>
                 <NavLink to='inspection-history' style={{ color: '#000', textDecoration: 'none' }}>
                     <ListItem className='profile-sidebar-item'>
-                        <RestorePageIcon />
+                        <RestoreIcon />
                         <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>История проверок</Typography>
                     </ListItem>
                 </NavLink>
@@ -143,8 +143,7 @@ const ProfileSidebar = () => {
             </List>
         </Box>
         <Box className='outlet-profile-container'>
-            <Outlet>
-            </Outlet>
+            <Outlet />
         </Box>
     </Box>
   )

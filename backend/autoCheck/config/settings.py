@@ -1,13 +1,17 @@
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
 import os
+
+dotenv_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
+load_dotenv(dotenv_path)
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-SECRET_KEY = 'django-insecure-7-ao56s^oco()i1d8l6r339(tq9eenyo@j*+-m0d9e(7heoz4o'
-
-DEBUG = True
+DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = ['*']
 
@@ -26,6 +30,7 @@ INSTALLED_APPS = [
     'djoser',
     'main.apps.MainConfig',
     'admin_panel.apps.AdminPanelConfig',
+    'billing.apps.BillingConfig',
 ]
 
 MIDDLEWARE = [
@@ -62,11 +67,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'autocheckdb',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'ENGINE': os.getenv("DB_ENGINE"),
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),
     }
 }
 
@@ -90,14 +95,12 @@ REST_FRAMEWORK = {
     'DATETIME_FORMAT': "%d.%m.%Y %H:%M:%S",
 }
 
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True
 }
-
 
 DJOSER = {
     'SEND_ACTIVATION_EMAIL': True,
@@ -125,18 +128,18 @@ LOGGING = {
     },
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'takemycodeservice@gmail.com'
-EMAIL_HOST_PASSWORD = 'lkrf xeug nfuz wggd'
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:3000",
-    "http://localhost:3000",
+    'http://127.0.0.1:3000',
+    'http://localhost:3000'
 ]
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -150,13 +153,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'main.CustomUser'
 
-LANGUAGE_CODE = 'ru'
-
-TIME_ZONE = 'Europe/Moscow'
-
-USE_I18N = True
-
-USE_TZ = True
+LANGUAGE_CODE = os.getenv("LANGUAGE_CODE")
+TIME_ZONE = os.getenv("TIME_ZONE")
+USE_I18N = os.getenv("USE_I18N")
+USE_TZ = os.getenv("USE_TZ")
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -164,3 +164,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/api/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Yookassa
+YOOKASSA_SECRET_KEY=os.getenv("YOOKASSA_SECRET_KEY")
+YOOKASSA_SHOP_ID=os.getenv("YOOKASSA_SHOP_ID")

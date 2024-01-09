@@ -6,7 +6,8 @@ import uuid
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
-    avatar = models.ImageField(default="users/avatar/default-avatar.png", upload_to="users/avatar/", blank=True, null=True) 
+    avatar = models.ImageField(default="users/avatar/default-avatar.png", upload_to="users/avatar/", blank=True, null=True)
+    balance = models.DecimalField(default=0, max_digits=10, decimal_places=2)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     current_tariff = models.ForeignKey('TariffPlan', on_delete=models.SET_NULL, null=True, blank=True)
@@ -27,11 +28,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return f'{self.first_name} | {self.email}'
 
-
 class UserBlock(models.Model):
     user = models.OneToOneField(to=CustomUser, on_delete=models.CASCADE)
     blocked_until = models.DateTimeField()
     block_reason = models.TextField()
+
 
 class TariffPlan(models.Model):
     TARIFF_COLORS_CHOICE = [
@@ -104,3 +105,21 @@ class Department(models.Model):
     ]
     name = models.CharField(max_length=9, choices=DEPARTMENT_CHOICE)
     quantity = models.PositiveIntegerField(default=0)
+
+class Ticket(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    subject = models.CharField(max_length=120)
+    text = models.TextField()
+    is_answered = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.subject}: answered {self.is_answered}'
+
+class TicketAnswer(models.Model):
+    ticket = models.ForeignKey(Ticket, related_name='answers', on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.ticket.subject}'

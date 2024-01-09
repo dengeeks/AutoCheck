@@ -1,19 +1,23 @@
 import { Button, Typography, Box } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import TicketsNotFoundImg from '../../../../media/images/TicketsNotFound.png'
-import TicketsDataGrid from "../../../../components/Tickets/TicketsDataGrid/TicketsDataGrid"
 import TicketCreateModal from "../../../../components/Tickets/TicketCreateModal/TicketCreateModal"
+import UserTicketsDataGrid from "../../../../components/Tickets/TicketsDataGrid/TicketsDataGrid"
+import getUserTicketsRequest from "../../../../api/getUserTicketsRequest"
 import './TicketCatalog.css'
+import AuthContext from "../../../../context/AuthContext"
+import Loader from "../../../../components/Loader/Loader"
 
 
 const TicketSystem = () => {
   const [isOpen, setIsOpen] = useState(false)
-    const data = [
-        { id: 1, title: 'hello world', theme: 'hello wolrd', is_responsed: false },
-        { id: 2, title: 'hello world', theme: 'hello wolrd', is_responsed: false },
-        { id: 3, title: 'hello world', theme: 'hello wolrd', is_responsed: false },
-        { id: 4, title: 'hello world', theme: 'hello wolrd', is_responsed: false },
-    ];
+  const [isLoading, setIsLoading] = useState(true)
+  const {authTokens} = useContext(AuthContext)
+  const [tickets, setTickets] = useState([])
+
+  useEffect(() => {
+    getUserTicketsRequest({setData: setTickets, setIsLoading: setIsLoading, token: authTokens.access})
+  }, [authTokens])
 
   const handleOpenModal = () => {
     setIsOpen(true)
@@ -23,6 +27,11 @@ const TicketSystem = () => {
     setIsOpen(false)
   }
 
+  if (isLoading) {
+    return(
+      <Loader />
+    )
+  }
   return (
     <Box sx={{ overflowY: 'none' }}>
       <TicketCreateModal open={isOpen} onClose={handleCloseModal} />
@@ -31,8 +40,8 @@ const TicketSystem = () => {
             <Button className='create-ticket-btn'>Создать запрос</Button>
       </Box>
 
-      {data ? (
-        <TicketsDataGrid rows={data} />
+      {tickets ? (
+        <UserTicketsDataGrid rows={tickets} />
       ) : (
         <>
           <Typography>Список пуст</Typography>

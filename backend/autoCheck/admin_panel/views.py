@@ -1,7 +1,31 @@
 from rest_framework import viewsets, views, generics
-from main.models import CustomUser, TariffPlan, Contact, SocialNetwork, Review, UserBlock, Department
-from main.serializers import ContactSerializer, SocialNetworkSerializer, ReviewSerializer, DepartmentSerializer
-from .serializers import AdminUserSerializer, AdminTariffPlansSerializer, UserBlockSerializer, AdminCustomUserSerializer, MailingSerializer, CustomBlockedUserSerializer
+from main.models import (
+    CustomUser, 
+    TariffPlan, 
+    Contact, 
+    SocialNetwork, 
+    Review, 
+    UserBlock, 
+    Department,
+    Ticket,
+    TicketAnswer
+)
+from main.serializers import (
+    ContactSerializer,
+    SocialNetworkSerializer,
+    ReviewSerializer,
+    DepartmentSerializer,
+    TicketSerializer,
+)
+from .serializers import (
+    AdminUserSerializer,
+    AdminTariffPlansSerializer,
+    UserBlockSerializer,
+    AdminCustomUserSerializer,
+    MailingSerializer,
+    CustomBlockedUserSerializer,
+    ReferralUserSerializer
+)
 from rest_framework.permissions import IsAdminUser
 from rest_framework import status
 from rest_framework.response import Response
@@ -184,3 +208,15 @@ class ResetDepartmentView(views.APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Department.DoesNotExist:
             return Response({'error': f'Отдел с именем {department_name} не найден'}, status=status.HTTP_404_NOT_FOUND)
+
+class AllReferralsView(views.APIView):
+    permission_classes = [IsAdminUser]
+    def get(self, request):
+        users = CustomUser.objects.all()
+        serializer = ReferralUserSerializer(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class TicketsView(viewsets.ModelViewSet):
+    queryset = Ticket.objects.all()
+    serializer_class = TicketSerializer
+    permission_classes = [IsAdminUser]

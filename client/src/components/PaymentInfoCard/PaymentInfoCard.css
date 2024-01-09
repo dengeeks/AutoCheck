@@ -40,22 +40,20 @@
     font-weight: 700!important;
 }
 
-.debit-color {
+.withdraw-color {
     background: rgb(255,103,103)!important;
     background: linear-gradient(90deg, rgba(255,103,103,1) 0%, rgba(255,89,64,1) 100%)!important;
 }
-
-.debit-color:hover {
+.withdraw-color:hover {
     background: rgb(255, 82, 82)!important;
     background: linear-gradient(90deg, rgb(255, 76, 76) 0%, rgb(255, 58, 28) 100%)!important;
 }
 
-.credit-color {
+.payment-color {
     background: rgb(111,255,103)!important;
     background: linear-gradient(90deg, rgba(111,255,103,1) 0%, rgba(84,255,64,1) 100%)!important;
 }
-
-.credit-color:hover {
+.payment-color:hover {
     background: rgb(83, 255, 73)!important;
     background: linear-gradient(90deg, rgb(87, 236, 79) 0%, rgb(53, 228, 33) 100%)!important;
 }

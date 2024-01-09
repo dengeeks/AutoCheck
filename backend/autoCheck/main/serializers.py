@@ -1,10 +1,18 @@
-from .models import Review
+from .models import Review, Ticket
 from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import CustomUser, TariffPlan, Contact, SocialNetwork, Department
+from .models import (
+    CustomUser,
+    TariffPlan,
+    Contact,
+    SocialNetwork,
+    Department,
+    TicketAnswer
+)
 import uuid
 import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -17,13 +25,12 @@ class ReviewSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['user']
 
-    
 class CustomUserCreateSerializer(UserCreateSerializer):
     created_at = serializers.DateTimeField(format="%d.%m.%Y %H:%M", required=False)
 
     class Meta(UserCreateSerializer.Meta):
         model = CustomUser
-        fields = ('id', 'avatar', 'email', 'first_name', 'last_name', 'password', 'current_tariff', 'request_quantity', 'is_active', 'is_staff', 'created_at')
+        fields = ('id', 'avatar', 'email', 'balance', 'first_name', 'last_name', 'password', 'current_tariff', 'request_quantity', 'is_active', 'is_staff', 'created_at')
 
     def create(self, validated_data):
         referral_code = self.initial_data.get('referral_code')
@@ -137,3 +144,40 @@ class CustomUserUpdateSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+
+class TicketSerializer(serializers.ModelSerializer):
+    user_first_name = serializers.CharField(source='user.first_name', read_only=True)
+    user_last_name = serializers.CharField(source='user.last_name', read_only=True)
+    class Meta:
+        model = Ticket
+        fields = ['id', 'user', 'subject', 'user_first_name', 'user_last_name', 'text', 'is_answered']
+        read_only_fields = ['user']
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        return Ticket.objects.create(user=user, **validated_data)
+    
+class TicketAnswerSerializer(serializers.ModelSerializer):
+    user_first_name = serializers.CharField(source='user.first_name', read_only=True)
+    user_last_name = serializers.CharField(source='user.last_name', read_only=True)
+
+    class Meta:
+        model = TicketAnswer
+        fields = ('id', 'ticket', 'user', 'text', 'user_first_name', 'user_last_name', 'created_at')
+        read_only_fields = ['user']
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        return TicketAnswer.objects.create(user=user, **validated_data)
+
+class TicketWithAnswersSerializer(serializers.ModelSerializer):
+    answers = TicketAnswerSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Ticket
+        fields = ('id', 'user', 'subject', 'text', 'is_answered', 'answers')
+
+class GetUserInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'first_name', 'last_name', 'avatar', 'email', 'balance')
