@@ -30,6 +30,7 @@ const AvatarUpload = ({selectedImage, onClose}) => {
          
         // Send a PATCH request to update the user's avatar on the server
         UpdateUserInfo({avatar: file, token: authTokens.access, updateUser: updateUser})
+        onClose()
       }, 'image/png', 1.0);
     }
   };

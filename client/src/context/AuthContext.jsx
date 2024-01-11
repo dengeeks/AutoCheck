@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-import getUserInfoRequest from "../api/User/getUserInfoRequest";
 
 
 const AuthContext = createContext()
@@ -121,8 +120,9 @@ export const AuthProvider = ({children}) => {
         const interval = setInterval(() => {
             if (authTokens) {
                 updateToken();
+                updateUserInfo()
             }
-        }, (1000 * 60) * 14);
+        }, (1000 * 60) * 13);
 
         return () => clearInterval(interval);
     // eslint-disable-next-line
@@ -132,6 +132,7 @@ export const AuthProvider = ({children}) => {
         if (!userData) {
             getUserInfo();
         }
+        // eslint-disable-next-line
     }, [authTokens]);
 
     return(

@@ -12,7 +12,7 @@ const getUserInfoRequest = ({ setData, token, logoutUser }) => {
     })
     .then((response) => {
         const userInfo = response.data.results[0];
-        setUserData(userInfo);
+        setData(userInfo);
         localStorage.setItem('userData', JSON.stringify(userInfo));
     })
     .catch(error => {
