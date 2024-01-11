@@ -101,14 +101,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-
-        token['avatar'] = user.avatar.url
-        token['first_name'] = user.first_name
-        token['last_name'] = user.last_name
-        token['email'] = user.email
-        token['request_quantity'] = user.request_quantity
-        token['is_staff'] = user.is_staff
-        token['is_blocked'] = user.is_blocked
+    
         return token
 
 class DepartmentSerializer(serializers.ModelSerializer):
@@ -180,4 +173,4 @@ class TicketWithAnswersSerializer(serializers.ModelSerializer):
 class GetUserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('id', 'first_name', 'last_name', 'avatar', 'email', 'balance')
+        fields = ('id', 'first_name', 'last_name', 'avatar', 'email', 'balance', 'is_blocked', 'is_staff')

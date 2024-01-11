@@ -16,18 +16,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AuthContext from '../../context/AuthContext';
 import HeaderReportForm from '../../components/HeaderReportForm/HeaderReportForm';
-import getUserInfoRequest from '../../api/User/getUserInfoRequest';
 import './Header.css'
 
 
 const Header = () => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
-  const {authTokens} = useContext(AuthContext)
   const {user, logoutUser} = useContext(AuthContext)
-  const [userData, setUserData] = useState(null);
-
-  console.log(userData)
 
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,25 +31,6 @@ const Header = () => {
   const closeMenu = () => {
     setAnchorEl(null);
   };
-
-  useEffect(() => {
-    const storedUserData = localStorage.getItem('user_data');
-
-    if (storedUserData) {
-      setUserData(JSON.parse(storedUserData));
-    } else if (authTokens) {
-      getUserInfoRequest({
-        setData: (userData) => {
-          setUserData(userData);
-
-          // Обновляем информацию в localStorage после успешного запроса
-          localStorage.setItem('user_data', JSON.stringify(userData));
-        },
-        token: authTokens.access,
-      });
-    }
-  }, [authTokens]);
-
 
   useEffect(() => {
     if (user?.is_blocked) {
@@ -146,9 +122,18 @@ const Header = () => {
           {user ?
             <>
               <Link to='/user-profile' style={{textDecoration: 'none'}}>
-                <Typography className="header-link">
-                  {userData?.first_name} {userData?.last_name}
-                </Typography>
+                <Box className='header-user-container'>
+                  <img 
+                    src={user?.avatar}
+                    alt="avatar" 
+                    width={50}
+                    className='header-user-avatar user-avatar-border'
+                  />
+                  <Typography className="header-username">
+                    {user?.first_name}
+                  </Typography>
+                </Box>
+
               </Link>
 
               <LogoutIcon onClick={logoutUser} />

@@ -84,6 +84,17 @@
     margin-left: 20px!important;
 }
 
+.profile-sidebar-username {
+    width: 105px;
+    overflow: hidden;
+    word-wrap: break-word;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+    margin-left: 20px!important;
+}
+
 .profile-user-account .profile-user-account-price {
     font-family: 'Ysabeau Infant', sans-serif!important;
     font-weight: 700!important;

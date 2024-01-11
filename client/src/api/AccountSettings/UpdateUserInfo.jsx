@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 
 export const UpdateUserInfo = ({ first_name, last_name, avatar, email, password, token, updateUser }) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
-    const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
 
     const requestData = {
         first_name: first_name,
@@ -24,24 +23,9 @@ export const UpdateUserInfo = ({ first_name, last_name, avatar, email, password,
             'Authorization': `Bearer ${token}`,
         }
     })
-    .then((response) => {
-        if (response.data.avatar.startsWith(BASE_URL_WITHOUT_PREFIX)) {
-            const user_avatar = response.data.avatar.substring(BASE_URL_WITHOUT_PREFIX.length);
-            updateUser({
-                first_name: response.data.first_name,
-                last_name: response.data.last_name,
-                email: response.data.email,
-                avatar: user_avatar,
-            })
-        } else {
-            updateUser({
-                first_name: response.data.first_name,
-                last_name: response.data.last_name,
-                email: response.data.email,
-                avatar: response.data.avatar,
-            })
-        }
+    .then((response) => {        
         toast.success('Ваш профиль успешно изменен!');
+        updateUser()
     })
     .catch(error => {
         console.log(error)

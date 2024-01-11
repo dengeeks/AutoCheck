@@ -9,7 +9,8 @@ from .apps import BillingConfig
 def create_payment_settings(sender, **kwargs):
     ''' After migrations, create a commission setting object if it doesn't exist. '''
     if sender.name == BillingConfig.name:
-        PaymentSettings.objects.get_or_create() 
+        if not PaymentSettings.objects.exists():
+            PaymentSettings.objects.create()
 
 @receiver(pre_save, sender=PaymentSettings)
 def limit_to_one_instance(sender, instance, **kwargs):

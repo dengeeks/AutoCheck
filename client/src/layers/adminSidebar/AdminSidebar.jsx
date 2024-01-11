@@ -24,7 +24,9 @@ import NotAllowedPage from '../../pages/Errors/NotAllowed/NotAllowedPage';
 
 
 const AdminSidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(
+    localStorage.getItem('isAdminSidebarOpen') === 'true' || false
+  );
   const [department, setDepartment] = useState([])
   const {authTokens, user} = useContext(AuthContext)
 
@@ -36,6 +38,10 @@ const AdminSidebar = () => {
         getDepartment({ setData: setDepartment, token: authTokens.access });
     }
   }, [authTokens]);
+
+  useEffect(() => {
+    localStorage.setItem('isAdminSidebarOpen', isOpen);
+  }, [isOpen]);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);

@@ -10,7 +10,7 @@ import Loader from "../../../components/Loader/Loader";
 
 
 const AccountSettings = () => {    
-    const {user, logoutUser} = useContext(AuthContext)
+    const {authTokens, user, logoutUser, updateUser } = useContext(AuthContext)
     const [editedUser, setEditedUser] = useState({first_name: '', last_name: '', email: ''})
     const [newAvatar, setNewAvatar] = useState()
     const [newPassword, setNewPassword] = useState({password: '', password1: ''})
@@ -21,8 +21,6 @@ const AccountSettings = () => {
         password: ''
     })
     const avatarInputRef = useRef(null);
-    const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
-    const {authTokens, updateUser} = useContext(AuthContext)
 
     useEffect(() => {
         setEditedUser({...user})
@@ -64,7 +62,7 @@ const AccountSettings = () => {
                     email: editedUser.email,
                     password: newPassword.password,
                     token: authTokens.access,
-                    updateUser: updateUser
+                    updateUser: updateUser,
                 })
             }
         }
@@ -89,7 +87,7 @@ const AccountSettings = () => {
                 </Typography>
                 <Box>
                     <img 
-                        src={`${BASE_URL_WITHOUT_PREFIX}${user?.avatar}`} 
+                        src={user?.avatar} 
                         className='profile-settings-avatar-img user-avatar-border'
                         alt="avatar" 
                         onClick={() => handleAttachFileClick()}

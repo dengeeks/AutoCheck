@@ -131,7 +131,7 @@ class ReferralsGetView(APIView):
 class CustomUserUpdateView(generics.UpdateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserUpdateSerializer
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_object(self):
         return self.request.user

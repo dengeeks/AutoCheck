@@ -6,7 +6,7 @@ import uuid
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
-    avatar = models.ImageField(default="users/avatar/default-avatar.png", upload_to="users/avatar/", blank=True, null=True)
+    avatar = models.ImageField(default="users/avatar/default-avatar.png", upload_to="users/avatar/")
     balance = models.DecimalField(default=0, max_digits=10, decimal_places=2)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -32,6 +32,9 @@ class UserBlock(models.Model):
     user = models.OneToOneField(to=CustomUser, on_delete=models.CASCADE)
     blocked_until = models.DateTimeField()
     block_reason = models.TextField()
+
+    def __str__(self):
+        return f'User ID: {self.user.id}, Blocked until {self.blocked_until}'
 
 
 class TariffPlan(models.Model):

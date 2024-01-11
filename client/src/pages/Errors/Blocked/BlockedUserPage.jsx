@@ -13,12 +13,9 @@ const BlockedUserPage = () => {
 
     useEffect(() => {
         if (user) {
-            console.log(user.user_id)
-            getBlockedUserInfo({id: user.user_id, setData: setBlockInfo, logout: logoutUser})
+            getBlockedUserInfo({id: user.id, setData: setBlockInfo, logout: logoutUser})
         }
     }, [user, logoutUser])
-
-    console.log(blockInfo)
 
     return(
         <Box className='blocked-page-container'>

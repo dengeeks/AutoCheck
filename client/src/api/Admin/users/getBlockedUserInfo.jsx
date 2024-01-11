@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 
 export const getBlockedUserInfo = ({ id, setData, logout }) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
-    console.log(id, 'ID')
     return(
         axios.get(`${BASE_URL}/admin-panel/block-user/${id}/`)
         .then((response) => {

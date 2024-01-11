@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, NavLink, Outlet, Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
-import { Box, List, ListItem, Typography } from '@mui/material';
+import { Box, List, ListItem, Typography, Tooltip } from '@mui/material';
 
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import RestoreIcon from '@mui/icons-material/Restore';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import PasswordIcon from '@mui/icons-material/Password';
 import LogoutIcon from '@mui/icons-material/Logout';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -18,18 +17,21 @@ import './ProfileSidebar.css';
 
 
 const ProfileSidebar = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(
+        localStorage.getItem('isSidebarOpen') === 'true' || false
+      );
     const {user, logoutUser} = useContext(AuthContext)
-    const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
     const navigate = useNavigate()
 
     useEffect(() => {
         if (!user) {
             navigate('/login')
-           
         }
-        handleNavbarClose()
     }, [user, navigate])
+
+    useEffect(() => {
+        localStorage.setItem('isSidebarOpen', isSidebarOpen);
+      }, [isSidebarOpen]);
 
     const handleNavbarOpen = () => {
         setIsSidebarOpen(true)
@@ -44,7 +46,7 @@ const ProfileSidebar = () => {
         {isSidebarOpen && (
              <div
                 className="background-overlay"
-                onClick={handleNavbarClose}
+                onClick={handleNavbarClose} 
             />
          )}
         <Box className={`profile-sidebar-container ${isSidebarOpen ? 'profile-sidebar-open' : 'profile-sidebar-closed'}`}>
@@ -54,15 +56,19 @@ const ProfileSidebar = () => {
                         className={`${isSidebarOpen ? 'profile-sidebar-header': 'profile-sidebar-header-closed'}`} 
                         sx={{ display: 'flex', flexDirection: 'row' }}
                     >
-                        <img 
-                            src={`${BASE_URL_WITHOUT_PREFIX}${user?.avatar}`} 
-                            alt="Аватарка" 
-                            className={`user-avatar-border ${isSidebarOpen ? 'profile-user-avatar' : 'profile-user-avatar-closed'}`} 
-                        />
+                        <Link to='/user-profile'>                        
+                            <img 
+                                src={user?.avatar} 
+                                alt="Аватарка" 
+                                className={`user-avatar-border ${isSidebarOpen ? 'profile-user-avatar' : 'profile-user-avatar-closed'}`} 
+                            />
+                        </Link>
                         {isSidebarOpen && (
                             <Box>
-                                <Typography className='profile-user-account'>Баланс: <span className='profile-user-account-price'>0.00₽</span></Typography>
-                                <Typography className='profile-user-account'>{user?.first_name} {user?.last_name}</Typography>
+                                <Typography className='profile-user-account'>Баланс: <span className='profile-user-account-price'>{user?.balance}₽</span></Typography>
+                                <Tooltip title={`${user?.first_name} ${user?.last_name}`}>
+                                    <Typography className='profile-sidebar-username'>{user?.first_name} {user?.last_name}</Typography>
+                                </Tooltip>
                             </Box>
                         )}
 
@@ -128,12 +134,6 @@ const ProfileSidebar = () => {
                     <ListItem className='profile-sidebar-item'>
                         <QuestionMarkIcon />
                         <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Вопросы и ответы</Typography>
-                    </ListItem>
-                </NavLink>
-                <NavLink to='/forget-password' style={{ color: '#000', textDecoration: 'none' }}>
-                    <ListItem className='profile-sidebar-item'>
-                        <PasswordIcon />
-                        <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Сменить пароль</Typography>
                     </ListItem>
                 </NavLink>
                 <ListItem className='profile-sidebar-item' onClick={logoutUser}>

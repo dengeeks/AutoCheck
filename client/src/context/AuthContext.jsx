@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import getUserInfoRequest from "../api/User/getUserInfoRequest";
 
 
 const AuthContext = createContext()
@@ -12,18 +12,12 @@ export default AuthContext
 
 export const AuthProvider = ({children}) => {
     const [authTokens, setAuthTokens] = useState(localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
-    const [user, setUser] = useState(localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')) : null)
+    const [userData, setUserData] = useState(localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : null);
     const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-          setUser(JSON.parse(storedUser));
-        }
-      }, []);
 
     const loginUser = ({ email, password }) => {
         axios.post(`${BASE_URL}/token/`, {
@@ -37,7 +31,6 @@ export const AuthProvider = ({children}) => {
         .then(response => {
             const data = response.data;
             setAuthTokens(data)
-            setUser(jwtDecode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
             navigate('/')
         })
@@ -48,18 +41,21 @@ export const AuthProvider = ({children}) => {
                 toast.error('Произошла ошибка при входе. Пожалуйста, попробуйте еще раз.');
             } else {
                 toast.error('Произошла непредвиденная ошибка при входе.');
+                console.log(error)
             }
         });
     };
 
     const logoutUser = () => {
         setAuthTokens(null)
-        setUser(null)
-        localStorage.removeItem('user')
         localStorage.removeItem('authTokens')
+
+        setUserData(null)
+        localStorage.removeItem('userData')
+
         navigate('/login')
     }
-      
+
     const updateToken = () => {
         axios.post(`${BASE_URL}/token/refresh/`, {
             refresh: authTokens?.refresh
@@ -68,10 +64,9 @@ export const AuthProvider = ({children}) => {
                 'Content-Type': 'application/json',
             },
         })
-        .then((response) => {
+        .then((response) => {            
             const data = response.data
             setAuthTokens(data)
-            setUser(jwtDecode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
         })
         .catch(() => {
@@ -82,37 +77,62 @@ export const AuthProvider = ({children}) => {
         }
     }
 
-    const updateUser = (updatedData) => {
-        console.log('update user updatedData: ', updatedData)
-        setUser((prevUser) => {
-          const newUser = { ...prevUser, ...updatedData };
-          localStorage.setItem('user', JSON.stringify(newUser));
-          return newUser;
-        });
+    
+    const getUserInfo = () => {
+        if (authTokens) {
+            axios.get(`${BASE_URL}/get-user-info/`, {
+                headers: {
+                    'Authorization': `Bearer ${authTokens.access}`
+                }
+            })
+            .then((response) => {
+                const userInfo = response.data.results[0];
+                setUserData(userInfo);
+                localStorage.setItem('userData', JSON.stringify(userInfo));
+            })
+            .catch(error => {
+                if (error.response.status === 401) {
+                    logoutUser()
+                }
+                console.log(error, error.status)
+                toast.error('Не удалось получить информацию пользователя')
+            });
+        }
+    };
+
+    const updateUserInfo = () => {
+        // Вызываем getUserInfo для обновления данных пользователя
+        getUserInfo();
     };
 
     const contextData = {
-        user: user,
         authTokens: authTokens,
+        user: userData,
         loginUser: loginUser,
         logoutUser: logoutUser,
-        updateUser, updateUser,
+        updateUser: updateUserInfo,
     }
-    console.log(user)
-
+ 
     useEffect(() => {
         if (loading) {
-            updateToken()
+            updateToken();
         }
 
         const interval = setInterval(() => {
             if (authTokens) {
-                updateToken()
+                updateToken();
             }
-        }, (1000 * 60) * 14)
-        return ()=> clearInterval(interval)
+        }, (1000 * 60) * 14);
+
+        return () => clearInterval(interval);
     // eslint-disable-next-line
-    }, [authTokens, loading])
+    }, [authTokens, userData, loading]);
+
+    useEffect(() => {
+        if (!userData) {
+            getUserInfo();
+        }
+    }, [authTokens]);
 
     return(
         <AuthContext.Provider value={contextData}>

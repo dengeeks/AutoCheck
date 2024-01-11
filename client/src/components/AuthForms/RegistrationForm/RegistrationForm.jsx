@@ -1,11 +1,10 @@
 import { Box, TextField, Typography, Button } from "@mui/material"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import PasswordField from "../PasswordField/PasswordField"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 import '../AuthFormStyle.css'
 import { validateRegistrationForm } from "./RegistrationFormValidate"
 import { registrationRequest } from "../../../api/Auth/registrationRequest"
-import { useNavigate } from 'react-router-dom'
 
 
 const RegistrationForm = () => {
@@ -43,9 +42,11 @@ const RegistrationForm = () => {
         }
     };
 
-    if (isSuccess) {
-        navigate('/login')
-    }
+    useEffect(() => {
+        if (isSuccess) {
+            navigate('/login')
+        }
+    }, [isSuccess, navigate])
 
     return(
         <Box className='auth-form-container'>
@@ -57,7 +58,7 @@ const RegistrationForm = () => {
                     size='small'
                     className='auth-field'
                     label='Имя'
-                    error={error.firstName}
+                    error={!!error.firstName}
                     helperText={error.firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                 />
@@ -65,7 +66,7 @@ const RegistrationForm = () => {
                     size='small'
                     className='auth-field'
                     label='Фамилия'
-                    error={error.lastName}
+                    error={!!error.lastName}
                     helperText={error.lastName}
                     onChange={(e) => setLastName(e.target.value)}
                 />
@@ -73,18 +74,18 @@ const RegistrationForm = () => {
                     size='small'
                     className='auth-field'
                     label='Почта'
-                    error={error.email}
+                    error={!!error.email}
                     helperText={error.email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <PasswordField 
                     label='Пароль'
-                    error={error.password}
+                    error={!!error.password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <PasswordField
                     label='Повтор пароля'
-                    error={error.password}
+                    error={!!error.password}
                     onChange={(e) => setPassword1(e.target.value)}
                 />
                 

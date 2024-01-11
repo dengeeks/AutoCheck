@@ -4,9 +4,30 @@
     font-weight: 700!important;
     margin-right: 15px!important;
     font-size: 20px!important;
+    color: white;
+    text-decoration: none;
+}
+
+.header-user-container {
+    text-align: center;
+    margin-right: 20px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.header-username {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+    font-size: 14px!important;
     cursor: pointer;
     color: white;
     text-decoration: none;
+    margin-top: -7px!important;
+}
+
+.header-user-avatar {
+    width: 40px;
+    border-radius: 50%;
 }
 
 .header-text-field label {
