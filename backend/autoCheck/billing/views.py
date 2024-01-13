@@ -9,16 +9,16 @@ from rest_framework.status import (
         HTTP_400_BAD_REQUEST, 
         HTTP_201_CREATED,
         HTTP_404_NOT_FOUND,
-        HTTP_500_INTERNAL_SERVER_ERROR,
     )
 from .models import Transaction, PaymentSettings
 from .serializers import PaymentSettingsSerializer
 from .permissions import IsAdminOrReadOnly
 from main.models import CustomUser
-from django.shortcuts import get_object_or_404
 from .services import create_yookassa_payment, update_user_balance, payment_commission
 from django.conf import settings
-from yookassa import Configuration, Payment
+from yookassa import Configuration
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 import logging
 
 
@@ -113,7 +113,15 @@ class YookassaWebhookView(APIView):
                     )
 
                     update_user_balance(user_id=user_id, amount=initial_amount)
-                    logger.debug(f'TransactionID: {transaction_id}, UserTransactionID: {user_transaction_id} IS UPDATED')
+                    logger.debug(f'{user_id}, asjdfla;skdj;flasdj')
+                    channel_layer = get_channel_layer()
+                    async_to_sync(channel_layer.group_send)(
+                        f"user_{user_id}",
+                        {
+                            'type': 'send.message',
+                            'message': f'+{initial_amount}'
+                        }
+                    )
 
         elif event_type == 'payment.canceled':
             try:

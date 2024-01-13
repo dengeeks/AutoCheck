@@ -14,6 +14,9 @@ const PaymentModal = ({open, onClose}) => {
     const navigate = useNavigate()  
     const {authTokens} = useContext(AuthContext)
 
+    const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
+
+
     useEffect(() => {
         console.log(url)
         if (url) {
@@ -30,7 +33,7 @@ const PaymentModal = ({open, onClose}) => {
 
     const handleCreatePayment = (selectedAmount) => {
         if (typeof selectedAmount === "number" && selectedAmount !== 0) {
-            const return_url = 'http://127.0.0.1:3000/';
+            const return_url = BASE_URL_WITHOUT_PREFIX;
             createPaymentRequest({
                 amount: selectedAmount, 
                 return_url: return_url, 
@@ -39,6 +42,7 @@ const PaymentModal = ({open, onClose}) => {
             });
             setAmount(0);
             setCustomAmount("");
+            onClose()
         }
     };
 

@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_json_api',
     'djoser',
+    'channels',
     'main.apps.MainConfig',
     'admin_panel.apps.AdminPanelConfig',
     'billing.apps.BillingConfig',
@@ -111,6 +112,17 @@ DJOSER = {
     'TOKEN_MODEL': None,
     'SERIALIZERS': {
         'user_create': 'main.serializers.CustomUserCreateSerializer',
+    },
+}
+
+ASGI_APPLICATION = "config.routing.application"
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
     },
 }
 

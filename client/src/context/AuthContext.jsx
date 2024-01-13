@@ -12,7 +12,7 @@ export default AuthContext
 export const AuthProvider = ({children}) => {
     const [authTokens, setAuthTokens] = useState(localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     const [userData, setUserData] = useState(localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : null);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const navigate = useNavigate()
     const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -90,7 +90,7 @@ export const AuthProvider = ({children}) => {
                 localStorage.setItem('userData', JSON.stringify(userInfo));
             })
             .catch(error => {
-                if (error.response.status === 401) {
+                if (error?.response?.status === 401) {
                     logoutUser()
                 }
                 console.log(error, error.status)

@@ -14,11 +14,23 @@ const UserBalance = () => {
         setIsModalOpen(false)
     }
 
+    const formatNumberWithSpaces = (number) => {
+        // Округляем число до двух знаков после точки
+        const roundedNumber = Number(number).toFixed(0);
+      
+        // Добавляем разделители для тысяч
+        const numberWithSpaces = roundedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+      
+        return numberWithSpaces;
+    };
+
+    const formattedBalance = formatNumberWithSpaces(user?.balance);
+
     return(
         <Container sx={{ minHeight: '100vh' }}>
             <PaymentModal open={isModalOpen} onClose={handleModalClose} />
             <Box className='user-balance-container'>
-                <Typography className='user-balance-title'>Ваш баланс: {user?.balance}₽</Typography>
+                <Typography className='user-balance-title'>Ваш баланс: {formattedBalance}₽</Typography>
                 <Box sx={{ paddingLeft: '25px' }}>
                     <Button
                         className='refill-balance-btn' 

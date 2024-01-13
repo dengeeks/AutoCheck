@@ -16,6 +16,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AuthContext from '../../context/AuthContext';
 import HeaderReportForm from '../../components/HeaderReportForm/HeaderReportForm';
+import NotificationWebSocket from '../../api/WebSockets/NotificationWebSocket';
 import './Header.css'
 
 
@@ -53,7 +54,15 @@ const Header = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{ background: '#498EDF', marginBottom: '25px !important'}}>
+      <AppBar 
+        position="fixed" 
+        sx={{ 
+          background: '#498EDF', 
+          marginBottom: '25px !important',
+          paddingTop: '2px',
+          paddingBottom: '2px'
+        }}
+      >
         <Toolbar>
           <Typography component="div" sx={{ flexGrow: 1 }}>
             <Link to='/'> 
@@ -121,6 +130,7 @@ const Header = () => {
           {/* Ссылки для десктопной версии */}
           {user ?
             <>
+              <NotificationWebSocket user_id={user.id} />
               <Link to='/user-profile' style={{textDecoration: 'none'}}>
                 <Box className='header-user-container'>
                   <img 
