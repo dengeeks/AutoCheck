@@ -37,7 +37,7 @@ const ReviewPage = () => {
         )
     }
     return(
-        <Container>
+        <Container sx={{ paddingTop: '25px' }}>
             <Grid item container sx={{ marginTop: '25px', marginBottom: '20vh' }}>
                 <Grid container xs={12} sx={{ marginBottom: '70px' }} className="review-page-header">
                     <Grid item xs={6} sx={{ textAlign: 'center' }}>

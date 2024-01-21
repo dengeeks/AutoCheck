@@ -50,7 +50,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,7 +75,6 @@ DATABASES = {
         'HOST': os.getenv("DB_HOST"),
     }
 }
-
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -112,6 +111,10 @@ DJOSER = {
     'TOKEN_MODEL': None,
     'SERIALIZERS': {
         'user_create': 'main.serializers.CustomUserCreateSerializer',
+    },
+    'EMAIL': {
+        'activation': 'config.email.ActivationEmail',
+        'password_reset': 'config.email.PasswordResetEmail',
     },
 }
 

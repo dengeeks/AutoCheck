@@ -4,7 +4,7 @@ import FeedbackForm from "../components/FeedbackForm/FeedbackForm"
 
 const FeedbackPage = () => {
     return(
-        <Box sx={{ margin: '0 auto' }}>
+        <Box sx={{ margin: '0 auto', paddingTop: '25px' }}>
             <FeedbackForm />
         </Box>
     )

@@ -14,7 +14,7 @@ export const sendFeedbackEmailApi = ({ email_from, subject, message, files, toke
         formData.append(`files[${index}]`, file);
     });
 
-    axios.post(`${BASE_URL}/send-email/`, formData, {
+    axios.post(`${BASE_URL}/send-feedback-email/`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${token}`, // Set the correct content type

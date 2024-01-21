@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Transaction, PaymentSettings
+from .models import Transaction, PaymentSetting
 
 
 class TransactionSerializer(serializers.ModelSerializer):
@@ -7,7 +7,7 @@ class TransactionSerializer(serializers.ModelSerializer):
         model = Transaction
         fields = ['user', 'initial_amount', 'commission_amount', 'timestamp']
 
-class PaymentSettingsSerializer(serializers.ModelSerializer):
+class PaymentSettingSerializer(serializers.ModelSerializer):
     class Meta:
-        model = PaymentSettings
+        model = PaymentSetting
         fields = '__all__'

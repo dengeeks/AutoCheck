@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./EmailActivation.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Template</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .content-info {
+          margin-top: 15px;
+        }
+        #header {
+            background-color: #498EDF;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #header a {
+            color: #ffffff;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        #header-logo-container {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            margin-left: 5px;
+        }
+
+        #email-header-logo {
+            width: 135px;
+        }
+        #header-links-container {            
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        #email-header-link {
+            margin-top:15px;
+            margin-left: 15px;
+        }
+
+        #header-logo-container {
+            margin-right: auto;
+        }
+
+        #content {
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        #content a {
+            color: #498EDF;
+        }
+        #button {
+            margin-top: 20px;
+            display: inline-block;
+            background-color: #498EDF;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #social-networks {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            background: #f0f0f0;
+            width: 100%;
+            margin: 25px auto;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            border-radius: 7px;
+        }
+        #social-network-item {
+            text-align: center;
+            margin: 0 auto;
+        }
+        #social-network-title {
+            font-weight: bold;
+            text-align: center;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        #social-network-footer {
+            display: flex;
+            justify-content: row;
+        }
+        #about-us-container {
+            display: flex;
+            justify-content: space-between;
+            background: linear-gradient(180deg, #F4F9FF 0%, #F4F9FF 0.01%, #CCE4FF 100%);
+            border-radius: 7px;
+            width: 100%;
+            margin: 20px auto;
+        }
+        #about-us-item {
+            margin-left: 15px;
+            width: 30%;
+            margin-right: 15px;
+        }
+        #about-us-item img {
+            width: 100px;
+        }
+        #about-us-item h4 {
+            margin: 0;
+        }
+        #about-us-item p {            
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div id="header-logo-container">
+            <img
+                src="https://i.ibb.co/hy8GFVb/logo.png"
+                alt="Logo"
+                id="email-header-logo"
+            > <!-- src="{{ protocol }}://{{ domain }}/api/media/logo.png" -->
+        </div>
+        <div id="header-links-container">
+            <a id="email-header-link" href="{{ protocol }}://{{ domain }}/">
+                Тарифы
+            </a>                
+            <a id="email-header-link" href="{{ protocol }}://{{ domain }}/feedback">
+                Поддержка
+            </a>                
+            <a id="email-header-link" href="{{ protocol }}://{{ domain }}/">
+                Отзывы
+            </a>          
+        </div>
+    </div>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="about-us-container">
+        <div id="about-us-item">
+            <div style="text-align: center;">
+                <img 
+                    src="https://i.ibb.co/q0ScQ6k/photo-6.png" 
+                    alt="Изображение"
+                    width="100px"
+                >
+            </div>
+            <div style="text-align: center;">
+                <h4>Данные обновляются 24/7</h4>
+                <p>Вы всегда будете получать самую актуальную информацию</p>                
+            </div>
+        </div>
+        <div id="about-us-item">
+            <div style="text-align: center;">
+                <img 
+                    src="https://i.ibb.co/Hd0xcyM/cloud-318-462259.png" 
+                    alt="Изображение"
+                    width="100px"
+                >
+            </div>
+            <div style="text-align: center;">
+                <h4>Доступные цены</h4>
+                <p>Наши расценки на подписки вас приятно удивят</p>                
+            </div>
+        </div>
+        <div id="about-us-item">            
+            <div style="text-align: center;">
+                <img 
+                    src="https://i.ibb.co/bvXnjVT/checklist.png" 
+                    alt="Изображение"
+                    width="100px"
+                >
+            </div>
+            <div style="text-align: center;">
+                <h4>Проверка по 15+ пунктам</h4>
+                <p>Залоги, ограничения, розыски, ДТП, фото, страховые, лизинг, техосмотры, такси и много другое...</p>                
+            </div>
+        </div>
+    </div>
+    <div id="social-networks">
+        {% for social_network in social_networks|slice:":4" %}
+            <div id="social-network-item">
+                <a href="{{ social_network.link }}" style="text-decoration: none;">
+                    <div id="social-network-header">
+                        <img 
+                            src="https://upload.wikimedia.org/wikipedia/commons/3/31/MM_QRcode.png?20120720164609"
+                            id="social-network-item"
+                            alt="QR Code соц сети"
+                            width="65px"
+                        >                    
+                    </div>
+                    <div id="social-network-footer">
+                        <img
+                            src="https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-1024.png"
+                            alt="Лого соц сети"
+                            width="20px"
+                            style="margin-right: 5px;"
+                        >
+                        <p id="social-network-title">
+                            {{ social_network.social_network }}
+                        </p>    
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+<!-- src="{{ protocol }}://{{ domain }}/{{ social_network.qr_code.url }}" -->

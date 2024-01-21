@@ -114,7 +114,10 @@ export const AuthProvider = ({children}) => {
  
     useEffect(() => {
         if (loading) {
-            updateToken();
+            if (authTokens) {
+                updateToken();
+                updateUserInfo()
+            }
         }
 
         const interval = setInterval(() => {

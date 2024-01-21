@@ -1,4 +1,14 @@
-from rest_framework import viewsets, views, generics
+from datetime import datetime, timezone, timedelta
+
+from django.http import Http404
+from django.conf import settings
+from django.shortcuts import get_object_or_404
+from django.core.mail import send_mail
+
+from rest_framework import generics, status, viewsets, views
+from rest_framework.response import Response
+from rest_framework.permissions import IsAdminUser
+
 from main.models import (
     CustomUser, 
     TariffPlan, 
@@ -17,6 +27,7 @@ from main.serializers import (
     DepartmentSerializer,
     TicketSerializer,
 )
+
 from .serializers import (
     AdminUserSerializer,
     AdminTariffPlansSerializer,
@@ -26,16 +37,10 @@ from .serializers import (
     CustomBlockedUserSerializer,
     ReferralUserSerializer
 )
-from rest_framework.permissions import IsAdminUser
-from rest_framework import status
-from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
-from datetime import datetime, timezone, timedelta
-from django.contrib.auth.hashers import make_password
-from django.core.mail import send_mail
-from django.http import Http404
-from django.conf import settings
-from django.db.models import Q
+
+from billing.models import PaymentSetting
+from billing.serializers import PaymentSettingSerializer
+from billing.permissions import IsAdminOrReadOnly
 
 
 class AdminUsersViewSet(viewsets.ModelViewSet):
@@ -220,3 +225,19 @@ class TicketsView(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
     permission_classes = [IsAdminUser]
+
+class ChangePaymentSettings(views.APIView):
+    permission_classes = [IsAdminUser]
+    def put(self, request):
+        instance = PaymentSetting.objects.first()
+
+        if instance:
+            serializer = PaymentSettingSerializer(instance, data=request.data)
+        else:
+            serializer = PaymentSettingSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

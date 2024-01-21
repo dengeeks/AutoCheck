@@ -84,13 +84,30 @@ const Header = () => {
             <HeaderReportForm />
           </Box>
           {/* Ссылки для десктопной версии */}
-          <Typography onClick={() => scrollToSection('tariff-plans')} className="header-link" sx={{ display: { xs: 'none', md: 'block' } }}>
+          <Typography 
+            onClick={() => navigate('/tariff-plans')} 
+            className="header-link" 
+            sx={{ display: { xs: 'none', md: 'block' } }}
+          >
             Тарифные планы
           </Typography>
-          <Typography onClick={() => scrollToSection('reviews')} className="header-link" sx={{ display: { xs: 'none', md: 'block' } }}>
+          <Typography 
+            onClick={() => scrollToSection('reviews')}
+            className="header-link"
+            sx={{ display: { xs: 'none', md: 'block' } }}
+          >
             Отзывы
           </Typography>
-
+          <Typography className="header-link" sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Link to='/faq' style={{ color: 'white', textDecoration: 'none' }}>
+              Ответы на вопросы
+            </Link>
+          </Typography>
+          <Typography className="header-link" sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Link to={user ? '/user-profile/ticket-system' : '/feedback'} style={{ color: 'white', textDecoration: 'none', marginRight: '25px' }}>
+              Помощь
+            </Link>
+          </Typography>
           {/* Popover для мобильной версии */}
           <Popover
             open={isMenuOpen}
@@ -106,20 +123,26 @@ const Header = () => {
             }}
           >
             <List>
-              <ListItem button onClick={() => scrollToSection('tariff-plans')}>
+              <ListItem button onClick={() => navigate('/tariff-plans')}>
                 <ListItemText primary="Тарифные планы" />
               </ListItem>
               <ListItem button onClick={() => scrollToSection('reviews')}>
                 <ListItemText primary="Отзывы" />
               </ListItem>
+              <ListItem button onClick={() => navigate('/faq')}>
+                <ListItemText primary="Ответы на вопросы" />
+              </ListItem>
+              <ListItem button onClick={() => navigate('/feedback')}>
+                <ListItemText primary="Помощь" />
+              </ListItem>
 
-              <ListItem button onClick={() => scrollToSection('reviews')}> 
+              <ListItem button> 
                 <Link to='/registration' style={{textDecoration: 'none'}}>
                   <ListItemText sx={{ color: 'black', textDecoration: 'none' }} primary="Регистрация" />
                 </Link>
               </ListItem>
 
-              <ListItem button onClick={() => scrollToSection('reviews')}>
+              <ListItem button>
                 <Link to='/login' style={{textDecoration: 'none'}}>
                   <ListItemText sx={{ color: 'black', }} primary="Авторизация" />
                 </Link> 

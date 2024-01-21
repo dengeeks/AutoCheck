@@ -34,7 +34,11 @@ const LoginForm = () => {
                 error={!!error.email}
                 helperText={error.email} 
             />
-            <PasswordField label='Пароль' error={error.password} onChange={(e) => setPassword(e.target.value)} />
+            <PasswordField 
+                label='Пароль'
+                error={!!error.password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
 
             <Button className='auth-form-button' onClick={handleLoginSubmit}>Войти</Button>
             <Box sx={{ display: 'flex', flexDirection: 'row', marginTop: '5px', textAlign: 'center', justifyContent: 'center'}}>

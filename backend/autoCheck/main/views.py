@@ -34,7 +34,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class SendEmailView(APIView):
+class SendFeedbackEmailView(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     def post(self, request, *args, **kwargs):
         serializer = EmailSerializer(data=request.data)

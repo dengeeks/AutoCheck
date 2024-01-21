@@ -1,0 +1,10 @@
+{% extends './BaseEmail.html' %}
+
+{% block title %}Активация аккаунта{% endblock %}
+
+{% block content %}
+    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+    <p>Поздравляем! Ваш баланс был успешно пополнен!</p>
+    <p class='content-info'>На ваш баланс было зачислено {{ amount }}₽</p>
+    <p class='content-info'>На данный момент ваш баланс составляет {{ user.balance }}₽</p>
+{% endblock %}

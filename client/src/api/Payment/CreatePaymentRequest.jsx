@@ -16,10 +16,8 @@ export const createPaymentRequest = ({ amount, return_url, setData, token }) => 
     })
     .then((response) => {
         setData(response.data.payment_url)
-        localStorage.removeItem('user_data');
     })
     .catch(error => {
         toast.error('Не удалось перенаправить на страницу пополнения')
-        console.log(error)
     });
 }

@@ -33,6 +33,7 @@ const FormReviewModal = ({ open, onClose, setData }) => {
                     tokens: authTokens.access
                 })
                 onClose()
+                window.location.reload();
             }
         }
     }

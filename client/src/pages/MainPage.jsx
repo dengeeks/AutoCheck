@@ -3,13 +3,11 @@ import { useState, useEffect } from "react"
 import VideoAnimation from "../components/VideoAnimation/VideoAnimation"
 import CustomTextField from "../components/CustomTextField/CustomTextField"
 import ReviewCard from "../components/ReviewCard/ReviewCard"
-import PlanCard from "../components/PlanCard/PlanCard"
 import InfoInReport from "../components/InfoInReport/InfoInReport"
 import FAQ from "../components/FAQ/FAQ"
 import InfoContacts from "../components/InfoContacts/InfoContacts"
 import FormReviewModal from "../components/FormModal/FormReviewModal"
 import { getReviewsRequest } from "../api/getReviewsRequest"
-import { getAllTariffRequest } from "../api/getAllTariffRequest"
 import '../styles/MainPage.css'
 
 import { Autoplay, Scrollbar, Navigation } from 'swiper/modules';
@@ -20,19 +18,14 @@ import 'swiper/css/pagination';
 
 import InfoAboutCheckImage from "../media/images/InfoAboutCheck.png"
 import InfoInReportPNG from "../media/images/InfoInReport.png"
-import Speedometr1 from "../media/images/speedometr1.png"
-import Speedometr2 from "../media/images/speedometr2.png"
-import Speedometr3 from "../media/images/speedometr3.png"
-import Speedometr4 from "../media/images/speedometr4.png"
-import Speedometr5 from "../media/images/speedometr5.png"
 import FaqIcon from "../media/images/faq_icon1.png"
+import AllPlans from "../components/AllPlans/AllPlans"
 
 
 const MainPage = () => {
     const [isOpenModalForm, setIsOpenModalForm] = useState(false)
     const [slidesPerView, setSlidesPerView] = useState(4)
     const [reviews, setReviews] = useState([])
-    const [tariffPlans, setTariffPlans] = useState([])
 
     const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
 
@@ -58,18 +51,6 @@ const MainPage = () => {
           window.removeEventListener('resize', handleResize);
         };
     }, []);
-
-    useEffect(() => {
-        getAllTariffRequest({setData: setTariffPlans})
-    }, [])
-
-    const tariffColors = {
-        red: {color: 'd11e22', effectColor: 'rgba(255, 214, 214, 0.3)', image: Speedometr1},
-        orange: {color: 'f46522', effectColor: 'rgba(255, 246, 214, 0.3)', image: Speedometr2},
-        yellow: {color: 'fcbd4b', effectColor: 'rgba(255, 246, 214, 0.3)', image: Speedometr3},
-        blue: {color: '01a8ba', effectColor: 'rgba(214, 235, 255, 0.3)', image: Speedometr4},
-        green: {color: '029547', effectColor: 'rgba(214, 255, 218, 0.3)', image: Speedometr5},
-    };
 
     const handleClickFormModal = () => {
         setIsOpenModalForm(!isOpenModalForm)
@@ -100,22 +81,7 @@ const MainPage = () => {
                 <Typography className='tariff-plan-title'>Тарифные планы</Typography>
             </Box>
             <Grid id='tariff-plans' item container xs={12} md={12} lg={12} xl={12} sx={{ alignItems: 'center' }}>
-                {tariffPlans.map((tariff) => {
-                    const tariffColor = tariffColors[String(tariff?.color)];
-                    return(
-                        <Grid item xs={6} md={6} lg={2.4} xl={2.4} sx={{ margin: '0 auto' }} key={tariff.id}>
-                            <PlanCard 
-                                plan={tariff.name}
-                                color={tariffColor?.color}
-                                effectColor={tariffColor?.effectColor}
-                                discount={tariff.profit_percentage}
-                                quantity={tariff.request_quantity}
-                                price={tariff.price}
-                                image={tariffColor?.image} 
-                            />
-                        </Grid>
-                    )
-                })}            
+                <AllPlans />
             </Grid>
             <Grid item container xs={12} className="info-in-report-grid-container">
                 <Grid item xs={12} md={12} lg={6} lx={8}>
@@ -159,8 +125,7 @@ const MainPage = () => {
             <Box className='small-screen-faq-container'>
                 <img src={FaqIcon} className='small-screen-faq-img' alt="" />
             </Box>
-            <Grid item xs={12} md={8} xl={8} className='faq-grid-container'>
-                
+            <Grid item id='faq' xs={12} md={8} xl={8} className='faq-grid-container'>
                 <FAQ />
             </Grid>
             <Grid item xs={12} md={4} xl={4} className='faq-img-grid-container'>

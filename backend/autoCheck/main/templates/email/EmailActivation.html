@@ -1,0 +1,16 @@
+{% extends './BaseEmail.html' %}
+
+{% block title %}Активация аккаунта{% endblock %}
+
+{% block content %}
+    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+    <p>Поздравляем! Вы успешно зарегистрированы на сайте - <a href="{{ protocol }}://{{ domain }}">{{ domain }}</a></p>
+    <p class='content-info'>Для продолжения работы в системе требуется активация учетной записи</p>
+    <a
+        href="{{ protocol }}://{{ domain }}/{{ url }}"
+        id="button" 
+        style="color: #ffffff; text-decoration: none; cursor: pointer;"
+    >
+        Активировать
+    </a>
+{% endblock %}

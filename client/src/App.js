@@ -42,6 +42,8 @@ import AdminTicketAnswerPage from "./pages/AdminPanel/TicketSystem/TicketAnswerP
 
 import './styles/App.css'
 import PaymentSettings from "./pages/AdminPanel/PaymentSettings/PaymentSettings";
+import FAQPage from "./pages/FAQ/FAQPage";
+import TariffPage from "./pages/Tariff/TariffPage";
 
 
 function App() {
@@ -60,6 +62,8 @@ function App() {
           <Route path="/feedback" element={<FeedbackPage />} />
           <Route path="/review/:id" element={<ReviewPage />} />
           <Route path="/you-blocked" element={<BlockedUserPage />} />
+          <Route path="/tariff-plans" element={<TariffPage />} />
+          <Route path="/faq" element={<FAQPage />} />
           <Route path="/user-profile" element={<ProfileSidebar />}>
             <Route index element={<Profile />} />
             <Route path="referral-system" element={<ReferralSystem />}/>

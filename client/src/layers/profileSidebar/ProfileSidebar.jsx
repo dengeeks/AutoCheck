@@ -129,8 +129,7 @@ const ProfileSidebar = () => {
                         <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Настройки аккаунта</Typography>
                     </ListItem>
                 </NavLink>
-                <NavLink to='/' style={{ color: '#000', textDecoration: 'none' }}> 
-                {/*TODO add scroll to #faq */}
+                <NavLink to='/faq' style={{ color: '#000', textDecoration: 'none' }}> 
                     <ListItem className='profile-sidebar-item'>
                         <QuestionMarkIcon />
                         <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Вопросы и ответы</Typography>

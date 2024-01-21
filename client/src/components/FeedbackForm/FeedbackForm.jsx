@@ -65,14 +65,14 @@ const FeedbackForm = () => {
                 <TextField
                     className='feedback-form-field'
                     onChange={(e) => setEmailFrom(e.target.value)}
-                    error={error.emailFrom}
+                    error={!!error.emailFrom}
                     helperText={error.emailFrom}
                     label='Ваша электронная почта'
                 />
                 <TextField
                     className='feedback-form-field'
                     onChange={(e) => setSubject(e.target.value)}
-                    error={error.subject}
+                    error={!!error.subject}
                     helperText={error.subject}
                     label='Тема'
                 />
@@ -81,7 +81,7 @@ const FeedbackForm = () => {
                     rows={4}
                     className='feedback-form-field'
                     onChange={(e) => setMessage(e.target.value)}
-                    error={error.message}
+                    error={!!error.message}
                     helperText={error.message}
                     label='Сообщение'
                 />

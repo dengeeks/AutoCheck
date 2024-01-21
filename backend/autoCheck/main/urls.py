@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import (
     ReviewAPIViewset,
-    SendEmailView,
+    SendFeedbackEmailView,
     MyTokenObtainPairView,
     TariffPlanList,
     ContactListView,
@@ -38,7 +38,7 @@ urlpatterns = [
     path('get-all-tickets/', GetAllTickets.as_view()),
     path('get-user-info/', GetUserInfoView.as_view()),
     path('ticket-and-answer/<int:id>/', TicketAndAnswerView.as_view()),
-    path('send-email/', SendEmailView.as_view()),
+    path('send-feedback-email/', SendFeedbackEmailView.as_view()),
     path('update-user/', CustomUserUpdateView.as_view()),
     path('auth/logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair_view'),

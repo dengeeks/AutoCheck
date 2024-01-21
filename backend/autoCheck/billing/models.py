@@ -2,14 +2,16 @@ from django.db import models
 from django.conf import settings
 from .managers import PaymentSettingsManager
 
+
 class Transaction(models.Model):
-    TRANSACTION_STATUS = {
+    OPERATION_TYPE = {
         ('Withdraw', 'withdraw'),
         ('Payment', 'payment'),
+        ('Bonus', 'bonus'),
     }
-    transaction_id = models.UUIDField()
+    transaction_id = models.UUIDField(unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    operation_type = models.CharField(max_length=8)    
+    operation_type = models.CharField(max_length=8, choices=OPERATION_TYPE, blank=False)    
     initial_amount = models.DecimalField(default=0, max_digits=10, decimal_places=2) 
     commission_amount = models.DecimalField(default=0, max_digits=10, decimal_places=2) # price after commission calculation
     is_accepted = models.BooleanField(default=False)
@@ -19,7 +21,7 @@ class Transaction(models.Model):
     def __str__(self):
         return f'{self.user.first_name}: {self.initial_amount} {self.timestamp}'
 
-class PaymentSettings(models.Model):
+class PaymentSetting(models.Model):
     COMMISSION_STATUS = {
         ('user_side', 'user_side'),
         ('site_side', 'site_side'),
