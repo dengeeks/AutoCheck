@@ -124,11 +124,12 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [('redis')],
         },
     },
 }
 
+# Logging config
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -143,6 +144,7 @@ LOGGING = {
     },
 }
 
+# Email config
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = os.getenv("EMAIL_PORT")
@@ -150,8 +152,8 @@ EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
+# CORS config
 CORS_ORIGIN_ALLOW_ALL = True
-
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
     'http://localhost:3000'
@@ -181,6 +183,6 @@ MEDIA_URL = '/api/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Yookassa
+# Yookassa config
 YOOKASSA_SECRET_KEY=os.getenv("YOOKASSA_SECRET_KEY")
 YOOKASSA_SHOP_ID=os.getenv("YOOKASSA_SHOP_ID")

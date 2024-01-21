@@ -129,13 +129,12 @@
     <div id="header">
         <div id="header-logo-container">
             <img
-                src="https://i.ibb.co/hy8GFVb/logo.png"
+                src="{{ protocol }}://{{ domain }}/api/media/logo.png"
                 alt="Logo"
                 id="email-header-logo"
-            > <!-- src="{{ protocol }}://{{ domain }}/api/media/logo.png" -->
         </div>
         <div id="header-links-container">
-            <a id="email-header-link" href="{{ protocol }}://{{ domain }}/">
+            <a id="email-header-link" href="{{ protocol }}://{{ domain }}/tariff-plans">
                 Тарифы
             </a>                
             <a id="email-header-link" href="{{ protocol }}://{{ domain }}/feedback">
@@ -153,7 +152,7 @@
         <div id="about-us-item">
             <div style="text-align: center;">
                 <img 
-                    src="https://i.ibb.co/q0ScQ6k/photo-6.png" 
+                    src="{{ protocol }}://{{ domain }}/about_us/cloud.png" 
                     alt="Изображение"
                     width="100px"
                 >
@@ -166,7 +165,7 @@
         <div id="about-us-item">
             <div style="text-align: center;">
                 <img 
-                    src="https://i.ibb.co/Hd0xcyM/cloud-318-462259.png" 
+                    src="{{ protocol }}://{{ domain }}/about_us/prices.png" 
                     alt="Изображение"
                     width="100px"
                 >
@@ -179,7 +178,7 @@
         <div id="about-us-item">            
             <div style="text-align: center;">
                 <img 
-                    src="https://i.ibb.co/bvXnjVT/checklist.png" 
+                    src="{{ protocol }}://{{ domain }}/about_us/checklist.png" 
                     alt="Изображение"
                     width="100px"
                 >
@@ -196,7 +195,7 @@
                 <a href="{{ social_network.link }}" style="text-decoration: none;">
                     <div id="social-network-header">
                         <img 
-                            src="https://upload.wikimedia.org/wikipedia/commons/3/31/MM_QRcode.png?20120720164609"
+                            src="{{ protocol }}://{{ domain }}/{{ social_network.qr_code.url }}"
                             id="social-network-item"
                             alt="QR Code соц сети"
                             width="65px"
@@ -204,7 +203,7 @@
                     </div>
                     <div id="social-network-footer">
                         <img
-                            src="https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-1024.png"
+                            src="{{ protocol }}://{{ domain }}/api/media/social_networks/{{ social_network.socail_network }}.svg"
                             alt="Лого соц сети"
                             width="20px"
                             style="margin-right: 5px;"
@@ -219,4 +218,3 @@
     </div>
 </body>
 </html>
-<!-- src="{{ protocol }}://{{ domain }}/{{ social_network.qr_code.url }}" -->

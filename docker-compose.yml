@@ -17,7 +17,11 @@ services:
     
     depends_on:
       - database
+      - redis
 
+  redis:
+    image: redis:7.0.5-alpine
+    hostname: redis
 
   database:
     image: postgres:15-alpine
