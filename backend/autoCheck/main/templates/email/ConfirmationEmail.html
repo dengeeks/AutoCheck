@@ -1,0 +1,15 @@
+{% extends './BaseEmail.html' %}
+
+{% block title %}Аккаунт успешно активирован{% endblock %}
+
+{% block content %}
+    <h1>Поздравляем Вас с регистрацией!</h1>
+    <p>Вы успешно зарегистрировались и активировали аккаунт</p>
+    <a
+        href="{{ protocol }}://{{ domain }}/{{ url }}/login"
+        id="button"
+        style="color: #ffffff; text-decoration: none; cursor: pointer;"
+    >
+        Войти в личный кабинет
+    </a>
+{% endblock %}

@@ -8,24 +8,24 @@ import './TicketsDataGrid.css'
 
 
 const columns = [
-    { field: 'id', headerName: 'ID', align: 'center', width: 90 },
+    { field: 'id', headerName: 'ID', width: 90, disableColumnMenu: true },
     {
       field: 'subject',
       headerName: 'Тема',
-      align: 'center',
       width: 230,
+      disableColumnMenu: true 
     },
     {
       field: 'text',
       headerName: 'Вопрос',
-      align: 'center',
       width: 200,
+      disableColumnMenu: true 
     },
     {
         field: 'is_answered',
         headerName: 'Ответ',
-        align: 'center',
         width: 110,
+        disableColumnMenu: true,
         renderCell: (params) => (
           params.value ? <CheckCircleIcon color="primary" /> : <DoNotDisturbOnIcon color="error" />
         ),
@@ -43,6 +43,9 @@ export default function UserTicketsDataGrid({rows}) {
           rows={rows}
           columns={columns}
           onCellClick={handleCellClick}
+          hideFooter        
+          hideFooterPagination
+          hideFooterSelectedRowCount
           className='ticket-data-grid'
           initialState={{
             pagination: {

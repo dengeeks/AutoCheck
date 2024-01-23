@@ -7,6 +7,7 @@ import InfoInReport from "../components/InfoInReport/InfoInReport"
 import FAQ from "../components/FAQ/FAQ"
 import InfoContacts from "../components/InfoContacts/InfoContacts"
 import FormReviewModal from "../components/FormModal/FormReviewModal"
+import CustomCompareSlider from "../components/CustomCompareSlider/CustomCompareSlider"
 import { getReviewsRequest } from "../api/getReviewsRequest"
 import '../styles/MainPage.css'
 
@@ -16,7 +17,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import InfoAboutCheckImage from "../media/images/InfoAboutCheck.png"
 import InfoInReportPNG from "../media/images/InfoInReport.png"
 import FaqIcon from "../media/images/faq_icon1.png"
 import AllPlans from "../components/AllPlans/AllPlans"
@@ -74,13 +74,17 @@ const MainPage = () => {
             </Grid>
             <Grid item xs={12} md={12} lg={4} xl={4}>
                 <Box className='info-image-container'>
-                    <img src={InfoAboutCheckImage} className="info-about-check-image" alt="info-about-check" />
+                    <CustomCompareSlider />
                 </Box>
             </Grid>
-            <Box className='tariff-plan-title-container' sx={{ textAlign: 'center', width: '100%' }}>
+            <Box 
+                id='tariff-plans' 
+                className='tariff-plan-title-container' 
+                sx={{ textAlign: 'center', width: '100%' }}
+            >
                 <Typography className='tariff-plan-title'>Тарифные планы</Typography>
             </Box>
-            <Grid id='tariff-plans' item container xs={12} md={12} lg={12} xl={12} sx={{ alignItems: 'center' }}>
+            <Grid  item container xs={12} md={12} lg={12} xl={12} sx={{ alignItems: 'center' }}>
                 <AllPlans />
             </Grid>
             <Grid item container xs={12} className="info-in-report-grid-container">

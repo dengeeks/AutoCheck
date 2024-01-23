@@ -42,8 +42,8 @@ import AdminTicketAnswerPage from "./pages/AdminPanel/TicketSystem/TicketAnswerP
 
 import './styles/App.css'
 import PaymentSettings from "./pages/AdminPanel/PaymentSettings/PaymentSettings";
-import FAQPage from "./pages/FAQ/FAQPage";
-import TariffPage from "./pages/Tariff/TariffPage";
+import FAQPage from "./pages/UserProfile/FAQ/FAQPage";
+import TariffPage from "./pages/UserProfile/TariffPlans/TariffPage";
 
 
 function App() {
@@ -51,7 +51,7 @@ function App() {
     <div className="App">
       <AuthProvider>
         <Header />
-        <ToastContainer position='top-center' autoClose={2000} />
+        <ToastContainer position='top-center' autoClose={2000} style={{ top: '70px' }} />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -62,14 +62,14 @@ function App() {
           <Route path="/feedback" element={<FeedbackPage />} />
           <Route path="/review/:id" element={<ReviewPage />} />
           <Route path="/you-blocked" element={<BlockedUserPage />} />
-          <Route path="/tariff-plans" element={<TariffPage />} />
-          <Route path="/faq" element={<FAQPage />} />
           <Route path="/user-profile" element={<ProfileSidebar />}>
             <Route index element={<Profile />} />
             <Route path="referral-system" element={<ReferralSystem />}/>
             <Route path="settings" element={<AccountSettings />}/>
             <Route path="ticket/:id" element={<TicketPage />} />
             <Route path="ticket-system" element={<TicketSystem />}/>
+            <Route path="tariff-plans" element={<TariffPage />} />
+            <Route path="faq" element={<FAQPage />} />
             <Route path="balance" element={<UserBalance />} />
           </Route> 
           <Route path="/admin" element={<AdminSidebar />}>

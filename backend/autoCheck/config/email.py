@@ -50,7 +50,7 @@ class PasswordResetEmail(email.PasswordResetEmail):
         subject = 'Смена пароля {} {}'.format(user.first_name, user.last_name)
 
         email_content = render_to_string(self.template_name, context_data)
-        logger.info(f'Data: {context_data}, User: {user}')
+        logger.info(f'Email: {email_content}')
 
         email_message = EmailMessage(
             subject=subject,
@@ -60,3 +60,26 @@ class PasswordResetEmail(email.PasswordResetEmail):
         email_message.content_subtype = 'html'
         email_message.send()
 
+class ConfirmationEmail(email.PasswordResetEmail):
+    template_name = 'email/ConfirmationEmail.html'
+    
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        social_networks = SocialNetwork.objects.all()
+        context_data['social_networks'] = social_networks
+        return context_data
+
+    def send(self, to, *args, **kwargs):
+        context_data = self.get_context_data()
+        user = context_data.get('user')
+
+        subject = 'Аккаунт успешно активирован!'
+
+        email_content = render_to_string(self.template_name, context_data)
+        email_message = EmailMessage(
+            subject=subject,
+            body=email_content,
+            to=[user.email],
+        )
+        email_message.content_subtype = 'html'
+        email_message.send()

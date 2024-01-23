@@ -87,11 +87,10 @@ const ProfileSidebar = () => {
                         <Box sx={{ marginTop: '10px', width: '100%', textAlign: 'left' }}>
                             <Typography className='profile-user-account'>Количество отчетов: {user?.request_quantity}</Typography>
                             <Typography className='profile-user-account'>
-                                Тарифный план: <Link to='/'><span className='profile-user-request-quantity'>Выбрать</span></Link>
-                            </Typography>  
+                                Тарифный план: <Link to='/user-profile/tariff-plans'><span className='profile-user-request-quantity'>Выбрать</span></Link>
+                            </Typography>
                         </Box>  
                     )}
- 
                 </ListItem> 
                 <NavLink to='balance' style={{ color: '#000', textDecoration: 'none' }}>
                     <ListItem className='profile-sidebar-item'>
@@ -129,7 +128,7 @@ const ProfileSidebar = () => {
                         <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Настройки аккаунта</Typography>
                     </ListItem>
                 </NavLink>
-                <NavLink to='/faq' style={{ color: '#000', textDecoration: 'none' }}> 
+                <NavLink to='/user-profile/faq' style={{ color: '#000', textDecoration: 'none' }}> 
                     <ListItem className='profile-sidebar-item'>
                         <QuestionMarkIcon />
                         <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Вопросы и ответы</Typography>

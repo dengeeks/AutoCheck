@@ -20,7 +20,7 @@ const columns = [
     },
     {
       field: 'qr_code',
-      headerName: 'QR CODE',
+      headerName: 'Qr Code',
       align: 'center',
       width: 200,
     },
@@ -48,14 +48,7 @@ export default function AdminSocialNetworksDataGrid({rows}) {
           rows={rows}
           columns={columns}
           onCellClick={handleCellClick}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 10,
-              },
-            },
-          }}
-          pageSizeOptions={[10]}
+          hideFooter
         />
       </Box>
     );

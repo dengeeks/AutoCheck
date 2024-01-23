@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
 import AuthContext from '../../context/AuthContext';
 
@@ -6,8 +6,10 @@ import AuthContext from '../../context/AuthContext';
 const NotificationWebSocket = ({ user_id }) => {
   const {updateUser} = useContext(AuthContext)
 
+  const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
+
   useEffect(() => {
-    const socket = new WebSocket(`ws://127.0.0.1:8000/ws/notification/${user_id}/`);
+    const socket = new WebSocket(`ws://${BASE_URL_WITHOUT_PREFIX}/ws/notification/${user_id}/`);
 
     // socket.onopen = () => {
     //   console.log('WebSocket connected');

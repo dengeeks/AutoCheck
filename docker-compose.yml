@@ -12,8 +12,6 @@ services:
       - DB_NAME=autocheckdb
       - DB_USER=postgres
       - DB_PASS=postgres
-
-    command: gunicorn config.wsgi --bind 0.0.0.0:8000
     
     depends_on:
       - database

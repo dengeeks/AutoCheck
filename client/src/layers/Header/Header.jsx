@@ -1,115 +1,94 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { 
-  Box,
-  AppBar, 
-  Toolbar, 
-  Typography, 
-  IconButton, 
-  Popover, 
-  List, 
-  ListItem,
-  ListItemText,
-  } from '@mui/material';
+import { Box, Typography, IconButton, Popover, List, ListItem, ListItemText } from "@mui/material"
+import { useNavigate, Link } from "react-router-dom"
+import { useContext, useState } from "react"
+import AuthContext from "../../context/AuthContext"
 import Logo from '../../media/images/logo.png'
-import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
-import AuthContext from '../../context/AuthContext';
-import HeaderReportForm from '../../components/HeaderReportForm/HeaderReportForm';
-import NotificationWebSocket from '../../api/WebSockets/NotificationWebSocket';
+import HeaderReportForm from "../../components/HeaderReportForm/HeaderReportForm";
+import MenuIcon from '@mui/icons-material/Menu';
 import './Header.css'
 
-
 const Header = () => {
-  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const {user, logoutUser} = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const openMenu = (event) => {
+    setIsMenuOpen(!isMenuOpen)
     setAnchorEl(event.currentTarget);
-  };
-
+  }
   const closeMenu = () => {
+    setIsMenuOpen(false)
     setAnchorEl(null);
-  };
-
-  useEffect(() => {
-    if (user?.is_blocked) {
-      navigate('/you-blocked/')
-    }
-  }, [user, navigate])
+  }
 
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
+  
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     } else {
       navigate(`/`);
+  
+      setTimeout(() => {
+        const homeSection = document.getElementById(id);
+        if (homeSection) {
+          homeSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     }
-    // Закрываем меню после выбора пункта
     closeMenu();
   };
 
-  const isMenuOpen = Boolean(anchorEl);
-
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar 
-        position="fixed" 
-        sx={{ 
-          background: '#498EDF', 
-          marginBottom: '25px !important',
-          paddingTop: '2px',
-          paddingBottom: '2px'
-        }}
+  return(
+    <Box className='header-container'>
+      <Box 
+        className='header-logo-container'
+        onClick={() => navigate('/')}
       >
-        <Toolbar>
-          <Typography component="div" sx={{ flexGrow: 1 }}>
-            <Link to='/'> 
-              <img src={Logo} alt="" style={{ width: '170px' }} />
-            </Link>
-          </Typography>
-          {/* IconButton для открытия меню на мобильных устройствах */}
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={openMenu}
-            sx={{ display: { xs: 'block', md: 'none' } }}
+        <img src={Logo} alt="logo" className='header-logo' />
+      </Box>
+      <Box className='header-report-form'>
+        <HeaderReportForm />
+      </Box>
+      
+      {/* Links for full size screen */}
+      <Box className='header-link-container'> 
+        <Box className='header-toolbar-links'>
+          <Box 
+            className='header-link-item'
+            onClick={() => user ? navigate('/user-profile/tariff-plans') : scrollToSection('tariff-plans')}
           >
-            <MenuIcon />
-          </IconButton>
-          <Box className='report-form-header'>
-            <HeaderReportForm />
+            <Typography className='header-link-text'>Тарифные планы</Typography>
           </Box>
-          {/* Ссылки для десктопной версии */}
-          <Typography 
-            onClick={() => navigate('/tariff-plans')} 
-            className="header-link" 
-            sx={{ display: { xs: 'none', md: 'block' } }}
-          >
-            Тарифные планы
-          </Typography>
-          <Typography 
+          <Box 
+            className='header-link-item'
             onClick={() => scrollToSection('reviews')}
-            className="header-link"
-            sx={{ display: { xs: 'none', md: 'block' } }}
           >
-            Отзывы
-          </Typography>
-          <Typography className="header-link" sx={{ display: { xs: 'none', md: 'block' } }}>
-            <Link to='/faq' style={{ color: 'white', textDecoration: 'none' }}>
-              Ответы на вопросы
-            </Link>
-          </Typography>
-          <Typography className="header-link" sx={{ display: { xs: 'none', md: 'block' } }}>
-            <Link to={user ? '/user-profile/ticket-system' : '/feedback'} style={{ color: 'white', textDecoration: 'none', marginRight: '25px' }}>
-              Помощь
-            </Link>
-          </Typography>
-          {/* Popover для мобильной версии */}
-          <Popover
+            <Typography className='header-link-text'>Отзывы</Typography>
+          </Box>
+          <Box 
+            className='header-link-item'
+            onClick={() => user ? navigate('/user-profile/faq') : scrollToSection('faq')}
+          >
+            <Typography className='header-link-text'>Ответы на вопросы</Typography>
+          </Box>
+          <Box 
+            sx={{ marginRight: '30px' }} 
+            className='header-link-item'
+            onClick={() => user ? navigate('/user-profile/ticket-system') : navigate('/feedback')}
+          >
+            <Typography className='header-link-text'>Помощь</Typography>
+          </Box>          
+        </Box>
+
+        {/* Menu with links for small screen */}
+        <IconButton className='header-menu-btn' onClick={openMenu}>
+          <MenuIcon />
+        </IconButton>
+
+        <Popover
             open={isMenuOpen}
             anchorEl={anchorEl}
             onClose={closeMenu}
@@ -123,7 +102,7 @@ const Header = () => {
             }}
           >
             <List>
-              <ListItem button onClick={() => navigate('/tariff-plans')}>
+              <ListItem button onClick={() => scrollToSection('tariff-plans')}>
                 <ListItemText primary="Тарифные планы" />
               </ListItem>
               <ListItem button onClick={() => scrollToSection('reviews')}>
@@ -136,60 +115,56 @@ const Header = () => {
                 <ListItemText primary="Помощь" />
               </ListItem>
 
-              <ListItem button> 
-                <Link to='/registration' style={{textDecoration: 'none'}}>
-                  <ListItemText sx={{ color: 'black', textDecoration: 'none' }} primary="Регистрация" />
-                </Link>
-              </ListItem>
-
-              <ListItem button>
-                <Link to='/login' style={{textDecoration: 'none'}}>
-                  <ListItemText sx={{ color: 'black', }} primary="Авторизация" />
-                </Link> 
-              </ListItem>
+              {!user &&
+                <>
+                  <ListItem button> 
+                    <Link to='/registration' style={{textDecoration: 'none'}}>
+                      <ListItemText sx={{ color: 'black', textDecoration: 'none' }} primary="Регистрация" />
+                    </Link>
+                  </ListItem>
+                  <ListItem button>
+                    <Link to='/login' style={{textDecoration: 'none'}}>
+                      <ListItemText sx={{ color: 'black', }} primary="Авторизация" />
+                    </Link> 
+                  </ListItem>                 
+                </>
+              }
             </List>
-          </Popover>
-
-          {/* Ссылки для десктопной версии */}
-          {user ?
-            <>
-              <NotificationWebSocket user_id={user.id} />
-              <Link to='/user-profile' style={{textDecoration: 'none'}}>
-                <Box className='header-user-container'>
-                  <img 
-                    src={user?.avatar}
-                    alt="avatar" 
-                    width={50}
-                    className='header-user-avatar user-avatar-border'
-                  />
-                  <Typography className="header-username">
-                    {user?.first_name}
-                  </Typography>
-                </Box>
-
-              </Link>
-
-              <LogoutIcon onClick={logoutUser} />
-            </>
-          :
-            <>
-              <Link to="/registration" style={{ textDecoration: 'none', color: '#fff' }}>
-                <Typography className="header-link" sx={{ display: { xs: 'none', md: 'block' } }}>
-                  Регистрация
-                </Typography>
-              </Link>
-
-              <Link to="/login" style={{ textDecoration: 'none', color: '#fff' }}>
-                <Typography className="header-link" sx={{ display: { xs: 'none', md: 'block' } }}>
-                  Войти
-                </Typography>
-              </Link>
-            </>
-          }
-        </Toolbar>
-      </AppBar>
+        </Popover>
+        {user ? 
+          <Box sx={{ display: 'flex', justifyContent: 'row', alignItems: 'center', marginLeft: '20px' }}>
+            <Box className='header-user-info' onClick={() => navigate('user-profile')}>
+              <img 
+                src={user.avatar} 
+                alt="avatar"  
+                className='header-user-avatar user-avatar-border'
+              />
+              <Typography className='header-user-name'>{user.first_name}</Typography>
+            </Box>
+            <LogoutIcon
+              className='header-logout-logo'
+              onClick={() => logoutUser()}
+            />
+          </Box>
+        :     
+          <>        
+            <Box 
+              className='header-link-item' 
+              sx={{ marginLeft: '20px' }}
+              onClick={() => navigate('/login')}
+            >
+              <Typography className='header-link-text'>Войти</Typography>
+            </Box>
+            <Box 
+              className='header-link-item'
+              onClick={() => navigate('/registration')}
+            >
+              <Typography className='header-link-text'>Регистрация</Typography>
+            </Box>
+          </>}
+      </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

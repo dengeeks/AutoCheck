@@ -20,6 +20,7 @@
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-avatar-editor": "^13.0.2",
+    "react-compare-slider": "^3.0.1",
     "react-dom": "^18.2.0",
     "react-easy-crop": "^5.0.4",
     "react-router-dom": "6",

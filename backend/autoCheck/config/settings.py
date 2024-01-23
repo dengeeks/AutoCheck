@@ -114,6 +114,7 @@ DJOSER = {
     },
     'EMAIL': {
         'activation': 'config.email.ActivationEmail',
+        'confirmation': 'config.email.ConfirmationEmail',
         'password_reset': 'config.email.PasswordResetEmail',
     },
 }
@@ -124,7 +125,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('redis')],
+            "hosts": [('redis://localhost), 6379')],
         },
     },
 }

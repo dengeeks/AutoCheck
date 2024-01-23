@@ -24,7 +24,7 @@ const AllPlans = () => {
     }, [])
 
     return (
-        <Box>
+        <Grid container>
             {tariffPlans.map((tariff) => {
                 const tariffColor = tariffColors[String(tariff?.color)];
                 return(
@@ -41,7 +41,7 @@ const AllPlans = () => {
                     </Grid>
                 )
             })}             
-        </Box>
+        </Grid>
     )
 }
 

@@ -70,14 +70,7 @@ export default function AdminReviewDataGrid({rows}) {
           rows={rows}
           columns={columns}
           onCellClick={handleCellClick}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 10,
-              },
-            },
-          }}
-          pageSizeOptions={[10]}
+          hideFooter
         />
       </Box>
     );

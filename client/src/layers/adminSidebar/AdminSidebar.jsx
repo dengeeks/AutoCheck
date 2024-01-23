@@ -34,7 +34,7 @@ const AdminSidebar = () => {
   const usersQuantity = department && department.find(result => result.name === 'users')?.quantity;
 
   useEffect(() => {
-    if (authTokens && authTokens.access) {
+    if (user?.is_staff) {
         getDepartment({ setData: setDepartment, token: authTokens.access });
     }
   }, [authTokens]);

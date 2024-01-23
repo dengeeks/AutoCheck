@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material"
-import AllPlans from "../../components/AllPlans/AllPlans"
+import AllPlans from "../../../components/AllPlans/AllPlans"
 
 
 const TariffPage = () => {
@@ -9,12 +9,11 @@ const TariffPage = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            marginTop: '25px'
         }}>
             <Typography className='tariff-plan-title'>Тарифные планы</Typography>
-            <Box>
-                <AllPlans />
-            </Box>
+            <AllPlans />
         </Box>
     )
 }

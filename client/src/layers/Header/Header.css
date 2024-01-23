@@ -1,70 +1,107 @@
-.header-link {
+.header-container {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background: #498EDF!important;
+    height: 65px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    top: 0;
+    margin-top: 0;
+    z-index: 100000; 
+}
+
+.header-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header-logo {
+    max-width: 200px;
+}
+
+.header-link-container {
+    display: flex;
+}
+
+.header-toolbar-links {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-link-item {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    height: 100%!important;
+}
+
+.header-link-item:hover {
+    background: #277FE4!important;
+}
+
+.header-link-text {
+    color: white;
     font-family: 'Ysabeau Infant', sans-serif!important;
     font-weight: 700!important;
-    margin-right: 15px!important;
     font-size: 18px!important;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
-.header-link:hover {
-    color: #e3e3e3!important;
-    transition: 0.5s;
-}
-
-.header-user-container {
+.header-user-info {
+    display: flex;
     text-align: center;
-    margin-right: 20px;
-    margin-left: 15px;
+    flex-direction: column;
     cursor: pointer;
 }
-
-.header-username {
-    font-family: 'Ysabeau Infant', sans-serif!important;
-    font-weight: 400!important;
-    font-size: 14px!important;
-    cursor: pointer;
-    color: white;
-    text-decoration: none;
-    margin-top: -7px!important;
-}
-
 .header-user-avatar {
     width: 40px;
-    border-radius: 50%;
+    
+}
+.header-user-name {
+    color: #fff;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+    font-size: 14px;
+    margin-top: -5px!important;
 }
 
-.header-text-field label {
-    color: #fff!important;
-    border-bottom-right-radius: 0!important;
-}
-.header-text-field .MuiOutlinedInput-notchedOutline {
-    border-color: white;
-}
-.header-text-field :hover .MuiOutlinedInput-notchedOutline {
-    border-color: white!important;
-}
-.header-text-field  .Mui-focused .MuiOutlinedInput-notchedOutline {
-    border-color: white!important;
-}
-.header-text-field .MuiInputBase-input {
-    color: white;
+.header-logout-logo {
+    color: #fff;
+    margin-right: 15px;
+    margin-left: 20px;
+    cursor: pointer;
 }
 
-.header-form-button {
-    background: white!important;
-    height: 55px;
-    border-top-left-radius: 0!important;
-    border-bottom-left-radius: 0!important;
+.header-report-form {
+    display: flex;
+    align-items: center;
 }
 
-.report-form-header {
-    flex-grow: 5;
+.header-menu-btn {
+    display: none!important;
+    color: white!important;
+}
+
+@media (max-width: 950px) {
+    .header-toolbar-links {
+        display: none;
+    }
+    .header-menu-btn {
+        display: block!important;
+    }
+    .header-logo {
+        max-width: 160px;
+        height: 55px;
+    }
 }
 
 @media (max-width: 1200px) {
-    .report-form-header {
-        display: none!important;
+    .header-report-form {
+        display: none;
     }
 }

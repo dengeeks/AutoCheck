@@ -1,6 +1,8 @@
 import Box from '@mui/material/Box';
+import { forwardRef } from 'react';
 import {useNavigate} from 'react-router-dom'
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import CustomToolbar from '../CustomAdminDataGrid/CustomToolbar';
 import EditIcon from '@mui/icons-material/Edit';
 
 
@@ -56,20 +58,15 @@ export default function AdminTariffPlansDataGrid({rows}) {
     const handleCellClick = (params) => {
         navigate(`/admin/tariff-plans/${params.id}`);
     };
+    
     return (
       <Box sx={{ width: '90vw', overflowX: 'auto', margin: '0 auto'}}>
         <DataGrid
           rows={rows}
           columns={columns}
           onCellClick={handleCellClick}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 15,
-              },
-            },
-          }}
-          pageSizeOptions={[15]}
+          hideFooter
+          slots={{ columnMenu: CustomToolbar }}
         />
       </Box>
     );

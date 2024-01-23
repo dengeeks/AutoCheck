@@ -1,5 +1,5 @@
 import { Box } from "@mui/material"
-import FAQ from "../../components/FAQ/FAQ"
+import FAQ from "../../../components/FAQ/FAQ"
 
 const FAQPage = () => {
     return (

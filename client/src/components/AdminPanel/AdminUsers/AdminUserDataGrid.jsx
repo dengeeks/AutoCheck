@@ -80,14 +80,7 @@ export default function AdminUsersDataGrid({rows}) {
           rows={rows}
           columns={columns}
           onCellClick={handleCellClick}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 15,
-              },
-            },
-          }}
-          pageSizeOptions={[15]}
+          hideFooter
         />
       </Box>
     );

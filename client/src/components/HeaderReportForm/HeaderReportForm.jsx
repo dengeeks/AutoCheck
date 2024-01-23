@@ -1,16 +1,12 @@
-import { Box, Input, Button, TextField } from "@mui/material"
+import { Box, Button, TextField } from "@mui/material"
 import { useState } from "react";
 import HelpModal from "../HelpModal/HelpModal"
 import SearchIcon from '@mui/icons-material/Search';
-import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import './HeaderReportForm.css'
+
 
 const HeaderReportForm = () => {
     const [isOpen, setIsOpen] = useState(false)
-
-    const handleClickHelpIcon = () => {
-        setIsOpen(true)
-    }
 
     const handleClose = () => {
         setIsOpen(false)
@@ -23,9 +19,7 @@ const HeaderReportForm = () => {
                 className='header-report-field'
                 label='VIN/Госномер'
             />
-            <Button 
-                className='header-report-btn'
-            >
+            <Button className='header-report-btn'>
                 <SearchIcon />
             </Button>
         </Box>

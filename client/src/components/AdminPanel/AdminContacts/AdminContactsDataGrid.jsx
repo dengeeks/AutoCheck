@@ -42,14 +42,7 @@ export default function AdminContactsDataGrid({rows}) {
           rows={rows}
           columns={columns}
           onCellClick={handleCellClick}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 15,
-              },
-            },
-          }}
-          pageSizeOptions={[15]}
+          hideFooter
         />
       </Box>
     );
