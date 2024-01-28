@@ -1,0 +1,39 @@
+
+.send-message-container {
+    display: flex;
+    justify-content: row;
+    margin-left: 15px!important;
+    margin-right: 15px!important;
+    margin-bottom: 5px!important;
+}
+
+.upload-files-attached {
+    display: flex;
+    flex-direction: row;
+    margin-left: 15px;
+}
+
+.upload-file-text {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    margin-top: 5px!important;
+}
+
+.send-message-attachment {
+    cursor: pointer;
+}
+
+.send-message-attachment:hover {
+    background: #e4e4e4!important;
+    padding: 2px;
+    border-radius: 50%;
+}
+
+.submit-message-btn {
+    color: #fff!important;
+    background: #498EDF!important;
+}
+.submit-message-btn:disabled {
+    cursor: not-allowed;
+    background: #c5c5c5!important;
+}

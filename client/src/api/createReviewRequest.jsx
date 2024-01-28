@@ -21,6 +21,6 @@ export const createReviewRequest = ({user, text, convenience, informativeness, q
         toast.success('Отзыв успешно отправлен!');
     })
     .catch(error => {
-        toast.error('Произошла ошибка при отпраке отзыва');
+        toast.error('Произошла ошибка при отправке отзыва');
     })
 }

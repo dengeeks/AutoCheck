@@ -1,12 +1,12 @@
 import { Button, Typography, Box } from "@mui/material"
 import { useEffect, useState, useContext } from "react"
-import TicketsNotFoundImg from '../../../../media/images/TicketsNotFound.png'
+import AuthContext from "../../../../context/AuthContext"
 import TicketCreateModal from "../../../../components/Tickets/TicketCreateModal/TicketCreateModal"
 import UserTicketsDataGrid from "../../../../components/Tickets/TicketsDataGrid/TicketsDataGrid"
-import getUserTicketsRequest from "../../../../api/getUserTicketsRequest"
-import './TicketCatalog.css'
-import AuthContext from "../../../../context/AuthContext"
 import Loader from "../../../../components/Loader/Loader"
+import TicketsNotFoundImg from '../../../../media/images/TicketsNotFound.png'
+import './TicketCatalog.css'
+import { getTickets } from "../../../../api/Tickets/getTickets"
 
 
 const TicketSystem = () => {
@@ -16,7 +16,7 @@ const TicketSystem = () => {
   const [tickets, setTickets] = useState([])
 
   useEffect(() => {
-    getUserTicketsRequest({setData: setTickets, setIsLoading: setIsLoading, token: authTokens.access})
+    getTickets({setData: setTickets, isLoading: setIsLoading, token: authTokens.access})
   }, [authTokens])
 
   const handleOpenModal = () => {
@@ -26,6 +26,7 @@ const TicketSystem = () => {
   const handleCloseModal = () => {
     setIsOpen(false)
   }
+  console.log(tickets)
 
   if (isLoading) {
     return(

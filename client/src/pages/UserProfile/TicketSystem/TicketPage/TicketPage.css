@@ -5,7 +5,7 @@
     min-height: 60px;
     padding: 5px;
     border-radius: 7px;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .support-ticket {
@@ -29,12 +29,39 @@
 .ticket-message-text {
     font-family: 'Ysabeau Infant', sans-serif!important;
     font-weight: 400!important;
+    display: flex;
+    flex-direction: column;
 }
 
 .ticket-message-username {
     font-family: 'Ysabeau Infant', sans-serif!important;
     font-weight: 700!important;
     font-size: 14px!important;
+}
+
+.user-ticket-container {
+    display: flex;
+    justify-content: left;
+}
+
+.support-ticket-container {
+    display: flex;
+    justify-content: right;
+}
+
+.ticket-message-img {
+    width: 200px;
+    padding-top: 5px;
+}
+
+.close-ticket-btn {
+    position: fixed!important;
+    background: #498EDF!important;
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 700!important;
+    margin-left: 15px!important;
+    color: white!important;
+    height: 45px;
 }
 
 @media (max-width: 600px) {

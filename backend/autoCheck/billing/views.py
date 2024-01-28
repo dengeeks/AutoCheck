@@ -83,7 +83,7 @@ class YookassaWebhookView(APIView):
         event_type = request.data.get('event')
 
         if event_type == 'payment.succeeded':
-            payload = request.data  # Assuming you are using DRF and payload comes in request.data
+            payload = request.data
             PaymentProcessing.handle_payment_succeeded(payload)
 
             return Response(status=HTTP_204_NO_CONTENT)

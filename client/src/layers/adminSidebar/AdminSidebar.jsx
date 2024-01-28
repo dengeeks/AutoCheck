@@ -32,6 +32,9 @@ const AdminSidebar = () => {
 
   const reviewsQuantity = department && department.find(result => result.name === 'reviews')?.quantity;
   const usersQuantity = department && department.find(result => result.name === 'users')?.quantity;
+  const ticketQuantity = department && department.find(result => result.name === 'ticket')?.quantity;
+  const referralQuantity = department && department.find(result => result.name === 'referral')?.quantity;
+
 
   useEffect(() => {
     if (user?.is_staff) {
@@ -92,7 +95,6 @@ const AdminSidebar = () => {
                         <ForumIcon />
                         {isOpen ? <ListItemText className='sidebar-list-item' primary="Отзывы" /> : ''}
                         {reviewsQuantity ? <Badge className='admin-sidebar-badge' color='error' badgeContent={`+${reviewsQuantity}`} /> : ''}
-                        
                     </ListItem>
                 </Link>
                 <Link to='social-networks' style={{ color: 'black', textDecoration: 'none' }}>
@@ -117,6 +119,7 @@ const AdminSidebar = () => {
                     <ListItem button>
                         <GroupAddIcon />
                         {isOpen ? <ListItemText className='sidebar-list-item' primary="Реферальная система" /> : ''}
+                        {referralQuantity ? <Badge className='admin-sidebar-badge' color='error' badgeContent={`+${referralQuantity}`} /> : ''}
                     </ListItem>
                 </Link>
                 <Link to='blocked' style={{ color: 'black', textDecoration: 'none' }}>
@@ -135,6 +138,7 @@ const AdminSidebar = () => {
                     <ListItem button>
                         <ConfirmationNumberIcon />
                         {isOpen ? <ListItemText className='sidebar-list-item' primary="Тикетная система" /> : ''}
+                        {ticketQuantity ? <Badge className='admin-sidebar-badge' color='error' badgeContent={`+${ticketQuantity}`} /> : ''}
                     </ListItem>
                 </Link>
                 <Link to='report-history' style={{ color: 'black', textDecoration: 'none' }}>

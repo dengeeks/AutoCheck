@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'admin_panel.apps.AdminPanelConfig',
     'billing.apps.BillingConfig',
+    'tickets.apps.TicketsConfig'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.IsAdminUser',
         'rest_framework.permissions.AllowAny',
     ),
-    'PAGE_SIZE': 10,
+    'PAGE_SIZE': 50,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         # 'rest_framework.authentication.TokenAuthentication',

@@ -1,14 +1,12 @@
-import Box from '@mui/material/Box';
+import {Box, Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid';
-import EditIcon from '@mui/icons-material/Edit';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 import './TicketsDataGrid.css'
 
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 90, disableColumnMenu: true },
     {
       field: 'subject',
       headerName: 'Тема',
@@ -16,13 +14,7 @@ const columns = [
       disableColumnMenu: true 
     },
     {
-      field: 'text',
-      headerName: 'Вопрос',
-      width: 200,
-      disableColumnMenu: true 
-    },
-    {
-        field: 'is_answered',
+        field: 'is_closed',
         headerName: 'Ответ',
         width: 110,
         disableColumnMenu: true,
@@ -30,6 +22,32 @@ const columns = [
           params.value ? <CheckCircleIcon color="primary" /> : <DoNotDisturbOnIcon color="error" />
         ),
     },
+    {
+      field: 'unread_messages_count',
+      headerName: 'Новых сообщений',
+      width: 180,
+      disableColumnMenu: true,
+      renderCell: (params) => {
+        if (params.value !== 0) {
+          return (
+            <Box sx={{ 
+              background: '#d32f2f',
+              color: 'white',
+              width: '25px',
+              height: '25px',
+              borderRadius: '50%',
+              display: 'flex',
+              justifyContent: 'center',
+              justifyItems: 'center'
+            }}>
+              <Typography>{params.value}</Typography>
+            </Box>
+          );
+        } else {
+          return null;
+        }
+      },
+  },
 ];
 
 export default function UserTicketsDataGrid({rows}) {

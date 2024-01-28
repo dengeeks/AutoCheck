@@ -10,10 +10,13 @@ import './HelpModal.css'
 const HelpModal = ({ open, onClose }) => {
   return (
     <Modal open={open} onClose={onClose}>
-      <Box className="help-modal-container"  sx={{ maxHeight: '90vh', overflowY: 'auto' }}>
+      <Box className="help-modal-container"  sx={{ maxHeight: '85vh', overflowY: 'auto' }}>
         <Box sx={{ display: 'inline-flex' }}>
             <Typography className="main-title-help-modal">Как узнать VIN, госномер и номер кузова</Typography>
-            <CloseIcon sx={{ fontSize: '26px' }} onClick={onClose} />
+            <CloseIcon
+              className='help-modal-close-icon'
+              onClick={onClose}
+            />
         </Box>
         
         <Typography className="title-help-modal">Загляните в документы</Typography>

@@ -38,6 +38,7 @@
     width: 60px;
     position: relative;
     transition: height 0.5s ease;
+    margin-top: 15px!important;
 }
 
 .profile-sidebar-open {
@@ -45,7 +46,6 @@
     padding: 1px;
     border-radius: 50%;
     margin-top: 15px!important;
-    
 }
 
 

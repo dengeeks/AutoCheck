@@ -1,9 +1,9 @@
 from django.apps import AppConfig
 
 
-class BillingConfig(AppConfig):
+class TicketsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'billing'
+    name = 'tickets'
 
     def ready(self):
-        import billing.signals
+        import tickets.signals

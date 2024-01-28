@@ -4,9 +4,9 @@
     background: white !important;
     margin: auto !important;
     width: 500px;
-
+    margin-top: 50px!important;
     position: fixed;
-    top: 50%;
+    top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
     outline: none;
@@ -46,6 +46,14 @@
     font-family: 'Ysabeau Infant', sans-serif!important;
     font-weight: 400!important;
     font-size: 18px!important;
+}
+
+.help-modal-close-icon {
+    font-size: 26px!important;
+    position: relative;
+    left: 35px;
+    bottom: 10px;
+    cursor: pointer;
 }
 
 

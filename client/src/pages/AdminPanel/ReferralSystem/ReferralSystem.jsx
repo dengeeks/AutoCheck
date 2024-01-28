@@ -3,6 +3,7 @@ import AdminReferralSystemDataGrid from "../../../components/AdminPanel/AdminRef
 import { getAdminAllReferrals } from "../../../api/Admin/referrals/getAllReferrals"
 import { useEffect, useContext, useState } from "react"
 import AuthContext from "../../../context/AuthContext"
+import { resetDepartment } from "../../../api/resetDepartmentRequest"
 
 
 const AdminReferralSystem = () => {
@@ -11,6 +12,7 @@ const AdminReferralSystem = () => {
 
     useEffect(() => {
         getAdminAllReferrals({setData: setReferralData, token: authTokens.access})
+        resetDepartment({department: 'referral', token: authTokens.access})
     }, [authTokens])
 
     return(

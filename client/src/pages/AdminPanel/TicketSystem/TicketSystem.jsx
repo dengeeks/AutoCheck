@@ -1,11 +1,14 @@
 import { Box, Typography } from "@mui/material"
 import '../../../styles/AdminData.css'
 import AuthContext from "../../../context/AuthContext"
-import getUserTicketsRequest from "../../../api/getUserTicketsRequest"
 import { useContext, useState, useEffect } from "react"
+import { resetDepartment } from "../../../api/resetDepartmentRequest"
 
 import AdminTicketsDataGrid from "../../../components/AdminPanel/AdminTickets/AdminTicketsDataGrid"
 import Loader from "../../../components/Loader/Loader"
+
+import { getTicketsAdmin } from "../../../api/Admin/tickets/getTicketsAdmin"
+
 
 const AdminTicketSystem = () => {
     const {authTokens} = useContext(AuthContext)
@@ -13,7 +16,12 @@ const AdminTicketSystem = () => {
     const [tickets, setTickets] = useState([])
 
     useEffect(() => {
-        getUserTicketsRequest({setData: setTickets, setIsLoading: setIsLoading, token: authTokens.access})
+        getTicketsAdmin({
+            setData: setTickets,
+            isLoading: setIsLoading,
+            token: authTokens.access
+        })
+        resetDepartment({department: 'ticket', token: authTokens.access})
     }, [authTokens])       
 
     if (isLoading) {

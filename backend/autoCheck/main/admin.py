@@ -6,8 +6,7 @@ from .models import (
     SocialNetwork, 
     CustomUser, 
     UserBlock,
-    Ticket,
-    TicketAnswer
+    Department,
 )
 
 class CustomUserAdmin(admin.ModelAdmin):
@@ -20,5 +19,4 @@ admin.site.register(Contact)
 admin.site.register(SocialNetwork)
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(UserBlock)
-admin.site.register(Ticket)
-admin.site.register(TicketAnswer)
+admin.site.register(Department)

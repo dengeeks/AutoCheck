@@ -1,23 +1,21 @@
 import axios from 'axios'
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 
-const getTicketAndAnswerRequest = ({ id, setData, setIsLoading, token }) => {
+export const getTicketDetailAdmin = ({ id, setData, isLoading, token }) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-    axios.get(`${BASE_URL}/ticket-and-answer/${id}/`, {
+    axios.get(`${BASE_URL}/admin-panel/tickets/${id}/`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
     })
     .then((response) => {
-        setData(response?.data)
-        setIsLoading(false)
+        setData(response.data)
+        isLoading(false)
+        console.log(response.data)
     })
     .catch(error => {
         toast.error('Не удалось получить информацию по тикету')
-        console.log(error)
     })
 }
-
-export default getTicketAndAnswerRequest

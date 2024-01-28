@@ -27,16 +27,10 @@ const columns = [
       width: 230,
     },
     {
-      field: 'text',
-      headerName: 'Вопрос',
-      align: 'center',
-      width: 120,
-    },
-    {
-        field: 'is_answered',
+        field: 'is_closed',
         headerName: 'Ответ',
         align: 'center',
-        width: 180,
+        width: 100,
         renderCell: (params) => (
           params.value ? <CheckCircleIcon color="primary" /> : <DoNotDisturbOnIcon color="error" />
         ),
@@ -44,7 +38,7 @@ const columns = [
     {
       field: 'change',
       headerName: 'Редактировать',
-      width: 200,
+      width: 120,
       align: 'center',
       renderCell: (params) => (
         <div>

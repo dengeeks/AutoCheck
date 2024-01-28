@@ -1,25 +1,22 @@
 import { Modal, TextField, Box, Typography, Button } from "@mui/material"
-import { createTicketRequest } from "../../../api/Admin/tickets/createTicketRequest"
 import './TicketCreateModal.css'
 import { useContext, useState } from "react"
 import AuthContext from "../../../context/AuthContext"
 import { validateTicketForm } from "./ValidateTicketForm"
+import { createTicket } from "../../../api/Tickets/createTicket"
 
 
 const TicketCreateModal = ({ open, onClose }) => {
     const {authTokens} = useContext(AuthContext)
     const [error, setError] = useState({
         subject: '',
-        text: ''
     })
     const [subject, setSubject] = useState('')
-    const [text, setText] = useState('')
 
     const handleSubmitTicket = () => {
-        if (validateTicketForm({subject: subject, text: text, setError: setError})) {
-            createTicketRequest({
+        if (validateTicketForm({subject: subject, setError: setError})) {
+            createTicket({
                 subject: subject,
-                text: text,
                 token: authTokens.access
             })
             onClose()
@@ -37,20 +34,11 @@ const TicketCreateModal = ({ open, onClose }) => {
                 </Box>
                 <Box className='ticket-form-fields'>
                     <TextField 
-                        label='Тема'
+                        label='Тема обращения'
                         className='ticket-form-field'
                         onChange={(e) => setSubject(e.target.value)}
                         error={!!error.subject}
                         helperText={error.subject}
-                    />
-                    <TextField
-                        label='Сообщение'
-                        rows={5}
-                        multiline
-                        onChange={(e) => setText(e.target.value)}
-                        className='ticket-form-field'
-                        error={!!error.subject}
-                        helperText={error.text}
                     />
                 </Box>
                 <Box className='ticket-form-btns'>
