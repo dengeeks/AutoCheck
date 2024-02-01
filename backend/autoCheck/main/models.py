@@ -36,7 +36,6 @@ class UserBlock(models.Model):
     def __str__(self):
         return f'User ID: {self.user.id}, Blocked until {self.blocked_until}'
 
-
 class TariffPlan(models.Model):
     TARIFF_COLORS_CHOICE = [
         ("red", "Red"),
@@ -71,14 +70,6 @@ class Review(models.Model):
     @property
     def avatar(self):
         return self.user.avatar
-    
-
-class Contact(models.Model):
-    name = models.CharField(max_length=100)
-    info = models.CharField(max_length=100) 
-
-    def __str__(self):
-        return 'Контакты'
 
 class SocialNetwork(models.Model):
     SOCIAL_NETWORKS_CHOICE = [
@@ -97,6 +88,13 @@ class SocialNetwork(models.Model):
     def __str__(self):
         return self.social_network
 
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    info = models.CharField(max_length=100) 
+
+    def __str__(self):
+        return 'Контакты'
+
 class Department(models.Model):
     DEPARTMENT_CHOICE = [
         ("users", "Users"),
@@ -111,3 +109,6 @@ class Department(models.Model):
 
     def __str__(self):
         return f'{self.name} {self.quantity}'
+
+class WebsiteLogo(models.Model):
+    logo = models.ImageField(default="website/logo.png", upload_to="website/")

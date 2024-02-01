@@ -9,11 +9,11 @@ const NotificationWebSocket = ({ user_id }) => {
   const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
 
   useEffect(() => {
-    const socket = new WebSocket(`ws://${BASE_URL_WITHOUT_PREFIX}/ws/notification/${user_id}/`);
+    const socket = new WebSocket(`ws://127.0.0.1:8000/ws/notification/${user_id}/`);
 
-    // socket.onopen = () => {
-    //   console.log('WebSocket connected');
-    // };
+    socket.onopen = () => {
+      console.log('WebSocket connected');
+    };
 
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
@@ -23,9 +23,9 @@ const NotificationWebSocket = ({ user_id }) => {
       })
     };
 
-    // socket.onclose = () => {
-    //   console.log('WebSocket closed');
-    // };
+    socket.onclose = () => {
+       console.log('WebSocket closed');
+    };
 
     return () => {
       socket.close();

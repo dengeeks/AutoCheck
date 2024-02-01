@@ -1,3 +1,4 @@
+import uuid
 from django.conf import settings
 from main.models import CustomUser
 from decimal import Decimal
@@ -89,8 +90,6 @@ class PaymentProcessing:
             user_transaction = PaymentProcessing.create_user_transaction(
                 user_transaction_id, user_id, initial_amount, income_amount
             )
-            logger.info(f'Webhook INITIAL: {initial_amount}')
-            logger.info(f'Webhook INCOME: {income_amount}')
 
             PaymentProcessing.process_user_transaction(user_transaction)
             PaymentProcessing.notify_user(user_id, initial_amount)
@@ -151,8 +150,26 @@ def send_email_notification(user_id, amount):
 
     send_mail(subject, message, from_email, recipient_list, html_message=message)
 
-
 def increase_balance(user_id, amount):
     user = get_object_or_404(CustomUser, id=user_id)
     user.balance += Decimal(amount)
     user.save()
+
+def refill_inviter_balance(user, price, procent):
+    inviter = user.referred_by
+    price_decimal = Decimal(price)
+    procent_decimal = Decimal(procent)
+    bonus_amount = price_decimal * (procent_decimal / Decimal(100))
+
+    transaction_id = uuid.uuid4()
+    Transaction.objects.create(
+        transaction_id=transaction_id,
+        user=inviter,
+        initial_amount=bonus_amount,
+        commission_amount=bonus_amount,
+        is_accepted=True,
+        operation_type='Bonus',
+        description=f'Бонус за реферала {user.first_name} {user.last_name}'
+    )
+    inviter.balance += bonus_amount
+    inviter.save()

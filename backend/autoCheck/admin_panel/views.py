@@ -11,17 +11,19 @@ from rest_framework.permissions import IsAdminUser
 from main.models import (
     CustomUser, 
     TariffPlan, 
-    Contact, 
     SocialNetwork, 
     Review, 
     UserBlock, 
     Department,
+    Contact,
+    WebsiteLogo
 )
 from main.serializers import (
-    ContactSerializer,
     SocialNetworkSerializer,
     ReviewSerializer,
     DepartmentSerializer,
+    ContactSerializer,
+    WebsiteLogoSerializer
 )
 
 from tickets.models import Ticket, Message
@@ -41,6 +43,7 @@ from billing.serializers import PaymentSettingSerializer
 from billing.permissions import IsAdminOrReadOnly
 from rest_framework.exceptions import ValidationError
 from tickets.models import File
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class AdminUsersViewSet(viewsets.ModelViewSet):
@@ -53,11 +56,6 @@ class AdminTariffPlansViewSet(viewsets.ModelViewSet):
     serializer_class = AdminTariffPlansSerializer
     permission_classes = [IsAdminUser]
 
-class AdminContactsViewSet(viewsets.ModelViewSet):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializer
-    permission_classes = [IsAdminUser]
-
 class AdminSocialNetworksViewSet(viewsets.ModelViewSet):
     queryset = SocialNetwork.objects.all()
     serializer_class = SocialNetworkSerializer
@@ -66,6 +64,11 @@ class AdminSocialNetworksViewSet(viewsets.ModelViewSet):
 class AdminReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    permission_classes = [IsAdminUser]
+
+class AdminContactsViewSet(viewsets.ModelViewSet):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
     permission_classes = [IsAdminUser]
 
 class AdminBlockUserGet(views.APIView):
@@ -236,7 +239,6 @@ class ChangePaymentSettings(views.APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
 
 # Tickets Admin API
 class TicketAdminAPIView(viewsets.ModelViewSet):
@@ -289,3 +291,26 @@ class MessageAdminAPIView(viewsets.ModelViewSet):
         for file_data in files_data:
             file_object = File.objects.create(file=file_data)
             instance.files.add(file_object)
+    
+class AdminContactsViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAdminUser]
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+
+class ChangeWebsiteLogo(views.APIView):
+    permission_classes = [IsAdminUser]
+    parser_classes = [MultiPartParser, FormParser]
+
+    def put(self, request):
+        instance = WebsiteLogo.objects.first()
+
+        if instance:
+            serializer = WebsiteLogoSerializer(instance, data=request.data)
+        else:
+            serializer = WebsiteLogoSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

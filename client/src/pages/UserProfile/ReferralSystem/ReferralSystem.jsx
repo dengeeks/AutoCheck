@@ -15,10 +15,11 @@ const ReferralSystem = () => {
     const [data, setData] = useState([])
     const [isIconChanged, setIsIconChanged] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+    const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
 
     const handleCopyClick = () => {
         if (data.referral_code) {
-            navigator.clipboard.writeText(`http://127.0.0.1:3000/registration/${data.referral_code}`) // hardcode value domain
+            navigator.clipboard.writeText(`${BASE_URL_WITHOUT_PREFIX}/registration/${data.referral_code}`)
             toast.success('Ваша реферальная ссылка успешно скопирована')
             setIsIconChanged(true)
         } else {
@@ -29,6 +30,8 @@ const ReferralSystem = () => {
     useEffect(() => {
         getReferralRequest({setData: setData, token: authTokens.access, isLoading: setIsLoading})
     }, [authTokens])
+
+    console.log(data)
 
     if (isLoading) {
         return(
@@ -46,7 +49,7 @@ const ReferralSystem = () => {
                         <Button className='referral-system-form-btn' onClick={() => handleCopyClick()}>
                             {isIconChanged ? <CheckIcon /> : <ContentCopyIcon />}
                         </Button> 
-                    </Box>     
+                    </Box>
                 </Grid>
                 <Grid item xs={6}>
                     <Typography className='referral-page-info-header'>Всего подключилось по вашей ссылке:</Typography>
@@ -54,15 +57,18 @@ const ReferralSystem = () => {
                 </Grid>
                 <Grid item xs={6}>
                     <Typography className='referral-page-info-header'>Вы заработали на рефералах:</Typography>
-                    <Typography className='referral-page-text'>+0₽</Typography>
+                    <Typography className='referral-page-text'>+{data.earning || 0}₽</Typography>
                 </Grid>
                 {data?.invited_referrals.map((referral, index) => {
+                    const userTransactions = data.transactions.filter(transaction => transaction.user === referral.id);
                     return(
                         <Grid item xs={6} sx={{ marginTop: '70px' }} key={index}>
                             <ReferralInfoCard 
                                 avatar={referral.avatar}
                                 first_name={referral.first_name}
                                 last_name={referral.last_name}
+                                balance={referral.balance}
+                                transactions={userTransactions}
                                 date={referral.created_at}
                             />
                         </Grid>

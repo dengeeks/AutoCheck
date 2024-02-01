@@ -1,18 +1,25 @@
 import { Box, Typography, IconButton, Popover, List, ListItem, ListItemText } from "@mui/material"
 import { useNavigate, Link } from "react-router-dom"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import AuthContext from "../../context/AuthContext"
-import Logo from '../../media/images/logo.png'
 import LogoutIcon from '@mui/icons-material/Logout';
 import HeaderReportForm from "../../components/HeaderReportForm/HeaderReportForm";
 import MenuIcon from '@mui/icons-material/Menu';
+import NotificationWebSocket from "../../api/WebSockets/NotificationWebSocket"
+import { getWebsiteLogo } from "../../api/WebsiteLogo/getWebsiteLogo"
 import './Header.css'
+
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [websiteLogo, setWebsiteLogo] = useState()
   const {user, logoutUser} = useContext(AuthContext)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    getWebsiteLogo({setData: setWebsiteLogo,})
+  }, [])
 
   const openMenu = (event) => {
     setIsMenuOpen(!isMenuOpen)
@@ -41,13 +48,17 @@ const Header = () => {
     closeMenu();
   };
 
+  console.log(websiteLogo?.logo)
   return(
     <Box className='header-container'>
+      {user ? 
+      <NotificationWebSocket user_id={user?.id} />
+      : ''}
       <Box 
         className='header-logo-container'
         onClick={() => navigate('/')}
       >
-        <img src={Logo} alt="logo" className='header-logo' />
+        <img src={websiteLogo?.logo} alt="logo" className='header-logo' />
       </Box>
       <Box className='header-report-form'>
         <HeaderReportForm />

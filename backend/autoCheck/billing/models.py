@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from .managers import PaymentSettingsManager
+from django.core.validators import MaxValueValidator
 
 
 class Transaction(models.Model):
@@ -28,7 +29,10 @@ class PaymentSetting(models.Model):
         ('equal', 'equal'),
     }
     commission  = models.CharField(max_length=9, choices=COMMISSION_STATUS, default='site_side')
-
+    bonus_procent = models.PositiveIntegerField(
+        default=0,
+        validators=[MaxValueValidator(limit_value=100)]
+    )
     objects = PaymentSettingsManager()
 
     def __str__(self):

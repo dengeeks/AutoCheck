@@ -1,4 +1,4 @@
-import { Box, Typography, Select, MenuItem, Button } from "@mui/material"
+import { Box, Typography, Select, MenuItem, Button, TextField } from "@mui/material"
 import { useContext, useEffect, useState } from "react"
 import Loader from "../../../components/Loader/Loader"
 import './PaymentSettings.css'
@@ -9,7 +9,7 @@ import AuthContext from "../../../context/AuthContext"
 
 
 const PaymentSettings = () => {
-    const [commissionType, setCommisionType] = useState()
+    const [commissionType, setCommisionType] = useState({ commission: null, bonus_procent: null })
     const [isLoading, setIsLoading] = useState(true)
     const {authTokens} = useContext(AuthContext)
 
@@ -18,10 +18,12 @@ const PaymentSettings = () => {
     }, [])
 
     const handleSubmitPaymentSettings = () => {
-        changePaymentSettings({ commission: commissionType, token: authTokens.access })
+        changePaymentSettings({ 
+            commission: commissionType.commission,
+            bonus_procent: commissionType.bonus_procent, 
+            token: authTokens.access
+        })
     }
-
-    console.log(commissionType)
 
     if (isLoading) {
         return(
@@ -35,9 +37,12 @@ const PaymentSettings = () => {
             </Typography>
             <Select
                 labelId="color-selector-label"
-                value={commissionType || ''}
+                value={commissionType.commission || ''}
                 fullWidth
-                onChange={(e) => setCommisionType(e.target.value)}
+                onChange={(e) => setCommisionType((prevCommissionType) => ({
+                    ...prevCommissionType,
+                    commission: e.target.value,
+                  }))}                  
                 displayEmpty
                 sx={{ marginTop: '10px' }}
             >
@@ -46,9 +51,29 @@ const PaymentSettings = () => {
                 <MenuItem value="user_side">Комиссия на стороне пользователя</MenuItem>
                 <MenuItem value="equal">комиссия 50 на 50</MenuItem>
             </Select>
-            <Button className='payment-settngs-btn' onClick={() => handleSubmitPaymentSettings()}>
-                Подтвердить
-            </Button>
+
+            <Box sx={{ marginTop: '20px' }}>
+                <Typography className='payment-settings-title'>
+                    Процент начисления бонуса
+                </Typography>
+                <TextField
+                    sx={{ marginTop: '10px' }}
+                    fullWidth 
+                    type='number'
+                    label='Процент'
+                    value={commissionType.bonus_procent}
+                    onChange={(e) => setCommisionType((prevCommissionType) => ({
+                        ...prevCommissionType,
+                        bonus_procent: e.target.value,
+                    }))}
+                />
+                <Button 
+                    className='payment-settngs-btn' 
+                    onClick={() => handleSubmitPaymentSettings()}
+                >
+                    Подтвердить
+                </Button>
+            </Box>
         </Box>
     )
 }

@@ -40,6 +40,7 @@ const ProfileSidebar = () => {
     const handleNavbarClose = () => {
         setIsSidebarOpen(false)
     }
+    console.log(user, 'REQ QUANTITY')
 
     return(
     <Box sx={{ display: 'flex', marginTop: '20px' }}>

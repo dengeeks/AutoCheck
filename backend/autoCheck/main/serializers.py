@@ -1,14 +1,15 @@
-from .models import Review
+from .models import Review, Contact
 from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import (
     CustomUser,
     TariffPlan,
-    Contact,
     SocialNetwork,
     Department,
+    WebsiteLogo
 )
+from billing.serializers import TransactionSerializer
 import uuid
 import logging
 
@@ -49,7 +50,6 @@ class CustomUserCreateSerializer(UserCreateSerializer):
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             password=validated_data['password'],
-            current_tariff=validated_data.get('current_tariff', None),
             request_quantity=validated_data.get('request_quantity', 0),
             is_active=validated_data.get('is_active', False),
             is_staff=validated_data.get('is_staff', False),
@@ -84,12 +84,6 @@ class TariffPlanSerializer(serializers.ModelSerializer):
             return round(profit_percentage)
         else:
             return 0
-    
-
-class ContactSerializer(serializers.ModelSerializer):
-    class Meta: 
-        model = Contact
-        fields = '__all__'
 
 class SocialNetworkSerializer(serializers.ModelSerializer): 
     class Meta: 
@@ -100,7 +94,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-    
+
         return token
 
 class DepartmentSerializer(serializers.ModelSerializer):
@@ -112,6 +106,8 @@ class ReferralSerializer(serializers.Serializer):
     referral_code = serializers.CharField()
     invited_referrals = CustomUserCreateSerializer(many=True)
     all_invited = serializers.IntegerField()
+    earning = serializers.IntegerField()
+    transactions = TransactionSerializer(many=True, read_only=True)
 
 class CustomUserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -140,4 +136,14 @@ class CustomUserUpdateSerializer(serializers.ModelSerializer):
 class GetUserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('id', 'first_name', 'last_name', 'avatar', 'email', 'balance', 'is_blocked', 'is_staff')
+        fields = ('id', 'first_name', 'last_name', 'avatar', 'request_quantity', 'email', 'balance', 'is_blocked', 'is_staff')
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Contact
+        fields = '__all__'
+
+class WebsiteLogoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WebsiteLogo
+        fields = '__all__'

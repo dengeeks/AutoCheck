@@ -2,15 +2,15 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 
 
-export const changePaymentSettings = ({ commission, bonus_procent, token }) => {
+export const changeWebsiteLogo = ({ logo, token }) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+    const formData = new FormData();
+    formData.append('logo', logo);
     
-    axios.put(`${BASE_URL}/admin-panel/change-payment-settings/`, {
-        commission: commission,
-        bonus_procent: bonus_procent,
-    },{
+    axios.put(`${BASE_URL}/admin-panel/change-logo/`, { logo: logo },{
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${token}`
         }
     })

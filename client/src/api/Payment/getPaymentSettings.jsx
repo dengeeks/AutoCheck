@@ -7,7 +7,7 @@ export const getPaymentSettings = ({setData, setLoading}) => {
 
     axios.get(`${BASE_URL}/payment-settings/`)
     .then((response) => {
-        setData(response?.data?.commission)
+        setData(response?.data)
         setLoading(false)
     })
     .catch(error => {

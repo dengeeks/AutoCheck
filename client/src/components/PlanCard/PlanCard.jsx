@@ -2,7 +2,7 @@ import { Typography, Box,} from "@mui/material"
 import './PlanCard.css'
 
 
-const PlanCard = ({ plan, color, effectColor, price, quantity, discount, image }) => {
+const PlanCard = ({ plan, color, effectColor, price, quantity, discount, image, handleTariffBuy }) => {
     return(
         <Box className="card-container">
             <Box className="card-header" sx={{ background: `#${color}`, boxShadow: `inset 0 0 10px 5px ${effectColor}`,}}>
@@ -22,7 +22,10 @@ const PlanCard = ({ plan, color, effectColor, price, quantity, discount, image }
             <Typography className="price-for-one">{Math.round(price / quantity)}₽ за одну</Typography>
             <Typography className="price-plan">{quantity}шт/{Math.round(price)}₽</Typography>
 
-            <Box className="buy-plan-button">
+            <Box 
+                className="buy-plan-button"
+                onClick={() => handleTariffBuy()}
+            >
                 <Typography className="buy-plan-button-text">Купить</Typography>
             </Box>
         </Box>

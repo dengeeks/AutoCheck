@@ -4,11 +4,12 @@ from .views import (
     SendFeedbackEmailView,
     MyTokenObtainPairView,
     TariffPlanList,
-    ContactListView,
     SocialNetworkListView,
     ReferralsGetView,
     CustomUserUpdateView,
-    GetUserInfoView
+    GetUserInfoView,
+    WebsiteLogoAPIView,
+    ContactListView
 )
 from django.contrib.auth import views as auth_views
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -23,6 +24,7 @@ urlpatterns = [
     path('', include(reviews_router.urls)),
     path('tariff-plans/', TariffPlanList.as_view()),
     path('contacts/', ContactListView.as_view()),
+    path('get-logo/', WebsiteLogoAPIView.as_view()),
     path('referrals/', ReferralsGetView.as_view()),
     path('social-networks/', SocialNetworkListView.as_view()),
     path('get-user-info/', GetUserInfoView.as_view()),

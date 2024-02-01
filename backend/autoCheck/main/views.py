@@ -5,24 +5,28 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.core.mail import EmailMessage
 from rest_framework.response import Response
+from django.db.models import Sum
 from .serializers import (
     EmailSerializer,
     MyTokenObtainPairSerializer,
-    ContactSerializer,
     TariffPlanSerializer,
     SocialNetworkSerializer,
     ReviewSerializer,
     ReferralSerializer,
     CustomUserUpdateSerializer,
-    GetUserInfoSerializer
+    GetUserInfoSerializer,
+    ContactSerializer,
+    WebsiteLogoSerializer
 )
 from .models import (
     Review, 
     TariffPlan, 
-    Contact, 
     SocialNetwork, 
     CustomUser, 
+    Contact,
+    WebsiteLogo
 )
+from billing.models import Transaction
 import logging
 
 
@@ -36,19 +40,19 @@ class SendFeedbackEmailView(APIView):
             subject = serializer.validated_data['subject']
             message = serializer.validated_data['message']
             email_from = serializer.validated_data['email_from']
-            files = serializer.validated_data.get('files', [])
+            feedback_files = serializer.validated_data.get('files', [])
 
             # Create an EmailMessage instance
             email_message = EmailMessage(
                 subject=subject,
                 body=message,
                 from_email=email_from,
-                to=['sudosurebootapt@gmail.com', ],
+                to=['sudosurebootapt@gmail.com',],
             )
 
             # Attach files to the email message
-            for file in files:
-                email_message.attach(file.name, file.read(), file.content_type)
+            for feedback_file in feedback_files:
+                email_message.attach(feedback_file.name, feedback_file.read(), feedback_file.content_type)
 
             # Send the email
             email_message.send(fail_silently=False)
@@ -56,7 +60,6 @@ class SendFeedbackEmailView(APIView):
             return Response({'success': True}, status=status.HTTP_200_OK)
         else:
             return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
-
 
 class ReviewAPIViewset(viewsets.ModelViewSet):
     queryset = Review.objects.filter(is_allowed=True)
@@ -92,14 +95,9 @@ class ReviewAPIViewset(viewsets.ModelViewSet):
         # Associate the authenticated user with the review
         serializer.save(user=self.request.user)
 
-
 class TariffPlanList(generics.ListAPIView):
     queryset = TariffPlan.objects.all().order_by('price')
     serializer_class = TariffPlanSerializer
-
-class ContactListView(generics.ListAPIView):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializer
 
 class SocialNetworkListView(generics.ListAPIView):
     queryset = SocialNetwork.objects.all()
@@ -118,7 +116,18 @@ class ReferralsGetView(APIView):
             return Response({'error': 'Пользователь не найден'}, status=status.HTTP_400_BAD_REQUEST)
         invited_referrals = CustomUser.objects.filter(referred_by=user)
         all_invited = invited_referrals.count()
-        serializer = ReferralSerializer({'referral_code': referral_code, 'invited_referrals': invited_referrals, 'all_invited': all_invited})
+        earnings = Transaction.objects.filter(user=user, operation_type='Bonus')
+        total_earnings = earnings.aggregate(total_amount=Sum('initial_amount'))['total_amount']
+
+        invited_transactions = Transaction.objects.filter(user__in=invited_referrals, operation_type='Withdraw')
+        logger.info(f'{total_earnings} Total earning')
+        serializer = ReferralSerializer({
+            'referral_code': referral_code, 
+            'invited_referrals': invited_referrals, 
+            'all_invited': all_invited,
+            'earning': total_earnings,
+            'transactions': invited_transactions
+        })
         return Response({'data': serializer.data}, status=status.HTTP_200_OK)
 
 class CustomUserUpdateView(generics.UpdateAPIView):
@@ -136,3 +145,15 @@ class GetUserInfoView(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return CustomUser.objects.filter(id=user.id)
+
+class ContactListView(generics.ListAPIView):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+
+class WebsiteLogoAPIView(generics.RetrieveAPIView):
+    serializer_class = WebsiteLogoSerializer
+
+    def get_object(self):
+        queryset = WebsiteLogo.objects.all()
+        obj = queryset.first()
+        return obj

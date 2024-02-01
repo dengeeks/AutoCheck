@@ -39,6 +39,7 @@ import Profile from "./pages/UserProfile/Profile/ProfileIndex";
 import AdminReferralSystem from "./pages/AdminPanel/ReferralSystem/ReferralSystem";
 import AdminTicketSystem from "./pages/AdminPanel/TicketSystem/TicketSystem";
 import AdminTicketAnswerPage from "./pages/AdminPanel/TicketSystem/TicketAnswerPage";
+import AdminDesign from "./pages/AdminPanel/Design/AdminDesign";
 
 import './styles/App.css'
 import PaymentSettings from "./pages/AdminPanel/PaymentSettings/PaymentSettings";
@@ -91,7 +92,7 @@ function App() {
             <Route path="payment-settings" element={<PaymentSettings />}/>
             <Route path="referral-system" element={<AdminReferralSystem />}/>
             <Route path="report-history" element={<AdminStatistic />}/>
-            <Route path="design" element={<AdminStatistic />}/>
+            <Route path="design" element={<AdminDesign />}/>
           </Route>
           <Route path='*' element={<NotFoundError />} />
         </Routes>
