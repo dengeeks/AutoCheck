@@ -60,9 +60,6 @@ const Header = () => {
       >
         <img src={websiteLogo?.logo} alt="logo" className='header-logo' />
       </Box>
-      <Box className='header-report-form'>
-        <HeaderReportForm />
-      </Box>
       
       {/* Links for full size screen */}
       <Box className='header-link-container'> 

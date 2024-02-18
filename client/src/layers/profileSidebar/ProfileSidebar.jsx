@@ -111,7 +111,7 @@ const ProfileSidebar = () => {
                         <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>История проверок</Typography>
                     </ListItem>
                 </NavLink>
-                <NavLink to='favorites' style={{ color: '#000', textDecoration: 'none' }}>
+                <NavLink to='favorite-reports' style={{ color: '#000', textDecoration: 'none' }}>
                     <ListItem className='profile-sidebar-item'>
                         <FavoriteIcon />
                         <Typography className={`profile-item-text ${isSidebarOpen ? '' : 'profile-item-text-close'}`}>Избранное</Typography>

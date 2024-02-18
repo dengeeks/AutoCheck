@@ -1,6 +1,7 @@
 from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
+from celery.schedules import crontab
 import os
 
 dotenv_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
@@ -29,10 +30,13 @@ INSTALLED_APPS = [
     'rest_framework_json_api',
     'djoser',
     'channels',
+    'django_celery_beat',
+    'celery',
     'main.apps.MainConfig',
     'admin_panel.apps.AdminPanelConfig',
     'billing.apps.BillingConfig',
-    'tickets.apps.TicketsConfig'
+    'tickets.apps.TicketsConfig',
+    'reports.apps.ReportsConfig'
 ]
 
 MIDDLEWARE = [
@@ -132,17 +136,40 @@ CHANNEL_LAYERS = {
 }
 
 # Logging config
+LOGS_DIR = os.path.join(BASE_DIR, 'logs')
+if not os.path.exists(LOGS_DIR):
+    os.makedirs(LOGS_DIR)
+LOG_FILE = os.path.join(LOGS_DIR, 'django.log')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': LOG_FILE,
+            'maxBytes': 1024 * 1024 * 5,
+            'backupCount': 5,
+            'formatter': 'verbose',
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '{asctime} {levelname} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
         },
     },
     'root': {
-        'handlers': ['console'],
-        'level': 'DEBUG', 
+        'handlers': ['console', 'file'],
+        'level': 'DEBUG',
     },
 }
 
@@ -161,6 +188,26 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000'
 ]
 
+# Celery config
+CELERY_BROKER_URL = 'redis://localhost:6379/1'
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True 
+CELERY_BEAT_SCHEDULE = {
+    'update-auth-token-every-10-minutes': {
+        'task': 'reports.tasks.update_auth_token',
+        'schedule': crontab(minute='*/1'),
+    },
+}
+
+# Cache settings
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://localhost:6379/2',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {

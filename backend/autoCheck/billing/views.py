@@ -17,7 +17,6 @@ from .services import CreatePayment, PaymentProcessing, refill_inviter_balance
 from django.conf import settings
 from yookassa import Configuration
 from django.shortcuts import get_object_or_404
-
 import logging
 
 
@@ -25,7 +24,6 @@ Configuration.secret_key = settings.YOOKASSA_SECRET_KEY
 Configuration.account_id = settings.YOOKASSA_SHOP_ID
 
 logger = logging.getLogger(__name__)
-
 class YookassaPaymentView(views.APIView):    
     ''' 
     API view to create a transaction object and generate a payment link using Yookassa.

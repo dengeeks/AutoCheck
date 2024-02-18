@@ -12,4 +12,4 @@ RUN pip install -r /temp/req.txt
 RUN adduser --disabled-password admin-user
 USER admin-user
 
-CMD ["daphne", "-u", "config.asgi:application", "--port", "8000"]
+CMD ["daphne", "config.asgi:application"]

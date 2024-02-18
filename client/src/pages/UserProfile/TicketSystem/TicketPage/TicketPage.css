@@ -64,6 +64,11 @@
     height: 45px;
 }
 
+.file-type-ticket {
+    font-family: 'Ysabeau Infant', sans-serif!important;
+    font-weight: 400!important;
+}
+
 @media (max-width: 600px) {
     .support-ticket {
         max-width: 85%;

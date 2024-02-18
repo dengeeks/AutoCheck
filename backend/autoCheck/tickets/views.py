@@ -10,7 +10,7 @@ from .models import File
 class TicketAPIView(viewsets.ModelViewSet):
     '''
     API endpoint for managing support tickets.
-    Users can only view and manage their own tickets.
+    Users can view and manage their own tickets.
     '''
     permission_classes = [permissions.IsAuthenticated,]
     serializer_class = TicketSerializer

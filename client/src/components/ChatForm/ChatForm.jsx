@@ -35,7 +35,7 @@ const ChatForm = ({ id, handleMessageSubmit }) => {
                 ref={fileInputRef}
                 style={{ display: 'none' }}
                 onChange={handleFileInputChange}
-                accept=".pdf, .doc, .docx, .jpg, .jpeg, .png"
+                accept=".pdf, .doc, .docx, .jpg, .jpeg, .png, .gif, .mp4, .mp3"
                 multiple
             />
             <Box className='send-message-container'>

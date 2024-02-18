@@ -60,7 +60,8 @@
 }
 .header-user-avatar {
     width: 40px;
-    
+    text-align: center;
+    margin: 0 auto!important;
 }
 .header-user-name {
     color: #fff;

@@ -1,4 +1,6 @@
 .ticket-data-grid .MuiDataGrid-cell {
     font-family: 'Ysabeau Infant', sans-serif!important;
     font-weight: 400!important;
+    cursor: pointer;
+    user-select: none;
 }

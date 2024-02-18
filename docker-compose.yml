@@ -28,6 +28,25 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
+  worker:
+    build:
+      context: ./backend/autoCheck
+    hostname: worker
+    entrypoint: celery
+    command: -A celery_app.app worker --loglevel=info
+    volumes:
+      - ./backend/autoCheck:/autoCheck
+    links:
+      - redis
+    depends_on:
+      - redis
+      - database
+    environment:
+      - DB_HOST=database
+      - POSTGRES_DB=autocheckdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
   react-app:
     image: docker-react-i
     build:

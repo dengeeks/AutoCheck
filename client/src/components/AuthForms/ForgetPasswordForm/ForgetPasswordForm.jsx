@@ -34,7 +34,7 @@ const ForgetPasswordForm = () => {
                     className='auth-field'
                     label='Почта'
                     onChange={(e) => setEmail(e.target.value)}
-                    error={error.email}
+                    error={!!error.email}
                     helperText={error.email}
                 />
             

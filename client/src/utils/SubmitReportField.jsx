@@ -1,0 +1,5 @@
+
+
+const SubmitReportField = ({ user, code }) => {
+    
+}

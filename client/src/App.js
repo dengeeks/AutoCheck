@@ -35,11 +35,14 @@ import TicketSystem from "./pages/UserProfile/TicketSystem/TicketCatalog/TicketC
 import TicketPage from "./pages/UserProfile/TicketSystem/TicketPage/TicketPage";
 import ReferralSystem from "./pages/UserProfile/ReferralSystem/ReferralSystem";
 import UserBalance from "./pages/UserProfile/Balance/UserBalance";
+import FavoriteReports from "./pages/UserProfile/FavoriteReports/FavoriteReports";
 import Profile from "./pages/UserProfile/Profile/ProfileIndex";
 import AdminReferralSystem from "./pages/AdminPanel/ReferralSystem/ReferralSystem";
 import AdminTicketSystem from "./pages/AdminPanel/TicketSystem/TicketSystem";
 import AdminTicketAnswerPage from "./pages/AdminPanel/TicketSystem/TicketAnswerPage";
 import AdminDesign from "./pages/AdminPanel/Design/AdminDesign";
+
+import ReportDetail from "./pages/Reports/ReportDetail";
 
 import './styles/App.css'
 import PaymentSettings from "./pages/AdminPanel/PaymentSettings/PaymentSettings";
@@ -63,10 +66,12 @@ function App() {
           <Route path="/feedback" element={<FeedbackPage />} />
           <Route path="/review/:id" element={<ReviewPage />} />
           <Route path="/you-blocked" element={<BlockedUserPage />} />
+          <Route path="/report/:uuid" element={<ReportDetail />} />
           <Route path="/user-profile" element={<ProfileSidebar />}>
             <Route index element={<Profile />} />
             <Route path="referral-system" element={<ReferralSystem />}/>
             <Route path="settings" element={<AccountSettings />}/>
+            <Route path="favorite-reports" element={<FavoriteReports />} />
             <Route path="ticket/:id" element={<TicketPage />} />
             <Route path="ticket-system" element={<TicketSystem />}/>
             <Route path="tariff-plans" element={<TariffPage />} />

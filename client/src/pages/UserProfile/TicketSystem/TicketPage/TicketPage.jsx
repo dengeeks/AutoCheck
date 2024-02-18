@@ -19,6 +19,17 @@ const TicketPage = () => {
     const [error, setError] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const [isSended, setIsSended] = useState(false)
+    const fileTypes = {
+        mp3: 'Аудио',
+        mp4: 'Видео',
+        pdf: 'PDF',
+        doc: 'Документ (doc)',
+        docx: 'Документ (docx)',
+        jpg: 'Изображение (jpg)',
+        jpeg: 'Изображение (jpeg)',
+        png: 'Изображение (png)',
+        gif: 'Изображение (gif)'
+    };
     const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX
 
     useEffect(() => {
@@ -47,8 +58,8 @@ const TicketPage = () => {
     const handleMessageSubmit = ({text, files}) => {
         if (text || files) {
             if (validateTicketMessage({ selectedFiles: files, setError: setError })) {
-                createTicketMessage({ 
-                    text: text, 
+                createTicketMessage({
+                    text: text,
                     files: files,
                     ticket: id,
                     token: authTokens.access,
@@ -108,13 +119,20 @@ const TicketPage = () => {
                                         />
                                     </Link>
                                 ) : (
-                                    <a 
-                                        href={`${BASE_URL_WITHOUT_PREFIX}${file.file}`} 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                    >
-                                        Ссылка на файл
-                                    </a>
+                                    <Box>
+                                        <Typography className='file-type-ticket'>
+                                            Тип файла: {fileTypes[file.file.split('.').pop().toLowerCase()]}
+                                        </Typography>
+                                        <a 
+                                            href={`${BASE_URL_WITHOUT_PREFIX}${file.file}`} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}
+                                        >
+                                            Загрузить файл
+                                        </a>                                        
+                                    </Box>
+
                                 )}
                             </React.Fragment>
                         ))}

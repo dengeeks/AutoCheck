@@ -71,6 +71,19 @@ export const validateText = (text) => {
     return ''
 };
 
+export const validateMessage = (text) => {
+    if (!text) {
+        return 'Поле не может быть пустым';
+    }
+
+    // Check for min and max length
+    const minLength = 5;
+    if (text.length < minLength) {
+      return `Длина должна быть от ${minLength} символов`
+    }
+
+    return ''
+};
 
 export const validateNotEmpty = (field) => {
     if (!field) {
@@ -89,3 +102,26 @@ export const validateImageSize = (imageList) => {
         return 'Размер файлов привышает 20 МБ'
     }
 };
+
+export const codeValidation = (code, codeType) => {
+    const maskValidation = {
+        VIN: /^[A-HJ-NPR-Z0-9]{17}$/,
+        GRZ: /^[АВЕКМНОРСТУХABEKMHOPCTYX]{1}\d{3}[АВЕКМНОРСТУХABEKMHOPCTYX]{2}\d{2,3}$/,
+        BODY: /^[A-Z0-9]{3,7}[-\s]?[A-Z0-9]{6,10}$/,
+    }
+
+    if (!code) {
+        return 'Код не может быть пустым';
+    }
+
+    const regex = maskValidation[codeType];
+    if (!regex) {
+        return 'Неверный тип кода';
+    }
+
+    if (!regex.test(code)) {
+        return 'Введите корректный код';
+    }
+
+    return '';
+}

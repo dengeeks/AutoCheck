@@ -7,6 +7,7 @@ urlpatterns = [
     path('api/', include('main.urls')),
     path('api/', include('billing.urls')),
     path('api/', include('tickets.urls')),
+    path('api/', include('reports.urls')),
     path('api/admin-panel/', include('admin_panel.urls')),
     path('api/admin/', admin.site.urls),
     path('api/api-auth/', include('rest_framework.urls')),
