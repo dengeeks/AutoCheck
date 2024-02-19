@@ -7,7 +7,6 @@ export const getWebsiteLogo = ({ setData }) => {
 
     axios.get(`${BASE_URL}/get-logo`)
     .then((response) => {        
-        console.log(response)
         setData(response?.data)
     })
     .catch(error => {

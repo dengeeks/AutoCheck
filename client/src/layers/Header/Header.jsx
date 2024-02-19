@@ -48,7 +48,6 @@ const Header = () => {
     closeMenu();
   };
 
-  console.log(websiteLogo?.logo)
   return(
     <Box className='header-container'>
       {user ? 

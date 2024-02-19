@@ -43,7 +43,6 @@ const CustomTextField = () => {
     }
 
     useEffect(() => {
-        console.log(uuid)
         if (uuid) {
             navigate(`/report/${uuid}/`)
         } 

@@ -22,3 +22,10 @@
     right: 10px;
     z-index: 10000;
 }
+
+.report-arrow {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: white;
+}

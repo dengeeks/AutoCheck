@@ -2,18 +2,18 @@ import axios from 'axios'
 import { toast } from "react-toastify";
 
 
-export const getUserReports = ({ setData, token }) => {
-    const BASE_URL = process.env.REACT_APP_BASE_URL;
-
-    axios.get(`${BASE_URL}/reports/list/`, {
+export const getReportPaginationList = ({ setData, url, token }) => {
+    axios.get(`${url}`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
     })
     .then((response) => {
+        console.log(response)
         setData(response?.data)
     })
     .catch(error => {
+        console.log(error)
         toast.error('Не удалось получить отчеты')
     })
 }

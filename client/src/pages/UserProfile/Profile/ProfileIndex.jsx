@@ -10,6 +10,7 @@ import { createReportRequest } from "../../../api/Reports/CreateReportRequest";
 import AuthContext from "../../../context/AuthContext";
 import { getUserReports } from "../../../api/Reports/GetUserReportsRequest";
 import ReportItem from "../../../components/ReportItem/ReportItem";
+import { getReportPaginationList } from "../../../api/Reports/GetReportPaginationList";
 
 
 const Profile = () => {
@@ -63,6 +64,13 @@ const Profile = () => {
         setIsModalOpen(false)
     }
 
+    const handlePreviousPage = () => {
+        getReportPaginationList({setData: setReports, url: reports.previous, token: authTokens.access})
+    }
+
+    const handleNextPage = () => {
+        getReportPaginationList({setData: setReports, url: reports.next, token: authTokens.access})
+    }
     return (
         <Container>
             <HelpModal open={isModalOpen} onClose={closeModal} />
@@ -137,16 +145,33 @@ const Profile = () => {
                 </Button>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '300px' }}>
-                {reports.length > 0 ? (
+                {reports?.results?.length > 0 ? (
                     <Box sx={{ width: '100%', marginBottom: '15px' }}>
-                    {reports.map((report, index) => {
+                    {reports?.results?.map((report, index) => {
                         return(
-                            <ReportItem report={report} token={authTokens.access} key={index} />
+                            <ReportItem report={report} token={authTokens?.access} key={index} />
                         )
                     })}
                     </Box>
                 ) : (<Typography className='profile-title'>У вас нет отчетов</Typography>)}
-                
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Button 
+                    className='report-pagination-btns' 
+                    sx={{ marginRight: '15px' }}
+                    onClick={() => handlePreviousPage()}
+                    disabled={!reports.previous} 
+                >
+                    Предыдущий
+                </Button>
+                <Button 
+                    className='report-pagination-btns' 
+                    sx={{ marginLeft: '15px' }}
+                    onClick={() => handleNextPage()}
+                    disabled={!reports.next} 
+                >
+                    Следующий
+                </Button>
             </Box>
         </Container>
     )

@@ -54,6 +54,9 @@
 .review-button:hover {
     background: #277FE4!important;
 }
+.review-button:disabled {
+    background: #d3d3d3!important;
+}
 
 .faq-grid-container {
     display: flex;

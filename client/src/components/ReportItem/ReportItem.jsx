@@ -1,9 +1,10 @@
 import { Box, Typography } from "@mui/material"
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { changeReportFavorite } from "../../api/Reports/ChangeReportFavoriteRequest";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import './ReportItem.css'
 
@@ -26,7 +27,10 @@ const ReportItem = ({ report, token }) => {
         setIsFavorite(!isFavorite)
     }
 
-    console.log(report)
+    useEffect(() => {
+        setIsFavorite(report.is_favorite);
+    }, [report?.is_favorite]);
+
     return(
         <Box sx={{ width: '100%', marginBottom: '15px' }}>
             <Box 
@@ -38,9 +42,10 @@ const ReportItem = ({ report, token }) => {
                     handleIconClick();
                 }}>
                     {isFavorite
-                    ? <BookmarkOutlinedIcon className='report-favorite-btn' />
-                    : <BookmarkBorderIcon className='report-favorite-btn' />}                                
+                    ? <BookmarkOutlinedIcon sx={{ color: 'white' }} className='report-favorite-btn' />
+                    : <BookmarkBorderIcon sx={{ color: 'white' }} className='report-favorite-btn' />}
                 </Box>
+                <ArrowForwardIosIcon className='report-arrow' />
                 <Typography className='report-list-text'>🕒 Дата создания: {report.created_at}</Typography>
                 <Typography className='report-list-text'>🆔 {codeName[report.body_type]}: {report.body}</Typography>
                 <Typography className='report-list-text'>🚘 Транспортное средство: {report.model}</Typography>

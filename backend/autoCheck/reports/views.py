@@ -10,6 +10,7 @@ from django.utils import timezone
 from .models import UserReport
 from .serializers import ReportCreateSerializer, UserReportSerializer
 from .services import create_report, get_report, upgrade_report
+from rest_framework.pagination import PageNumberPagination
 
 
 logger = logging.getLogger(__name__)
@@ -45,13 +46,14 @@ class CreateReportAPIView(views.APIView):
 
 class GetReportsListAPIView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
-    serializer_class = UserReportSerializer 
+    serializer_class = UserReportSerializer
+    pagination_class = PageNumberPagination
+    pagination_class.page_size = 15
 
     def get_queryset(self):
         return UserReport.objects.filter(user=self.request.user, is_upgraded=True).order_by('-created_at')
 
 class ReportDetailAPIView(views.APIView):
-    permission_classes = [permissions.IsAuthenticated]
     def get(self, request, uuid):
         report = get_object_or_404(UserReport, uuid=uuid)
  

@@ -1,10 +1,12 @@
 import { Container, Typography, Button, Box } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 
+import expireReport from '../../../media/video/extendReport.gif'
+
 
 const ReportExpire = () => {
     const navigate = useNavigate()
-    
+
     return(
         <Container>
             <Box sx={{ 
@@ -15,6 +17,7 @@ const ReportExpire = () => {
                 alignItems: 'center',
                 minHeight: '90vh',
             }}>
+                <img src={expireReport} alt="expire report" style={{ width: '300px' }} />
                 <Typography className='report-container-title'>Данные из отчёта устарели, вы можете заказать новый отчет!</Typography>
                 <Button
                     sx={{ 

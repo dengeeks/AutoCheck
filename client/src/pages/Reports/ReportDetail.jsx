@@ -46,7 +46,7 @@ const ReportDetail = () => {
             setData: setReport, 
             setExpire: setExpire, 
             uuid: uuid, 
-            token: authTokens.access
+            token: authTokens?.access
         })
     }, [uuid])
 
@@ -121,7 +121,7 @@ const ReportDetail = () => {
                                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                                 className='report-preview-swiper'
                             >
-                                {previewImages?.length > 0 ? ( // Check if previewImages is not empty
+                                {previewImages?.length > 0 ? (
                                     previewImages.map((image, index) => (
                                         <SwiperSlide 
                                             className='report-preview-slide'
