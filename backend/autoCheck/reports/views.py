@@ -51,7 +51,13 @@ class GetReportsListAPIView(generics.ListAPIView):
     pagination_class.page_size = 15
 
     def get_queryset(self):
-        return UserReport.objects.filter(user=self.request.user, is_upgraded=True).order_by('-created_at')
+        queryset = UserReport.objects.filter(user=self.request.user, is_upgraded=True).order_by('-created_at')
+        
+        body_filter = self.request.query_params.get('body', None)
+        if body_filter is not None:
+            queryset = queryset.filter(body__icontains=body_filter)
+        
+        return queryset
 
 class ReportDetailAPIView(views.APIView):
     def get(self, request, uuid):
