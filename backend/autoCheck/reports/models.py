@@ -7,9 +7,9 @@ from django.utils import timezone
 class UserReport(models.Model):
     uuid = models.UUIDField(unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    model = models.CharField()
-    body = models.CharField()
-    body_type = models.CharField()
+    model = models.CharField(max_length=100)
+    body = models.CharField(max_length=50)
+    body_type = models.CharField(max_length=20)
     report_uuid = models.CharField(max_length=36, unique=True)
     is_upgraded = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
