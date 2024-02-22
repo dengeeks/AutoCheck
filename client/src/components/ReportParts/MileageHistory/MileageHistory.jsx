@@ -6,16 +6,16 @@ import dislike from '../../../media/images/dislike.png';
 
 const MileageHistory = ({ mileages }) => {
     const hasMileages = mileages?.items?.length > 0;
-    const mileagesLength = hasMileages ? mileages.items.length : 0;
+    const mileagesLength = hasMileages ? mileages?.items?.length : 0;
     const [hasDecreasingMileage, setHasDecreasingMileage] = useState(false);
 
     useEffect(() => {
-        if (!Array.isArray(mileages?.items) || mileages.items.length === 0) {
+        if (!Array.isArray(mileages?.items) || mileages?.items?.length === 0) {
             setHasDecreasingMileage(false);
         } else {
             let decreasing = false;
-            for (let i = 1; i < mileages.items.length; i++) {
-                if (mileages.items[i].mileage <= mileages.items[i - 1].mileage) {
+            for (let i = 1; i < mileages?.items?.length; i++) {
+                if (mileages?.items[i]?.mileage <= mileages?.items[i - 1].mileage) {
                     decreasing = true;
                     break;
                 }
@@ -48,14 +48,14 @@ const MileageHistory = ({ mileages }) => {
                     <Typography className='report-container-title' sx={{ marginBottom: '5px' }}>История пробега</Typography>                    
                 </Box>
 
-                {mileages.items.length === 0 ? (
+                {!mileages?.items || mileages.items.length === 0 ? (
                     <Typography className='report-text-bold'>Нет информации о пробеге автомобиля</Typography>
                 ) : (
                     <Box sx={{ marginTop: '10px' }}>
-                        {mileages.items.map((mileage, index) => (
+                        {mileages?.items.map((mileage, index) => (
                             <Box key={index} className="mileage-block">
                                 <Box sx={{ 
-                                    backgroundColor: mileage.mileage < (mileages.items[index - 1]?.mileage || 0) ? '#DF4949' : '#82DF49',
+                                    backgroundColor: mileage.mileage < (mileages?.items[index - 1]?.mileage || 0) ? '#DF4949' : '#82DF49',
                                     borderRadius: '4px',
                                     padding: '0px 2px',
                                     marginRight: '5px',

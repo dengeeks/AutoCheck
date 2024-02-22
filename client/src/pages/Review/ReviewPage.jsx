@@ -7,12 +7,14 @@ import Loader from "../../components/Loader/Loader"
 import LikeDislikeImg from "../../media/images/likeDislike.jpg"
 import CommentImg from "../../media/images/comment.png"
 import './Review.css'
+import useDocumentTitle from "../../utils/useDocumentTitle"
 
 const ReviewPage = () => {
     const [review, setReview] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const navigate = useNavigate()
     const {id} = useParams()
+    useDocumentTitle('Отзыв')
 
     const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
 

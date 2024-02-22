@@ -1,10 +1,12 @@
 import { Box, Typography, Button } from "@mui/material"
 import NotAllowedImg from '../../../media/images/NotAllowed.jpg'
 import { useNavigate } from "react-router-dom"
+import useDocumentTitle from "../../../utils/useDocumentTitle"
 import './NotAllowed.css'
 
 const NotAllowedPage = () => {
     const navigate = useNavigate()
+    useDocumentTitle('Ошибка доступа')
 
     const navigateToFeedbackPage = () => {
         navigate('/feedback')

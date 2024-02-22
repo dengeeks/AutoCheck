@@ -32,22 +32,38 @@ const Footer = () => {
         </Box>
       </Box>
       <Box className="footer-column">
-         <Typography className='footer-title'>Следующий отдел</Typography>
-         <Typography className='contact-footer-info'>Информация</Typography>
-         <Typography className='contact-footer-info'>Информация</Typography>
-         <Typography className='contact-footer-info'>Информация</Typography>
-         <Typography className='contact-footer-info'>Информация</Typography>
+         <Typography className='footer-title'>Страницы</Typography>
+         <Link style={{ textDecoration: 'none', color: '#fff' }} to='/'>
+          <Typography className='contact-footer-info'>Главная</Typography>
+         </Link>
+         <Link style={{ textDecoration: 'none', color: '#fff' }} to='/user-profile'>
+          <Typography className='contact-footer-info'>Личный кабинет</Typography>
+         </Link>
+         <Link style={{ textDecoration: 'none', color: '#fff' }} to='/feedback'>
+          <Typography className='contact-footer-info'>Обратная связь</Typography>
+         </Link>
+         <Link style={{ textDecoration: 'none', color: '#fff' }} to='/user-profile/tariff-plans'>
+          <Typography className='contact-footer-info'>Тарифные планы</Typography>
+         </Link>
       </Box>
       <Box className="footer-column">
-         <Typography className='footer-title'>Следующий отдел</Typography>
-         <Typography className='contact-footer-info'>Информация</Typography>
-         <Typography className='contact-footer-info'>Информация</Typography>
-         <Typography className='contact-footer-info'>Информация</Typography>
-         <Typography className='contact-footer-info'>Информация</Typography>
+         <Typography className='footer-title'>Страницы</Typography>
+         <Link style={{ textDecoration: 'none', color: '#fff' }} to='/user-profile/balance'>
+          <Typography className='contact-footer-info'>Баланс</Typography>
+         </Link>
+         <Link style={{ textDecoration: 'none', color: '#fff' }} to='/registration'>
+          <Typography className='contact-footer-info'>Регистрация</Typography>
+         </Link>
+         <Link style={{ textDecoration: 'none', color: '#fff' }} to='/login'>
+          <Typography className='contact-footer-info'>Авторизация</Typography>
+         </Link>
+         <Link style={{ textDecoration: 'none', color: '#fff' }} to='/forget-password'>
+          <Typography className='contact-footer-info'>Восстановление пароля</Typography>
+         </Link>
       </Box>
     </Container>     
     <Box className="under-footer-info">
-        © 2023 Your Company. All rights reserved.
+        © 2023 Avtorevizorbot.
     </Box>
     </Box>
   );

@@ -2,6 +2,7 @@ import { Typography, Box } from "@mui/material"
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../../../context/AuthContext"
 import BlockedIcon from '../../../media/images/BlockedIcon.png'
+import useDocumentTitle from "../../../utils/useDocumentTitle"
 import './BlockedUser.css'
 
 import { getBlockedUserInfo } from "../../../api/Admin/users/getBlockedUserInfo"
@@ -10,6 +11,7 @@ import { getBlockedUserInfo } from "../../../api/Admin/users/getBlockedUserInfo"
 const BlockedUserPage = () => {
     const {user, logoutUser} = useContext(AuthContext)
     const [blockInfo, setBlockInfo] = useState()
+    useDocumentTitle('Вы заблокироны!')
 
     useEffect(() => {
         if (user) {

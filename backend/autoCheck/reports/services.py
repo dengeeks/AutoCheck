@@ -29,7 +29,7 @@ def create_report(query, code_type):
     try:
         uuid = response.json()['result']['uuid']
         report_info = get_report(uuid=uuid)
-        model, body, body_type = get_additional_info(report_info=report_info)
+        model, body, body_type, brand_name, car_year = get_additional_info(report_info=report_info)
     except KeyError:
         if response.json().get('error', {}).get('data', {}).get('class') == "AuthenticationException":
             cache.delete('api_token')
@@ -39,26 +39,27 @@ def create_report(query, code_type):
             response.raise_for_status()
             uuid = response.json()['result']['uuid']
             report_info = get_report(uuid=uuid)
-            model, body, body_type = get_additional_info(report_info=report_info)
+            model, body, body_type, brand_name, car_year  = get_additional_info(report_info=report_info)
         else:
             raise
     except Exception as e:
         raise Exception(f'Key exception {e}')
-    return uuid, model, body, body_type
+    return uuid, model, body, body_type, brand_name, car_year
 
 def get_additional_info(report_info):
     try:    
         content = report_info.get('content', {})
         tech_data = content.get('content', {}).get('tech_data', {})
-        logger.warning(f'TECH DATA {tech_data}')
         
+        brand_name = tech_data.get('brand', {}).get('name', {}).get('original')
+        car_year = tech_data.get('year')
         model = tech_data.get('model', {}).get('name', {}).get('normalized')
         body = content.get('query', {}).get('body')
         body_type = content.get('query', {}).get('type')
         
         if None in (model, body, body_type):
             raise KeyError("One of the required keys is missing in the report_info content")
-            
+
     except KeyError as e:
         logger.error(f"KeyError occurred: {e}")
         raise
@@ -68,7 +69,7 @@ def get_additional_info(report_info):
     except Exception as e:
         logger.error(f'An unexpected error occurred: {e}')
         raise
-    return model, body, body_type
+    return model, body, body_type, brand_name, car_year
 
 def get_report(uuid):
     api_domain_url = os.getenv("API_DOMAIN")

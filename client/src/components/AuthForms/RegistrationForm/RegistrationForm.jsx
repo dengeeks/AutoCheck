@@ -80,18 +80,23 @@ const RegistrationForm = () => {
                 />
                 <PasswordField 
                     label='Пароль'
-                    error={!!error.password}
+                    error={error.password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <PasswordField
                     label='Повтор пароля'
-                    error={!!error.password}
+                    error={error.password}
                     onChange={(e) => setPassword1(e.target.value)}
                 />
-                
                 <Button className='auth-form-button' onClick={handleSubmitForm}>Отправить</Button>
 
-                <Box sx={{ display: 'flex', flexDirection: 'row', marginTop: '10px', textAlign: 'center', justifyContent: 'center'}}>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    marginTop: '10px', 
+                    textAlign: 'center', 
+                    justifyContent: 'center'
+                }}>
                     <Typography sx={{ fontSize: '14px', marginRight: '5px'}}>Уже зарегестрированы?</Typography> 
                     -
                     <Link to='/login'>

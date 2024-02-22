@@ -218,6 +218,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://avtorevizorbot.ru', 'http://127.0.0.1:8000']
+
 AUTH_USER_MODEL = 'main.CustomUser'
 
 LANGUAGE_CODE = os.getenv("LANGUAGE_CODE")

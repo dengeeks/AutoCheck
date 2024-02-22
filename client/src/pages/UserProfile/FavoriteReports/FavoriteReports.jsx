@@ -6,6 +6,7 @@ import { Box, Button, Typography } from "@mui/material"
 import ReportItem from "../../../components/ReportItem/ReportItem"
 import Loader from "../../../components/Loader/Loader"
 import { getReportPaginationList } from "../../../api/Reports/GetReportPaginationList"
+import useDocumentTitle from "../../../utils/useDocumentTitle"
 
 const FavoriteReports = () => {
     const [reports, setReports] = useState()
@@ -13,7 +14,7 @@ const FavoriteReports = () => {
     useEffect(() => {
         getFavoriteReportList({setData: setReports, token: authTokens.access})
     }, [])
-
+    useDocumentTitle('Избранные отчеты')
     const handlePreviousPage = () => {
         getReportPaginationList({setData: setReports, url: reports?.previous, token: authTokens.access})
     }

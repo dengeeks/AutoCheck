@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
 import CheckIcon from '@mui/icons-material/Check';
 import Loader from "../../../components/Loader/Loader";
+import useDocumentTitle from "../../../utils/useDocumentTitle";
 
 
 const ReferralSystem = () => {
@@ -16,6 +17,7 @@ const ReferralSystem = () => {
     const [isIconChanged, setIsIconChanged] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
+    useDocumentTitle('Реферальная система')
 
     const handleCopyClick = () => {
         if (data.referral_code) {

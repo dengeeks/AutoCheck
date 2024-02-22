@@ -34,6 +34,7 @@ import CustomsHistory from "../../components/ReportParts/CustomsHistory/CustomsH
 import RepairsHistory from "../../components/ReportParts/RepairsHistory/RepairsHistory"
 import ServiceHistory from "../../components/ReportParts/ServiceHistory/ServiceHistory"
 import ReportExpire from "../Errors/ReportExpire/ReportExpire"
+import useDocumentTitle from "../../utils/useDocumentTitle"
 
 
 const ReportDetail = () => {
@@ -41,6 +42,7 @@ const ReportDetail = () => {
     const [expire, setExpire] = useState(false)
     const {authTokens} = useContext(AuthContext)
     const {uuid} = useParams()
+    useDocumentTitle(`Отчет`)
     useEffect(() => {
         getReportDetailRequest({
             setData: setReport, 
@@ -61,7 +63,7 @@ const ReportDetail = () => {
     const reportExpiryDate = report?.data?.report?.expiry_date
 
     const handleReportUpgrade = () => {
-        upgradeReportRequest({ uuid: uuid, token: authTokens.access })
+        upgradeReportRequest({ uuid: uuid, token: authTokens?.access })
         window.location.reload(false)
     }
 
@@ -122,7 +124,7 @@ const ReportDetail = () => {
                                 className='report-preview-swiper'
                             >
                                 {previewImages?.length > 0 ? (
-                                    previewImages.map((image, index) => (
+                                    previewImages?.map((image, index) => (
                                         <SwiperSlide 
                                             className='report-preview-slide'
                                             key={index}

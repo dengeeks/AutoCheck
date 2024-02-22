@@ -2,9 +2,11 @@ import NotFoundGif from '../../../media/video/404-NotFound.gif'
 import { Box, Typography, Button } from '@mui/material'
 import './NotFound.css'
 import { useNavigate } from 'react-router-dom'
+import useDocumentTitle from '../../../utils/useDocumentTitle'
 
 const NotFoundError = () => {
     const navigate = useNavigate()
+    useDocumentTitle('Страница не найдена')
     const NavigateToMainPage = () => {
         navigate('/')
     }

@@ -23,17 +23,17 @@ class CreateReportAPIView(views.APIView):
                 code_type = serializer.validated_data.get('code_type')
                 query = serializer.validated_data.get('query')
                 try: 
-                    report_uuid, model, body, body_type = create_report(query=query, code_type=code_type)
+                    report_uuid, model, body, body_type, brand_name, car_year = create_report(query=query, code_type=code_type)
                 except (KeyError, ValueError, JSONDecodeError, requests.RequestException) as e:
                     logger.error(f'CreateReportAPIView exception {e}')
                     return Response({"error": "Ошибка при обработке запроса"}, status=status.HTTP_400_BAD_REQUEST)
                 new_uuid = uuid.uuid4()
-                logger.info(f'{model}, {body}, {body_type}')
+
                 UserReport.objects.create(
                     uuid=new_uuid,
                     user=request.user,
                     report_uuid=report_uuid,
-                    model=model,
+                    model=f'{brand_name} {model} {car_year}',
                     body=body,
                     body_type=body_type,
                 )

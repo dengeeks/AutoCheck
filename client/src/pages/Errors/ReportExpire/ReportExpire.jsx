@@ -1,11 +1,13 @@
 import { Container, Typography, Button, Box } from "@mui/material"
 import { useNavigate } from "react-router-dom"
+import useDocumentTitle from "../../../utils/useDocumentTitle"
 
 import expireReport from '../../../media/video/extendReport.gif'
 
 
 const ReportExpire = () => {
     const navigate = useNavigate()
+    useDocumentTitle('Отчет устарел')
 
     return(
         <Container>

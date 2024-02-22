@@ -11,6 +11,8 @@ import AuthContext from "../../../context/AuthContext";
 import { getUserReports } from "../../../api/Reports/GetUserReportsRequest";
 import ReportItem from "../../../components/ReportItem/ReportItem";
 import { getReportPaginationList } from "../../../api/Reports/GetReportPaginationList";
+import { getFilteredReports } from "../../../api/Reports/GetFilteredReportsRequest";
+import useDocumentTitle from "../../../utils/useDocumentTitle";
 
 
 const Profile = () => {
@@ -19,7 +21,9 @@ const Profile = () => {
     const [error, setError] = useState()
     const [codeType, setCodeType] = useState('GRZ')
     const {user, authTokens} = useContext(AuthContext)
+    const [bodyCode, setBodyCode] = useState()
     const [reports, setReports] = useState([])
+    useDocumentTitle('Личный кабинет')
     const placeholders = {
         VIN: 'Введите VIN',
         GRZ: 'Введите госномер',
@@ -40,14 +44,18 @@ const Profile = () => {
                     codeType: codeType, 
                     token: authTokens?.access
                 })
-            }            
+            }
         } else {
             navigate('/tariff-plans')
         }
     }
 
+    const handleFiltration = () => {
+        getFilteredReports({setData: setReports, bodyCode: bodyCode, token: authTokens?.access})
+    }
+
     useEffect(() => {
-        getUserReports({ setData: setReports, token: authTokens.access})
+        getUserReports({ setData: setReports, token: authTokens?.access})
     }, [])
 
     useEffect(() => {
@@ -65,11 +73,11 @@ const Profile = () => {
     }
 
     const handlePreviousPage = () => {
-        getReportPaginationList({setData: setReports, url: reports.previous, token: authTokens.access})
+        getReportPaginationList({setData: setReports, url: reports?.previous, token: authTokens?.access})
     }
 
     const handleNextPage = () => {
-        getReportPaginationList({setData: setReports, url: reports.next, token: authTokens.access})
+        getReportPaginationList({setData: setReports, url: reports?.next, token: authTokens?.access})
     }
     return (
         <Container>
@@ -142,6 +150,20 @@ const Profile = () => {
                     onClick={() => navigate('/user-profile/tariff-plans')}
                 >
                     Перейти к тарифам
+                </Button>
+            </Box>
+            <Box className='search-filter-container'>
+                <TextField 
+                    className='search-filter-field'
+                    label='Код автомобиля' 
+                    onChange={(e) => setBodyCode(e.target.value)}
+                    size='small'
+                />
+                <Button
+                    className='search-filter-btn'
+                    onClick={() => handleFiltration()}
+                >
+                    Поиск
                 </Button>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '300px' }}>

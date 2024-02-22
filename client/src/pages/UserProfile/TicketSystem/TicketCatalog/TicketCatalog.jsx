@@ -7,6 +7,7 @@ import Loader from "../../../../components/Loader/Loader"
 import TicketsNotFoundImg from '../../../../media/images/TicketsNotFound.png'
 import './TicketCatalog.css'
 import { getTickets } from "../../../../api/Tickets/getTickets"
+import useDocumentTitle from "../../../../utils/useDocumentTitle"
 
 
 const TicketSystem = () => {
@@ -14,6 +15,7 @@ const TicketSystem = () => {
   const [isLoading, setIsLoading] = useState(true)
   const {authTokens} = useContext(AuthContext)
   const [tickets, setTickets] = useState([])
+  useDocumentTitle('Помощь')
 
   useEffect(() => {
     getTickets({setData: setTickets, isLoading: setIsLoading, token: authTokens.access})

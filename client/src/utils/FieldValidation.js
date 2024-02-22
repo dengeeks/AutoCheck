@@ -18,9 +18,9 @@ export const validatePassword = (password) => {
     }
 
     // Check for at least one lowercase letter
-    const lowercaseRegex = /[a-z]/;
-    if (!lowercaseRegex.test(password)) {
-        return 'Пароль должен содержать хотя бы одну строчную букву';
+    const letterRegex = /[a-zA-Z]/;
+    if (!letterRegex.test(password)) {
+        return 'Пароль должен содержать хотя бы одну букву';
     }
 
     // Check for at least one digit

@@ -4,11 +4,13 @@ import PaymentHistory from "./PaymentHistory/PaymentHistory";
 import PaymentModal from "../../../components/PaymentModal/PaymentModal";
 import './UserBalance.css'
 import AuthContext from "../../../context/AuthContext";
+import useDocumentTitle from "../../../utils/useDocumentTitle";
 
 
 const UserBalance = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const {user} = useContext(AuthContext)
+    useDocumentTitle('Баланс пользователя')
 
     const handleModalClose = () => {
         setIsModalOpen(false)

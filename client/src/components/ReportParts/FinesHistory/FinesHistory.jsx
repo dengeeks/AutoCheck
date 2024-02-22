@@ -31,7 +31,7 @@ const FinesHistory = ({ fines }) => {
                         </Typography>
                     </Box>
                     {hasFines ? (
-                        fines.items.map((fines, index) => {
+                        fines?.items?.map((fines, index) => {
                             return(
                                 <Box key={index} sx={{ marginTop: '15px', position: 'relative' }}>
                                         <Box

@@ -6,16 +6,15 @@ services:
       - "8000:8000"
     volumes:
       - ./backend/autoCheck:/autoCheck
-    
     environment:
       - DB_HOST=database
       - DB_NAME=autocheckdb
       - DB_USER=postgres
       - DB_PASS=postgres
-    
     depends_on:
       - database
       - redis
+      - beat
 
   redis:
     image: redis:7.0.5-alpine
@@ -47,13 +46,32 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
+  beat:
+    build:
+      context: ./backend/autoCheck
+    hostname: beat
+    entrypoint: celery
+    command: -A celery_app.app beat --loglevel=info
+    volumes:
+      - ./backend/autoCheck:/autoCheck
+    links:
+      - redis
+    depends_on:
+      - redis
+      - database
+    environment:
+      - DB_HOST=database
+      - POSTGRES_DB=autocheckdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
   react-app:
     image: docker-react-i
     build:
       context: ./client/
     volumes:
       - react_build:/react/build
-  
+
   nginx:
     image: nginx:latest
     ports:
@@ -62,7 +80,8 @@ services:
       - ./nginx/nginx-setup.conf:/etc/nginx/conf.d/default.conf:ro
       - react_build:/var/www/react
     depends_on:
-     - web-app
-     - react-app
+      - web-app
+      - react-app
+
 volumes:
   react_build:

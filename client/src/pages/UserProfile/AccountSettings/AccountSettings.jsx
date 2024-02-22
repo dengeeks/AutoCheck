@@ -7,6 +7,7 @@ import { validateAccountSettings } from "./ValidateAccountSettings";
 import './AccountSettings.css'
 import { UpdateUserInfo } from "../../../api/AccountSettings/UpdateUserInfo";
 import Loader from "../../../components/Loader/Loader";
+import useDocumentTitle from "../../../utils/useDocumentTitle";
 
 
 const AccountSettings = () => {    
@@ -14,6 +15,7 @@ const AccountSettings = () => {
     const [editedUser, setEditedUser] = useState({first_name: '', last_name: '', email: ''})
     const [newAvatar, setNewAvatar] = useState()
     const [newPassword, setNewPassword] = useState({password: '', password1: ''})
+    useDocumentTitle('Настройки аккаунта')
     const [error, setError] = useState({
         first_name: '',
         last_name: '',

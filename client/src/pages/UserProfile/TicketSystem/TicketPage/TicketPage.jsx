@@ -10,6 +10,7 @@ import { createTicketMessage } from "../../../../api/Tickets/createTicketMessage
 import { getTicketDetail } from "../../../../api/Tickets/getTicketDetail"
 import { closeTicketRequest } from "../../../../api/Tickets/closeTicketRequest"
 import { resetTicketUnreadMessages } from "../../../../api/Tickets/resetTicketUnreadMessages"
+import useDocumentTitle from "../../../../utils/useDocumentTitle"
 
 
 const TicketPage = () => {
@@ -19,6 +20,7 @@ const TicketPage = () => {
     const [error, setError] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const [isSended, setIsSended] = useState(false)
+    useDocumentTitle('Тикет')
     const fileTypes = {
         mp3: 'Аудио',
         mp4: 'Видео',

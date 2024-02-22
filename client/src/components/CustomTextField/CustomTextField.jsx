@@ -38,7 +38,7 @@ const CustomTextField = () => {
                 })
             }
         } else {
-            navigate('/tariff-plans')
+            navigate('/user-profile/tariff-plans')
         }
     }
 

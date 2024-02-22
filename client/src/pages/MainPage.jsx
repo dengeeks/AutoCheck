@@ -20,13 +20,14 @@ import 'swiper/css/pagination';
 import InfoInReportPNG from "../media/images/InfoInReport.png"
 import FaqIcon from "../media/images/faq_icon1.png"
 import AllPlans from "../components/AllPlans/AllPlans"
+import useDocumentTitle from "../utils/useDocumentTitle"
 
 
 const MainPage = () => {
     const [isOpenModalForm, setIsOpenModalForm] = useState(false)
     const [slidesPerView, setSlidesPerView] = useState(4)
     const [reviews, setReviews] = useState([])
-
+    useDocumentTitle('Главная')
     const BASE_URL_WITHOUT_PREFIX = process.env.REACT_APP_BASE_URL_WITHOUT_PREFIX;
 
     useEffect(() => {
