@@ -194,7 +194,7 @@ CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 CELERY_BEAT_SCHEDULE = {
     'update-auth-token-every-10-minutes': {
         'task': 'reports.tasks.update_auth_token',
-        'schedule': crontab(minute='*/1'),
+        'schedule': crontab(minute='*/10'),
     },
 }
 

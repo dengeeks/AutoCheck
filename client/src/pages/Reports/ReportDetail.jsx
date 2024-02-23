@@ -36,11 +36,15 @@ import ServiceHistory from "../../components/ReportParts/ServiceHistory/ServiceH
 import ReportExpire from "../Errors/ReportExpire/ReportExpire"
 import useDocumentTitle from "../../utils/useDocumentTitle"
 
+import Lightbox from "./Lightbox"
+
 
 const ReportDetail = () => {
     const [report, setReport] = useState()
     const [expire, setExpire] = useState(false)
     const {authTokens} = useContext(AuthContext)
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
     const {uuid} = useParams()
     useDocumentTitle(`Отчет`)
     useEffect(() => {
@@ -92,6 +96,7 @@ const ReportDetail = () => {
     }
     return(
         <Container sx={{ marginTop: '40px', marginBottom: '25px' }}>
+            <Lightbox isOpen={isOpen} image={selectedImage} onClose={() => setIsOpen(false)} />
             <Grid container className='report-container'>
                 <Grid item xs={12} md={6} lg={6} xl={6}>
                     <Box sx={{ width: '90%', margin: '0 auto' }}>
@@ -128,6 +133,10 @@ const ReportDetail = () => {
                                         <SwiperSlide 
                                             className='report-preview-slide'
                                             key={index}
+                                            onClick={() => {
+                                                setSelectedImage(image?.uri);
+                                                setIsOpen(true);
+                                            }}
                                         >
                                             <img
                                                 src={image?.uri} 

@@ -105,9 +105,9 @@ export const validateImageSize = (imageList) => {
 
 export const codeValidation = (code, codeType) => {
     const maskValidation = {
-        VIN: /^[A-HJ-NPR-Z0-9]{17}$/,
-        GRZ: /^[АВЕКМНОРСТУХABEKMHOPCTYX]{1}\d{3}[АВЕКМНОРСТУХABEKMHOPCTYX]{2}\d{2,3}$/,
-        BODY: /^[A-Z0-9]{3,7}[-\s]?[A-Z0-9]{6,10}$/,
+        VIN: /^[A-HJ-NPR-Z0-9А-ЯЁ]{17}$/i,
+        GRZ: /^[АВЕКМНОРСТУХABEKMHOPCTYX]{1}\d{3}[АВЕКМНОРСТУХABEKMHOPCTYX]{2}\d{2,3}$/i,
+        BODY: /^[A-ZА-ЯЁ0-9]{3,7}[-\s]?[A-ZА-ЯЁ0-9]{6,10}$/i,
     }
 
     if (!code) {
