@@ -35,6 +35,7 @@ import RepairsHistory from "../../components/ReportParts/RepairsHistory/RepairsH
 import ServiceHistory from "../../components/ReportParts/ServiceHistory/ServiceHistory"
 import ReportExpire from "../Errors/ReportExpire/ReportExpire"
 import useDocumentTitle from "../../utils/useDocumentTitle"
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import Lightbox from "./Lightbox"
 
@@ -55,6 +56,13 @@ const ReportDetail = () => {
             token: authTokens?.access
         })
     }, [uuid])
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }    
 
     const data = report?.data?.data?.content?.content;
     const techData = data?.tech_data;
@@ -233,26 +241,26 @@ const ReportDetail = () => {
                 <Fragment>
                     <ReportNavigation />
                     <GeneralSummary data={data} />
-                    <MileageHistory mileages={data?.mileages} />
-                    <AdsHistory ads={data?.ads?.history} />
-                    <AccidentsHistory accidents={data?.accidents?.history} />
-                    <FinesHistory fines={data?.fines} />
-                    <InsuranceHistory insurances={data?.insurance?.osago} />
-                    <LeasingHistory leasings={data?.leasings}/>
                     <RegistrationActions registrationActions={data?.registration_actions} />
-                    <DiagnosticCards diagnosticCards={data?.diagnostic_cards} />
-                    <ExecutiveProcedures executiveProcedures={data?.executive_procedures} />
-                    <TaxiHistory taxiHistory={data?.taxi?.history} />
-                    <PledgesHistory pledgesHistory={data?.pledges} />
-                    <RestrictHistory restrictHistory={data?.restrictions?.registration_actions_archive} />
-                    <CommercialUse commercialUse={data?.commercial_use} />
                     <OwnershipHistory ownerships={data?.ownership?.history} />
-                    <CustomsHistory customs={data?.customs?.history} />
+                    <MileageHistory mileages={data?.mileages} />
+                    <AccidentsHistory accidents={data?.accidents?.history} />
+                    <RestrictHistory restrictHistory={data?.restrictions?.registration_actions_archive} />
+                    <PledgesHistory pledgesHistory={data?.pledges} />
+                    <TaxiHistory taxiHistory={data?.taxi?.history} />
+                    <LeasingHistory leasings={data?.leasings}/>
+                    <CommercialUse commercialUse={data?.commercial_use} />
+                    <FinesHistory fines={data?.fines} />
+                    <ExecutiveProcedures executiveProcedures={data?.executive_procedures} />
+                    <AdsHistory ads={data?.ads?.history} />
+                    <InsuranceHistory insurances={data?.insurance?.osago} />
+                    <DiagnosticCards diagnosticCards={data?.diagnostic_cards} />
                     <RepairsHistory />
                     <ServiceHistory serviceHistory={data?.service_history}/>
+                    <CustomsHistory customs={data?.customs?.history} />
                 </Fragment>
             )}
-
+            <KeyboardArrowUpIcon className="top-error-report" onClick={() => scrollToTop()} />
         </Container>
     )
 }

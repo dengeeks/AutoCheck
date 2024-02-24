@@ -19,7 +19,7 @@ const PlanCard = ({ plan, color, effectColor, price, quantity, discount, image, 
                 <img src={image} alt="" className="plan-card-image" />
             </Box>
 
-            <Typography className="price-for-one">{Math.round(price / quantity)}₽ за одну</Typography>
+            <Typography className="price-for-one">{Math.round(price / quantity)}₽ за один отчёт</Typography>
             <Typography className="price-plan">{quantity}шт/{Math.round(price)}₽</Typography>
 
             <Box 

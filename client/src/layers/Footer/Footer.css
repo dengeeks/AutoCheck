@@ -50,6 +50,9 @@
     margin-top: 25px!important;
 }
 
+.footer-logo-img {
+    width: 150px;
+}
 
 @media (max-width: 1200px) {
     .footer-contacts {
@@ -88,5 +91,8 @@
     }
     .contact-footer-btn text {
         font-size: 14px!important;
+    }
+    .footer-logo-img {
+        width: 100px;
     }
 }

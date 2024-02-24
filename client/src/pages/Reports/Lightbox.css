@@ -39,5 +39,6 @@
     top: 10px;
     right: 10px;
     cursor: pointer;
-    color: white!important;
+    font-size: 28px!important;
+    color: rgb(0, 0, 0)!important;
 }

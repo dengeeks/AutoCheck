@@ -7,6 +7,7 @@ import HelpModal from "../HelpModal/HelpModal";
 import { codeValidation } from "../../utils/FieldValidation";
 import { useContext, useEffect, useState } from "react";
 import { createReportRequest } from "../../api/Reports/CreateReportRequest";
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import AuthContext from "../../context/AuthContext";
 
 
@@ -69,7 +70,7 @@ const CustomTextField = () => {
             >
                 {error}
             </InputLabel>
-            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'row', }}>
                 <Typography 
                     className={`select-code-type ${codeType === 'GRZ' && 'active'}`}
                     onClick={() => setCodeType('GRZ')}
@@ -103,12 +104,12 @@ const CustomTextField = () => {
             >
                 Проверить
             </Button>
-            <Box sx={{ display: 'flex', justifyContent: 'inline' }}>
-                <Link>
-                    <Typography sx={{ marginRight: '15px' }} className="link-under-field">история проверок</Typography>
-                </Link>
-                <Link>
-                    <Typography onClick={handleClickHelpIcon} className="link-under-field">пример отчета</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'inline', alignItems: 'center' }}>
+                <Link style={{display: 'flex', flexDirection: 'row'}}>
+                    <Typography onClick={handleClickHelpIcon} className="link-under-field">
+                        Пример отчета
+                    </Typography>
+                    <ReceiptLongIcon />
                 </Link>
             </Box>
         </Box>

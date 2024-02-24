@@ -11,7 +11,7 @@ const CommercialUse = ({ commercialUse }) => {
     return(
         <Box 
             className="report-block-container" 
-            id="leasing-history"
+            id="commercial-history"
             sx={{ borderBottom: `6px solid ${hasCommercialUse ? '#DF4949' : '#82DF49'}` }}
         >
             <Box className='report-badge' sx={{ background: hasCommercialUse ? '#DF4949' : '#82DF49'}}>

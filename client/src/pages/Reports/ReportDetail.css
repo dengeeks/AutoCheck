@@ -73,6 +73,17 @@
     font-size: 32px!important;
 }
 
+.top-error-report {
+    background: #E4E4E4!important;
+    border-radius: 50%;
+    font-size: 32px!important;
+    border: 1px solid black;
+    position: fixed;
+    bottom: 20px; /* или любое другое значение, которое вы предпочитаете */
+    right: 20px; 
+    cursor: pointer;
+}
+
 @media (max-width: 899px) {
     .characteristics-item-report {
         text-align: left;

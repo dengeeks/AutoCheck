@@ -55,7 +55,9 @@ const Profile = () => {
     }
 
     useEffect(() => {
-        getUserReports({ setData: setReports, token: authTokens?.access})
+        if (user) {
+            getUserReports({ setData: setReports, token: authTokens?.access})
+        }
     }, [])
 
     useEffect(() => {

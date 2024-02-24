@@ -12,7 +12,7 @@ const ExecutiveProcedures = ({ executiveProcedures }) => {
     return(
         <Box
             className="report-block-container" 
-            id="insurance-history"
+            id="executive-procedures"
             sx={{ borderBottom: `6px solid ${hasExecutiveProcedures ? '#DF4949' : '#82DF49'}` }}
         >
             <Box className='report-badge' sx={{ background: hasExecutiveProcedures ? '#DF4949' : '#82DF49'}}>

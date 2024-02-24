@@ -11,7 +11,7 @@ const PledgesHistory = ({ pledgesHistory }) => {
     return(
         <Box 
             className="report-block-container" 
-            id="leasing-history"
+            id="pledges-history"
             sx={{ borderBottom: `6px solid ${hasPledges ? '#DF4949' : '#82DF49' }` }}
         >
             <Box className='report-badge' sx={{ background: hasPledges ? '#DF4949' : '#82DF49'}}>
