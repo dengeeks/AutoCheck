@@ -75,8 +75,10 @@ const ReportDetail = () => {
     const reportExpiryDate = report?.data?.report?.expiry_date
 
     const handleReportUpgrade = () => {
-        upgradeReportRequest({ uuid: uuid, token: authTokens?.access })
-        window.location.reload(false)
+        upgradeReportRequest({ uuid: uuid, token: authTokens?.access });
+        setTimeout(() => {
+            window.location.reload(false);
+        }, 3000);
     }
 
     const codeType = {
@@ -133,7 +135,6 @@ const ReportDetail = () => {
                                 slidesPerView={1}
                                 navigation
                                 scrollbar={{ draggable: true }}
-                                autoplay={{ delay: 3000, disableOnInteraction: false }}
                                 className='report-preview-swiper'
                             >
                                 {previewImages?.length > 0 ? (
@@ -141,15 +142,15 @@ const ReportDetail = () => {
                                         <SwiperSlide 
                                             className='report-preview-slide'
                                             key={index}
-                                            onClick={() => {
-                                                setSelectedImage(image?.uri);
-                                                setIsOpen(true);
-                                            }}
-                                        >
+                                        >   
                                             <img
-                                                src={image?.uri} 
-                                                alt="Логотип бренда" 
+                                                src={image?.uri}
+                                                alt="Изображение автомобиля" 
                                                 className='report-preview-image'
+                                                onClick={() => {
+                                                    setSelectedImage(image?.uri);
+                                                    setIsOpen(true);
+                                                }}
                                             />
                                         </SwiperSlide>
                                     ))
@@ -175,18 +176,22 @@ const ReportDetail = () => {
                         <Typography className='report-model-name'>{carModelName}</Typography>                        
                     </Box>
                     <Box className='report-characteristics-block'>
-                        <Typography className='characteristics-item-report'>
-                            Бренд: <span className='report-text-bold'>{techData?.brand?.name?.normalized}</span>
-                        </Typography>
+                        {techData?.brand?.name?.normalized && (
+                            <Typography className='characteristics-item-report report-brand-name-x'>
+                                Бренд: <span className='report-text-bold'>{techData?.brand?.name?.normalized}</span>
+                            </Typography>                            
+                        )}
                         {report?.data?.data?.content?.query?.type && (
                             <Typography className='characteristics-item-report'>
                                 {codeType[report?.data?.data?.content?.query?.type]}:
                                 <span className='report-text-bold'> {report.data.data.content.query.body}</span>
                             </Typography>
                         )}
-                        <Typography className='characteristics-item-report'>
-                            Расположение руля: <span className='report-text-bold'>{getWheelPosition()}</span>
-                        </Typography>
+                        {getWheelPosition() && (
+                            <Typography className='characteristics-item-report'>
+                                Расположение руля: <span className='report-text-bold'>{getWheelPosition()}</span>
+                            </Typography>                            
+                        )}
                         {techData?.year && (
                             <Typography className='characteristics-item-report'>
                                 Год выпуска: <span className='report-text-bold'>{techData.year}</span>
@@ -219,7 +224,7 @@ const ReportDetail = () => {
                         )}
                         {techData?.body?.color?.name && (
                             <Typography className='characteristics-item-report'>
-                                Цвет: <span className='report-text-bold'>{techData.body.color?.name}</span>
+                                Цвет: <span className='report-text-bold'>{techData.body.color.name}</span>
                             </Typography>
                         )}
                         {techData?.drive?.type && (

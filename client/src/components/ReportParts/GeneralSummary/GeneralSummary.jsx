@@ -1,17 +1,16 @@
 import { Box, Typography } from "@mui/material"
-import like from '../../../media/images/like.png';
-import dislike from '../../../media/images/dislike.png';
+import { useMediaQuery } from '@mui/material';
 import '../ReportStyles.css'
-import { Fragment } from "react";
 
 const GeneralSummary = ({ data }) => {
     const days = data?.ownership?.history?.usage?.days
+    const isSmScreen = useMediaQuery('(max-width:600px)');
 
     const formatDuration = (days) => {
         const years = Math.floor(days / 365);
         const months = Math.floor((days % 365) / 30);
         const remainingDays = days % 30;
-    
+
         let result = '';
     
         if (years > 0) {
@@ -40,8 +39,8 @@ const GeneralSummary = ({ data }) => {
                         Общая информация
                     </Typography>
                 </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                    <Box sx={{ width: '50%' }}>
+                <Box sx={{ display: 'flex', flexDirection: isSmScreen ? 'column' : 'row' }}>
+                    <Box sx={{ width: isSmScreen ? '100%' : '50%' }}>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         {/* Количество владельцев */}
                         <Box
@@ -150,7 +149,7 @@ const GeneralSummary = ({ data }) => {
                             <Typography className='text-item-report'>
                                 Пройденные техосмотры:
                                 <span className='report-text-bold'>
-                                    {data?.inspections?.count ? ` ${data?.inspections?.count}` : ' Техосмотры не проводились'}
+                                    {data?.inspections?.count ? ` ${data?.inspections?.count}` : ' Не проводились'}
                                 </span>
                             </Typography>
                         </Box>

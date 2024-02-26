@@ -41,4 +41,7 @@
     cursor: pointer;
     font-size: 28px!important;
     color: rgb(0, 0, 0)!important;
+    background: #fff!important;
+    border-radius: 50%;
+    margin: 5px!important;
 }

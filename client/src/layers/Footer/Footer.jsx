@@ -52,7 +52,7 @@ const Footer = () => {
           <Typography className='contact-footer-info'>Тарифные планы</Typography>
          </Link>
       </Box>
-      <Box className="footer-column">
+      <Box className="footer-column second-footer-column">
          <Typography className='footer-title'>Навигация:</Typography>
          <Link style={{ textDecoration: 'none', color: '#fff' }} to='/registration'>
           <Typography className='contact-footer-info'>Регистрация</Typography>

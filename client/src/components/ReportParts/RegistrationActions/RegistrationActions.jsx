@@ -30,7 +30,7 @@ const RegistrationActions = ({ registrationActions }) => {
                         sx={{ background: hasRegistrationActions ? '#82DF49' : '#DF4949' }}
                     />
                     <Typography className="report-container-title" sx={{ marginBottom: '5px' }}>
-                        История регистрационных действий
+                        История регистраций
                     </Typography>
                 </Box>
                 {hasRegistrationActions ? (

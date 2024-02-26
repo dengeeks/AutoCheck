@@ -52,7 +52,7 @@ const PaymentModal = ({open, onClose}) => {
             onClose={onClose}
             sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         >
-            <Box>              
+            <Box>    
                 <Box 
                     sx={{ textAlign: 'center' }}
                     className='payment-header-form'
@@ -64,9 +64,8 @@ const PaymentModal = ({open, onClose}) => {
                         className='payment-modal-close-icon'
                         onClick={onClose}
                     />
-                </Box>
+                </Box> 
                 <Box className='payment-modal-container'>
-
                     <Box className='payment-modal-custom-amount'>
                         <Typography className='payment-modal-helper-text'>
                             Для пополнения баланса на произвольную сумму, введите сумму в поле ввода

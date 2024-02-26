@@ -103,6 +103,10 @@
     font-weight: 700!important;
 }
 
+.info-image-container-sm {
+    display: none;
+}
+
 @media (max-width: 1199px) {
     .info-about-check-image {
         width: 500px;
@@ -131,6 +135,14 @@
     }
     .tariff-plan-title {
         font-size: 24px!important;
+    }
+    .info-image-container-sm {
+        display: block;
+        margin: 0 auto!important;
+
+        margin-top: 30px!important;
+        margin-bottom: -105px!important;
+        width: 80%;
     }
 }
 

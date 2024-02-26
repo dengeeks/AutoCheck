@@ -48,12 +48,8 @@ const PaymentHistory = () => {
                     margin: '0 auto' 
                 }}>
                 <Box className='payment-collapse-item-container' >
-                    <Typography className='payment-history-selected' sx={{ textAlign: 'center' }} onClick={() => setIsCollapse(!isCollapse)}>
-                        {selectedType[selectedItem]}
-                    </Typography>
-                    {isCollapse ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+
                 </Box>
-                <Collapse className='payment-history-collapse' in={isCollapse}>
                         <Box className='collapse-select-item' onClick={() => handleSelectItem('Withdraw')}>
                             <LocalMallIcon />
                             <Typography className='collapse-select-item-text'>
@@ -73,7 +69,6 @@ const PaymentHistory = () => {
                             </Typography>
                             
                         </Box>
-                </Collapse>     
             </Box>
 
             <Grid container sx={{ marginTop: '20px' }}>

@@ -105,11 +105,11 @@ const CustomTextField = () => {
                 Проверить
             </Button>
             <Box sx={{ display: 'flex', justifyContent: 'inline', alignItems: 'center' }}>
-                <Link style={{display: 'flex', flexDirection: 'row'}}>
-                    <Typography onClick={handleClickHelpIcon} className="link-under-field">
+                <Link  to='https://avtorevizorbot.ru/report/5c56c33f-811e-4a1d-8805-c36b243a6fad/' style={{display: 'flex', flexDirection: 'row'}}>
+                    <ReceiptLongIcon />
+                    <Typography className="link-under-field">
                         Пример отчета
                     </Typography>
-                    <ReceiptLongIcon />
                 </Link>
             </Box>
         </Box>

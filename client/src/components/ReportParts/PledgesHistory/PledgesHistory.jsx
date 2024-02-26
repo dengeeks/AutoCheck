@@ -17,7 +17,7 @@ const PledgesHistory = ({ pledgesHistory }) => {
             <Box className='report-badge' sx={{ background: hasPledges ? '#DF4949' : '#82DF49'}}>
                 <img src={hasPledges ? dislike : like} alt="badge" className='report-badge-img' />
                 <Typography className="report-badge-text">
-                    {pledgesLength > 0 ? `Обременения на ТС: ${pledgesLength}` : 'Нет обременений на ТС'}
+                    {pledgesLength > 0 ? `Залоги: ${pledgesLength}` : 'Нет залогов'}
                 </Typography>
             </Box>
             <Box sx={{ marginLeft: '15px' }}>
@@ -27,7 +27,7 @@ const PledgesHistory = ({ pledgesHistory }) => {
                         sx={{ background: hasPledges ?'#DF4949' : '#82DF49'  }}
                     />
                     <Typography className="report-container-title" sx={{ marginBottom: '5px' }}>
-                        Обременения на ТС
+                        Залоги
                     </Typography>
                 </Box>
                 {hasPledges ? (

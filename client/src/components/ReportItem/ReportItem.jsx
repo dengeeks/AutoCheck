@@ -48,7 +48,7 @@ const ReportItem = ({ report, token }) => {
                 <ArrowForwardIosIcon className='report-arrow' />
                 <Typography className='report-list-text'>🕒 Дата создания: {report.created_at}</Typography>
                 <Typography className='report-list-text'>🆔 {codeName[report.body_type]}: {report.body}</Typography>
-                <Typography className='report-list-text'>🚘 Транспортное средство: {report.model}</Typography>
+                <Typography className='report-list-text'>🚘 Транспортное средство: <br />{report.model}</Typography>
             </Box>
         </Box>
     )

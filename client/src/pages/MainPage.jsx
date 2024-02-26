@@ -88,6 +88,11 @@ const MainPage = () => {
             <Grid  item container xs={12} md={12} lg={12} xl={12} sx={{ alignItems: 'center' }}>
                 <AllPlans />
             </Grid>
+            <Grid item xs={12} md={12} lg={4} xl={4}>
+                <Box className='info-image-container-sm'>
+                    <CustomCompareSlider />
+                </Box>
+            </Grid>
             <Grid item container xs={12} className="info-in-report-grid-container">
                 <Grid item xs={12} md={12} lg={6} lx={8}>
                     <InfoInReport />

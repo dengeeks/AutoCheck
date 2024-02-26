@@ -85,6 +85,12 @@
     .payment-modal-close-icon {
         left: 330px;
     }
+    .payment-modal-close-icon {
+        position: relative;
+        left: 60px;
+        bottom: 20px;
+        color: white!important;
+    }
 }
 
 @media (max-width: 370px) {
@@ -96,5 +102,11 @@
     }    
     .payment-modal-close-icon {
         left: 280px;
+    }
+    .payment-modal-close-icon {
+        position: relative;
+        left: 40px;
+        bottom: 20px;
+        color: white!important;
     }
 }

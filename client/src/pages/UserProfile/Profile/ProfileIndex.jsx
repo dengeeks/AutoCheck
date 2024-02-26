@@ -13,7 +13,8 @@ import ReportItem from "../../../components/ReportItem/ReportItem";
 import { getReportPaginationList } from "../../../api/Reports/GetReportPaginationList";
 import { getFilteredReports } from "../../../api/Reports/GetFilteredReportsRequest";
 import useDocumentTitle from "../../../utils/useDocumentTitle";
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -27,7 +28,7 @@ const Profile = () => {
     const placeholders = {
         VIN: 'Введите VIN',
         GRZ: 'Введите госномер',
-        BODY: 'Введите номер кузова'
+        BODY: 'Номер кузова'
     };
     const [uuid, setUuid] = useState()
     const navigate = useNavigate()
@@ -127,20 +128,13 @@ const Profile = () => {
                     />
                     <Button
                         className='profile-submit-request-btn'
-                        endIcon={<SearchIcon />}
                         onClick={handleFieldSubmit}
                     >
-                        Поиск
+                        <SearchIcon />
                     </Button>                      
                 </Box>
             </Box>
             <Box className='profile-btns-container'>
-                <Button 
-                    className='profile-navigate-btn' 
-                    onClick={() => navigate('/')}
-                >
-                    Заказать отчет
-                </Button>
                 <Button 
                     className='profile-navigate-btn'
                     onClick={() => navigate('/user-profile/balance')}
@@ -186,7 +180,7 @@ const Profile = () => {
                     onClick={() => handlePreviousPage()}
                     disabled={!reports.previous} 
                 >
-                    Предыдущий
+                    <ArrowBackIosIcon />
                 </Button>
                 <Button 
                     className='report-pagination-btns' 
@@ -194,7 +188,7 @@ const Profile = () => {
                     onClick={() => handleNextPage()}
                     disabled={!reports.next} 
                 >
-                    Следующий
+                    <ArrowForwardIosIcon />
                 </Button>
             </Box>
         </Container>

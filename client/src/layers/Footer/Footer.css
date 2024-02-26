@@ -74,6 +74,12 @@
     }
 }
 
+@media (max-width: 600px) {
+    .second-footer-column {
+        display: none;
+    }
+}
+
 @media (max-width: 510px) {
     .footer-title {
         font-size: 14px!important;

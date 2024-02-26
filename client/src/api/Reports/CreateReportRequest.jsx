@@ -15,10 +15,8 @@ export const createReportRequest = ({setUuid, code, codeType, token}) => {
         }
     })
     .then((response) => {
-        console.log(response)
         setUuid(response.data.uuid)
     })
     .catch(error => {
-        console.log(error, 'create erro')
     })
 }

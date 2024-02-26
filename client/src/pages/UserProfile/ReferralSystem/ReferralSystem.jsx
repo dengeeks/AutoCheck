@@ -53,18 +53,18 @@ const ReferralSystem = () => {
                         </Button> 
                     </Box>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={12} md={6} xl={6} lg={6}>
                     <Typography className='referral-page-info-header'>Всего подключилось по вашей ссылке:</Typography>
                     <Typography className='referral-page-text'>+{data.all_invited || 0} Пользователей</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={12} md={6} xl={6} lg={6}>
                     <Typography className='referral-page-info-header'>Вы заработали на рефералах:</Typography>
                     <Typography className='referral-page-text'>+{data.earning || 0}₽</Typography>
                 </Grid>
                 {data?.invited_referrals.map((referral, index) => {
                     const userTransactions = data.transactions.filter(transaction => transaction.user === referral.id);
                     return(
-                        <Grid item xs={6} sx={{ marginTop: '70px' }} key={index}>
+                        <Grid item xs={12} sm={12} md={6} xl={6} lg={6} sx={{ marginTop: '70px' }} key={index}>
                             <ReferralInfoCard 
                                 avatar={referral.avatar}
                                 first_name={referral.first_name}

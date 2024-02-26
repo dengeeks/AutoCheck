@@ -11,15 +11,15 @@ const FinesHistory = ({ fines }) => {
     const hasFines = fines?.items?.length > 0;
     const finesLength = hasFines ? fines?.items?.length : 0;
     const [isOpen, setIsOpen] = useState(false);
-
+    const isPaidAllFines = !fines?.items?.some(fine => !fine.is_paid);
     return (
         <Box
             className="report-block-container"
             id="fines-history"
-            sx={{ borderBottom: `6px solid ${hasFines ? '#DF4949' : '#82DF49'}` }}
+            sx={{ borderBottom: `6px solid ${isPaidAllFines ? '#82DF49' : '#DF4949'}` }}
         >
-            <Box className='report-badge' sx={{ background: hasFines ? '#DF4949' : '#82DF49' }}>
-                <img src={hasFines ? dislike : like} alt="badge" className='report-badge-img' />
+            <Box className='report-badge' sx={{ background: isPaidAllFines ? '#82DF49' : '#DF4949' }}>
+                <img src={isPaidAllFines ? like : dislike} alt="badge" className='report-badge-img' />
                 <Typography className="report-badge-text">
                     {finesLength > 0 ? `Найдено штрафов: ${finesLength} ` : 'Штрафы не найдены'}
                 </Typography>
@@ -28,7 +28,7 @@ const FinesHistory = ({ fines }) => {
                 <Box className='report-header-container' >
                     <Box
                         className="report-indicator"
-                        sx={{ background: hasFines ? '#DF4949' : '#82DF49' }}
+                        sx={{ background: isPaidAllFines ? '#82DF49' : '#DF4949' }}
                     />
                     <Typography className="report-container-title" sx={{ marginBottom: '5px' }}>
                         История штрафов

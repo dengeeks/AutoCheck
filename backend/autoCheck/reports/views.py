@@ -85,7 +85,7 @@ class ReportUpgradeAPIView(views.APIView):
         report = get_object_or_404(UserReport, user=request.user, uuid=uuid)
         uuid = upgrade_report(uuid=uuid, user=request.user, report=report)
         return Response({"uuid": uuid}, status=status.HTTP_200_OK)
-    
+
 class ReportChange(views.APIView):
     def post(self, request, uuid):
         try:

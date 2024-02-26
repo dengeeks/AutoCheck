@@ -26,7 +26,7 @@ const DiagnosticCards = ({ diagnosticCards }) => {
                         sx={{ background: hasDiagnosticCards ? '#82DF49' : '#DF4949' }}
                     />
                     <Typography className="report-container-title" sx={{ marginBottom: '5px' }}>
-                        История диагностических карт
+                        Диагностические карты
                     </Typography>
                 </Box>
                         {hasDiagnosticCards ? (

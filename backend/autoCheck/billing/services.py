@@ -51,7 +51,7 @@ class CreatePayment:
     def create_yookassa_payment(request, transaction_id, user_id, commission_amount, initial_amount, description):
         configure_yookassa()
 
-        domain_url = request.build_absolute_uri('/')
+        domain_url = request.build_absolute_uri('/') + 'user-profile/balance'
         payment_object = CreatePayment.create_payment_object(domain_url, transaction_id, user_id, commission_amount, initial_amount, description)
 
         payment = yookassa.Payment.create(payment_object)

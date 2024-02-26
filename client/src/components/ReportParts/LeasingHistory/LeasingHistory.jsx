@@ -12,10 +12,10 @@ const LeasingHistory = ({ leasings }) => {
         <Box 
             className="report-block-container" 
             id="leasing-history"
-            sx={{ borderBottom: `6px solid ${hasLeasing ? '#82DF49' : '#DF4949'}` }}
+            sx={{ borderBottom: `6px solid ${hasLeasing ?  '#DF4949' :'#82DF49'}` }}
         >
-            <Box className='report-badge' sx={{ background: hasLeasing ? '#82DF49' : '#DF4949'}}>
-                <img src={hasLeasing ? like : dislike} alt="badge" className='report-badge-img' />
+            <Box className='report-badge' sx={{ background: hasLeasing ?  '#DF4949' : '#82DF49'}}>
+                <img src={hasLeasing ?  dislike : like} alt="badge" className='report-badge-img' />
                 <Typography className="report-badge-text">
                     {leasingLength > 0 ? `Записи о лизинге: ${leasingLength}` : 'Нет сведений о лизинге'}
                 </Typography>
@@ -24,7 +24,7 @@ const LeasingHistory = ({ leasings }) => {
                 <Box className='report-header-container' >
                     <Box
                         className="report-indicator" 
-                        sx={{ background: hasLeasing ? '#82DF49' : '#DF4949' }}
+                        sx={{ background: hasLeasing ? '#DF4949' : '#82DF49'}}
                     />
                     <Typography className="report-container-title" sx={{ marginBottom: '5px' }}>
                         История лизинга

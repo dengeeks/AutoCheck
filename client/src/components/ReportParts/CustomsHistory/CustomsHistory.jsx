@@ -12,10 +12,10 @@ const CustomsHistory = ({ customs }) => {
         <Box 
             className="report-block-container" 
             id="customs-history"
-            sx={{ borderBottom: `6px solid ${hasCustoms ? '#82DF49' : '#DF4949'}` }}
+            sx={{ borderBottom: `6px solid #82DF49` }}
         >
-            <Box className='report-badge' sx={{ background: hasCustoms ? '#82DF49' : '#DF4949'}}>
-                <img src={hasCustoms ? like : dislike} alt="badge" className='report-badge-img' />
+            <Box className='report-badge' sx={{ background: '#82DF49'}}>
+                <img src={like} alt="badge" className='report-badge-img' />
                 <Typography className="report-badge-text">
                     {customsLength > 0 ? `Таможенные процедуры: ${customsLength}` : 'Нет таможенных процедур'}
                 </Typography>
@@ -24,7 +24,7 @@ const CustomsHistory = ({ customs }) => {
                 <Box className='report-header-container' >
                     <Box
                         className="report-indicator" 
-                        sx={{ background: hasCustoms ? '#82DF49' : '#DF4949' }}
+                        sx={{ background: '#82DF49' }}
                     />
                     <Typography className="report-container-title" sx={{ marginBottom: '5px' }}>
                         Таможенные процедуры 

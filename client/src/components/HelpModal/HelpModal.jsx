@@ -9,7 +9,7 @@ import './HelpModal.css'
 
 const HelpModal = ({ open, onClose }) => {
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal sx={{ zIndex: '10000000' }} open={open} onClose={onClose}>
       <Box className="help-modal-container"  sx={{ maxHeight: '85vh', overflowY: 'auto' }}>
         <Box sx={{ display: 'inline-flex' }}>
             <Typography className="main-title-help-modal">Как узнать VIN, госномер и номер кузова</Typography>

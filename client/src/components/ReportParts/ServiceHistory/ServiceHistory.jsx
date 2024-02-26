@@ -27,7 +27,7 @@ const ServiceHistory = ({ serviceHistory }) => {
                         sx={{ background: hasServiceHistory ? '#DF4949' : '#82DF49'}}
                     />
                     <Typography className="report-container-title" sx={{ marginBottom: '5px' }}>
-                        История сервисного обслуживания
+                        История обслуживания
                     </Typography>
                 </Box>
                 {hasServiceHistory ? (

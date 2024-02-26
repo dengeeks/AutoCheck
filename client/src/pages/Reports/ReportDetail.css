@@ -23,18 +23,28 @@
     font-weight: 700!important;
 }
 
-.report-preview-image {
-    border-radius: 15px!important;
-    border: 6px solid #8C8C8C;
-    height: 95%;
-}
 
 .report-preview-swiper {
+    display: flex;
+    align-items: center;
     text-align: center;
-}
-.report-preview-slide {
     height: 300px;
 }
+
+.report-preview-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.report-preview-image {
+    user-select: none;
+    cursor: pointer;
+    height: 95%;
+    border-radius: 15px!important;
+    border: 6px solid #8C8C8C;
+}
+
 
 .report-brand-logo {
     width: 100px;
@@ -98,7 +108,7 @@
     .report-preview-image {
         border-radius: 15px!important;
         border: 6px solid #8C8C8C;
-        height: 75%;
+        height: 70%;
     }
     .characteristics-grid {
         margin-top: -90px!important;
@@ -115,6 +125,15 @@
         font-weight: 700!important;
         margin-left: 5px!important;
     }    
+    .report-brand-logo {
+    }    
+    .report-brand-name-x {
+        display: none;
+    }
+    .characteristics-grid {
+        margin-top: -70px!important;
+        margin-bottom: 15px!important;
+    }
 }
 
 @media (max-width: 600px) {

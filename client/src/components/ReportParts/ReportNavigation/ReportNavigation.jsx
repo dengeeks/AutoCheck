@@ -30,7 +30,7 @@ const ReportNavigation = () => {
 
             <Grid item xs={12} md={6} lg={6} className="report-btns-grid">
                 <Button className="report-navigation-btn" onClick={() => scrollToAnchor('restrict-history')}>Ограничения</Button>
-                <Button className="report-navigation-btn" onClick={() => scrollToAnchor('pledges-history')}>Обременения на ТС</Button>
+                <Button className="report-navigation-btn" onClick={() => scrollToAnchor('pledges-history')}>Залоги</Button>
             </Grid>
             <Grid item xs={12} md={6} lg={6} className="report-btns-grid">
                 <Button className="report-navigation-btn" onClick={() => scrollToAnchor('taxi-history')} >Использование в такси</Button>
@@ -62,7 +62,7 @@ const ReportNavigation = () => {
                         <Button className="report-navigation-btn" onClick={() => scrollToAnchor('fines-history')}>Штрафы</Button>
                     </Grid>
                     <Grid item xs={12} md={6} lg={6} className="report-btns-grid">
-                        <Button className="report-navigation-btn" onClick={() => scrollToAnchor('executive-procedures')}>Производства</Button>
+                        <Button className="report-navigation-btn" onClick={() => scrollToAnchor('executive-procedures')}>Арбитражи</Button>
                         <Button className="report-navigation-btn" onClick={() => scrollToAnchor('ads-history')}>История объявлений</Button>
                     </Grid>
                     <Grid item xs={12} md={6} lg={6} className="report-btns-grid">

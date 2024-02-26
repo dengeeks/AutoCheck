@@ -47,7 +47,8 @@ def create_report(query, code_type):
     return uuid, model, body, body_type, brand_name, car_year
 
 def get_additional_info(report_info):
-    try:    
+    logger.warning(f'Additional report info {report_info}')
+    try:
         content = report_info.get('content', {})
         tech_data = content.get('content', {}).get('tech_data', {})
         
@@ -56,9 +57,6 @@ def get_additional_info(report_info):
         model = tech_data.get('model', {}).get('name', {}).get('normalized')
         body = content.get('query', {}).get('body')
         body_type = content.get('query', {}).get('type')
-        
-        if None in (model, body, body_type):
-            raise KeyError("One of the required keys is missing in the report_info content")
 
     except KeyError as e:
         logger.error(f"KeyError occurred: {e}")
@@ -109,9 +107,7 @@ def upgrade_report(uuid, report, user):
                     'Authorization': f'Bearer {token}'
                 }
                 response = requests.post(url=api_domain_url, json=payload, headers=headers)
-                logger.info(f'Upgrade response {response}')
                 response.raise_for_status()
-                
                 user.request_quantity -= 1
                 user.save()
                 report.is_upgraded = True

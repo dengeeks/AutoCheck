@@ -109,16 +109,16 @@ const Header = () => {
             }}
           >
             <List>
-              <ListItem button onClick={() => scrollToSection('tariff-plans')}>
+              <ListItem button onClick={() => user ? navigate('/user-profile/tariff-plans') : scrollToSection('tariff-plans')}>
                 <ListItemText primary="Тарифные планы" />
               </ListItem>
               <ListItem button onClick={() => scrollToSection('reviews')}>
                 <ListItemText primary="Отзывы" />
               </ListItem>
-              <ListItem button onClick={() => navigate('/faq')}>
+              <ListItem button onClick={() => user ? navigate('/user-profile/faq') : scrollToSection('faq')}>
                 <ListItemText primary="Ответы на вопросы" />
               </ListItem>
-              <ListItem button onClick={() => navigate('/feedback')}>
+              <ListItem button onClick={() => user ? navigate('/user-profile/ticket-system') : navigate('/feedback')}>
                 <ListItemText primary="Помощь" />
               </ListItem>
 

@@ -18,7 +18,7 @@ const ExecutiveProcedures = ({ executiveProcedures }) => {
             <Box className='report-badge' sx={{ background: hasExecutiveProcedures ? '#DF4949' : '#82DF49'}}>
                 <img src={hasExecutiveProcedures ? dislike : like} alt="badge" className='report-badge-img' />
                 <Typography className="report-badge-text">
-                    {executiveProceduresLength > 0 ? `Исп. производства: ${executiveProceduresLength}` : 'Исп. производства отсутствуют'}
+                    {executiveProceduresLength > 0 ? `Арбитражи: ${executiveProceduresLength}` : 'Арбитражи отсутствуют'}
                 </Typography>
             </Box>
             <Box sx={{ marginLeft: '15px' }}>
@@ -28,7 +28,7 @@ const ExecutiveProcedures = ({ executiveProcedures }) => {
                         sx={{ background: hasExecutiveProcedures ? '#DF4949' : '#82DF49'}}
                     />
                     <Typography className="report-container-title" sx={{ marginBottom: '5px' }}>
-                        Исполнительные производства
+                        Арбитражи
                     </Typography>
                 </Box>
                 {hasExecutiveProcedures ? (
@@ -98,7 +98,7 @@ const ExecutiveProcedures = ({ executiveProcedures }) => {
                             </Box>                                
                         )
                     })
-                ) : (<Typography className='report-text-bold'>Исполнительные производства не обнаружены</Typography>)}
+                ) : (<Typography className='report-text-bold'>Сведения об арбитраже не обнаружены</Typography>)}
             </Box>
         </Box>
     )
