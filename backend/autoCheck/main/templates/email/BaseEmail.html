@@ -196,19 +196,13 @@
                 <a href="{{ social_network.link }}" style="text-decoration: none;">
                     <div id="social-network-header">
                         <img 
-                            src="{{ protocol }}://{{ domain }}/{{ social_network.qr_code.url }}"
+                            src="{{ protocol }}://{{ domain }}{{ social_network.qr_code.url }}"
                             id="social-network-item"
                             alt="QR Code соц сети"
                             width="65px"
                         >                    
                     </div>
                     <div id="social-network-footer">
-                        <img
-                            src="{{ protocol }}://{{ domain }}/api/media/social_networks/{{ social_network.socail_network }}.svg"
-                            alt="Лого соц сети"
-                            width="20px"
-                            style="margin-right: 5px;"
-                        >
                         <p id="social-network-title">
                             {{ social_network.social_network }}
                         </p>    

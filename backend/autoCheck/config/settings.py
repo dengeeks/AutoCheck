@@ -73,11 +73,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv("DB_ENGINE"),
-        'NAME': os.getenv("DB_NAME"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': os.getenv("DB_HOST"),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST'),
+        'PORT': os.getenv('POSTGRES_PORT'),
     }
 }
 
@@ -94,7 +95,7 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS':
-        'rest_framework_json_api.pagination.PageNumberPagination',
+    'rest_framework_json_api.pagination.PageNumberPagination',
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DATETIME_FORMAT': "%d.%m.%Y %H:%M:%S",
@@ -130,7 +131,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('redis://localhost:6379')],
+            "hosts": [('redis://redis:6379')],
         },
     },
 }
@@ -169,7 +170,7 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console', 'file'],
-        'level': 'DEBUG',
+        'level': 'ERROR',
     },
 }
 
@@ -184,12 +185,11 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 # CORS config
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:3000',
-    'http://localhost:3000'
+    'https://av-skan.ru'
 ]
 
 # Celery config
-CELERY_BROKER_URL = 'redis://localhost:6379/1'
+CELERY_BROKER_URL = 'redis://redis:6379/1'
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True 
 CELERY_BEAT_SCHEDULE = {
     'update-auth-token-every-10-minutes': {
@@ -202,7 +202,7 @@ CELERY_BEAT_SCHEDULE = {
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://localhost:6379/2',
+        'LOCATION': 'redis://redis:6379/2',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -218,7 +218,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://avtorevizorbot.ru']
+CSRF_TRUSTED_ORIGINS = ['https://av-skan.ru']
 
 AUTH_USER_MODEL = 'main.CustomUser'
 
